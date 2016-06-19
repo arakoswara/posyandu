@@ -42,7 +42,7 @@ class RedirectIfAuthenticated
             
             } else if ($this->auth->user()->hasRole('visitor')) {
                 
-                return redirect()->route('visitor-index');
+                return redirect()->route('data-balita');
             } 
         }
 

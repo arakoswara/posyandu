@@ -76,16 +76,16 @@ Route::get('/admin', [
  * VISITOR
  */
 
-Route::group(['prefix' => 'sispos_1'], function() {
+Route::group(['prefix' => 'sispos'], function() {
 
-	Route::get('/', [
+	// Route::get('/', [
 
-		'as' => 'data-balita', 'uses' => 'VisitorController@index'
-	]);
+	// 	'as' => 'data-balita', 'uses' => 'VisitorController@index'
+	// ]);
 
 	Route::get('/data-balita', [
 
-		'as' => 'data_balita', 'uses' => 'BalitaController@index'
+		'as' => 'data-balita', 'uses' => 'BalitaController@index'
 	]);
 
 	Route::post('/do-tambah', [
@@ -129,6 +129,13 @@ Route::group(['prefix' => 'sispos_1'], function() {
 		'as' => 'do_periksa_balita',
 
 		'uses' => 'BalitaController@doPeriksaBalita'
+	]);
+
+	Route::get('hitung-balita', [
+
+		'use' => 'hitung-balita',
+
+		'uses' => 'BalitaController@hitungBalita'
 	]);
 
 });

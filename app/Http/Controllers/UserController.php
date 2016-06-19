@@ -89,7 +89,7 @@ class UserController extends Controller
                 } else if (Auth::user()->hasRole('visitor')) {
 
                     // return "VISITOR";
-                    return redirect()->route('visitor-index');
+                    return redirect()->route('data-balita');
 
                 }
             }

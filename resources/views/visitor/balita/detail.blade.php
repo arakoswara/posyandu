@@ -150,11 +150,13 @@
 
     <div id="compose" class="subcontent" style="display: none">
         
-        <h3>Form Pemeriksaan Balita</h3>
+        <h3>Form Pemeriksaan Balita [ <b>{{ $data_balita->nama_balita }}</b> ]</h3>
 
-        <hr>
+        <hr class="garis">
 
         {!! Form::open(['route' => 'do_periksa_balita']) !!}
+
+            {!! Form::hidden('id_balita', $data_balita->id) !!}
 
             <div class="col-md-6">
                 
