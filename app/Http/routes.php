@@ -78,10 +78,10 @@ Route::get('/admin', [
 
 Route::group(['prefix' => 'sispos'], function() {
 
-	// Route::get('/', [
+	Route::get('/', [
 
-	// 	'as' => 'data-balita', 'uses' => 'VisitorController@index'
-	// ]);
+		'as' => 'data-balita', 'uses' => 'BalitaController@dashboard'
+	]);
 
 	Route::get('/data-balita', [
 

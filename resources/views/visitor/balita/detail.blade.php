@@ -24,7 +24,7 @@
 
             <div class="col-md-6">
                 
-                <h4>Data Detail Balita</h4>
+                <h4>Data Detail Balita [ {{ $data_balita->nama_balita }} ]</h4>
 
                 <hr class="garis">
 
@@ -73,7 +73,7 @@
 
             <div class="col-md-6">
 
-                <h4>Riwayat Pemeriksaan</h4>
+                <h4>Riwayat Pemeriksaan [ {{ $score->dataBalita->nama_balita }} ]</h4>
 
                 <hr class="garis">
 
@@ -82,50 +82,50 @@
                         <tr>
                             <th>Tanggal Periksa</th>
                             <th> : </th>
-                            <th> {{ $data_balita->no_reg }}</th>
+                            <th> {{ $score->periksa->tgl_periksa }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Berat Badan</td>
                             <td> : </td>
-                            <td>{{ $data_balita->nama_balita }}</td>
+                            <td>{{ $score->periksa->berat_badan }} Kg</td>
                         </tr>
 
                         <tr>
                             <td>Tinggi Badan</td>
                             <td> : </td>
-                            <td>{{ $data_balita->tgl_lahir }}</td>
+                            <td>{{ $score->periksa->tinggi_badan }} cm</td>
                         </tr>
 
                         <tr>
                             <td>BBU / U</td>
                             <td> : </td>
-                            <td>{{ $data_balita->jenis_kelamin }}</td>
+                            <td>{{ $score->zbbu }}</td>
                         </tr>
 
                         <tr>
                             <td>TB / U</td>
                             <td> : </td>
-                            <td>{{ $data_balita->nama_ayah }}</td>
+                            <td>{{ $score->ztbu }}</td>
                         </tr>
 
                         <tr>
                             <td>BB / TB</td>
                             <td> : </td>
-                            <td>{{ $data_balita->nama_ayah }}</td>
+                            <td>{{ $score->zbbtb }}</td>
                         </tr>
 
                         <tr>
                             <td>Energi yang dibutuhkan</td>
                             <td> : </td>
-                            <td>{{ $data_balita->nama_ibu }}</td>
+                            <td>{{ $score->energi }}</td>
                         </tr>
 
                          <tr>
                             <td>Protein</td>
                             <td> : </td>
-                            <td>{{ $data_balita->nama_ibu }}</td>
+                            <td>{{ $score->protein }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,10 +135,12 @@
             <div class="col-md-12">
 
                 <hr class="garis">
-                
-                <h3>Grafik Pemeriksaan Balita</h3>
 
-                <hr class="garis">
+                <center>
+                    <h4>Grafik Pemeriksaan Balita [ {{ $data_balita->nama_balita }} ]</h4>
+                </center>
+
+                <div id="grafikBalita" style="width:100%; height: 400px;"></div>
 
             </div>
 
@@ -187,5 +189,28 @@
         {!! Form::close() !!}
     </div>
 </div><!--contentwrapper-->
+
+<script>
+
+    <?php 
+        foreach ($grafik_score as $item) {
+
+        $time=strtotime($item->periksa->tgl_periksa);
+
+        $month=date("F",$time);
+
+    ?>
+
+    var chartData = [
+        {
+            "month" : "<?php echo $month; ?>",
+            "zbbu" : <?php echo $item->zbbu; ?>,
+            "ztbu" : <?php echo $item->ztbu; ?>,
+            "zbbtb" : <?php echo $item->zbbtb; ?>
+        }
+    ];
+
+    <?php } ?>
+</script>
 
 @endsection

@@ -14,6 +14,12 @@ class DataBalita extends Model
 
     public function periksas()
     {
-    	return $this->hasMany('App\Periksa', 'id_balita');
+    	return $this->hasOne('App\Periksa', 'id_balita');
     }
+
+    public function score()
+    {
+    	return $this->hasMany('App\Score', 'id_balita');
+    }
+
 }

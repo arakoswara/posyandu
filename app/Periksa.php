@@ -16,4 +16,9 @@ class Periksa extends Model
     {
     	return $this->belongsTo('App\DataBalita', 'id_balita');
     }
+
+    public function score()
+    {
+    	return $this->belongsToMany('App\DataBalita', 'id_periksa');
+    }
 }
