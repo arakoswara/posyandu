@@ -346,7 +346,7 @@ class BalitaController extends Controller
 
     public function zbbuGizikurang()
     {
-        return $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
         if ($score->zbbu <= -3 || $score->zbbu >= 0) {
             
@@ -373,20 +373,21 @@ class BalitaController extends Controller
 
         if ($score->zbbu <= -2 || $score->zbbu >= 2) {
             
-            return $gizi_baik = 0;
+            $gizi_baik = 0;
 
         }else if($score->zbbu >= -2 && $score->zbbu <= 0) {
 
-            return $gizi_baik = ($score->zbbu + 2)/2;
+            $gizi_baik = ($score->zbbu + 2)/2;
 
         }else if($score->zbbu >= 0 && $score->zbbu <= 2) {
 
-            return $gizi_baik = (2 - $score->zbbu)/2;
+            $gizi_baik = (2 - $score->zbbu)/2;
 
         }else if($score->zbbu == 0) {
 
-            return $gizi_baik = 1;
+            $gizi_baik = 1;
         }
+        return $gizi_baik;
 
     }
 
@@ -396,16 +397,18 @@ class BalitaController extends Controller
 
         if ($score->zbbu >= 0 && $score->zbbu <= 2) {
             
-            return $gizi_lebih = ($score->zbbu)/2;
+            $gizi_lebih = ($score->zbbu)/2;
 
         }else if($score->zbbu >= 2) {
 
-            return $gizi_lebih = 1;
+            $gizi_lebih = 1;
 
         }else if($score->zbbu <= 0) {
 
-            return $gizi_lebih = 0;
+            $gizi_lebih = 0;
         }
+
+        $gizi_lebih;
 
     }
 
@@ -464,19 +467,19 @@ class BalitaController extends Controller
 
         if ($score->ztbu <= -2 || $score->ztbu >= 2) {
             
-            return $normal = 0;
+            return $normal_ztbu = 0;
 
         }else if($score->ztbu >= -2 && $score->ztbu <= 0) {
 
-            return $normal = ($score->ztbu + 2)/2;
+            return $normal_ztbu = ($score->ztbu + 2)/2;
 
         }else if($score->ztbu >= 0 && $score->ztbu <= 2) {
 
-            return $normal = (2 - $score->ztbu)/2;
+            return $normal_ztbu = (2 - $score->ztbu)/2;
 
         }else if($score->ztbu == 0) {
 
-            return $normal = 1;
+            return $normal_ztbu = 1;
         }
 
     }
@@ -487,16 +490,18 @@ class BalitaController extends Controller
 
         if ($score->ztbu >= 0 && $score->ztbu <= 2) {
             
-            return $tinggi = ($score->ztbu)/2;
+            $tinggi = ($score->ztbu)/2;
 
         }else if($score->ztbu >= 2) {
 
-            return $tinggi = 1;
+            $tinggi = 1;
 
         }else if($score->ztbu <= 0) {
 
-            return $tinggi = 0;
+            $tinggi = 0;
         }
+
+        return $tinggi;
 
     }
 
@@ -556,20 +561,22 @@ class BalitaController extends Controller
 
         if ($score->zbbtb <= -2 || $score->zbbtb >= 2) {
             
-            return $normal = 0;
+            $normal_zbbtb = 0;
 
         }else if($score->zbbtb >= -2 && $score->zbbtb <= 0) {
 
-            return $normal = ($score->zbbtb + 2)/2;
+            $normal_zbbtb = ($score->zbbtb + 2)/2;
 
         }else if($score->zbbtb >= 0 && $score->zbbtb <= 2) {
 
-            return $normal = (2 - $score->zbbtb)/2;
+            $normal_zbbtb = (2 - $score->zbbtb)/2;
 
         }else if($score->zbbtb == 0) {
 
-            return $normal = 1;
+            $normal_zbbtb = 1;
         }
+
+        return $normal_zbbtb;
 
     }
 
@@ -579,17 +586,174 @@ class BalitaController extends Controller
 
         if ($score->zbbtb >= 0 && $score->zbbtb <= 2) {
             
-            return $tinggi = ($score->zbbtb)/2;
+            return $gemuk = ($score->zbbtb)/2;
 
         }else if($score->zbbtb >= 2) {
 
-            return $tinggi = 1;
+            return $gemuk = 1;
 
         }else if($score->zbbtb <= 0) {
 
-            return $tinggi = 0;
+            return $gemuk = 0;
         }
 
+        return $gemuk;
+
+    }
+
+    public function R_1($gizi_lebih = 0, $tinggi = 0, $normal_zbbtb = 0.95454545)
+    {
+
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+
+        // return $score->periksa->berat_badan;
+        
+        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
+        /**
+         * Pembulatan umur ke tahun
+         */
+        $umur_tahun_bulat = floor($umur_tahun);
+
+        /**
+         * CARI ENERGI
+         */
+        if ($umur_tahun_bulat <= 1) {
+            
+            $energi = 110 * $score->periksa->berat_badan;  
+
+        } else if ($umur_tahun_bulat <= 3) {
+
+            $energi = 100 * $score->periksa->berat_badan;
+
+        } else if ($umur_tahun_bulat <= 5) {
+
+            $energi = 90 * $score->periksa->berat_badan;
+        }
+
+        // return $energi;
+
+        /**
+         * CARI PROTEIN
+         */
+        
+        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+
+        $umur_bulan_bulat = floor($umur_bulan);
+
+        /**
+         * Protein DIIT
+         */
+        if ($umur_bulan_bulat <= 48) {
+            
+            $protein_diit = 1.84 * $score->periksa->berat_badan;
+
+        }else{
+
+            $protein_diit =  1.79 * $score->periksa->berat_badan;
+        }
+
+        // return $protein_diit;
+
+        /**
+         * Protein KKP
+         */
+        if ($umur_bulan_bulat <= 48) {
+            
+            $protein_kkp = 2.05 * $score->periksa->berat_badan;
+
+        }else{
+
+            $protein_kkp =  2.03 * $score->periksa->berat_badan;
+        }
+
+        // return $protein_kkp;
+        
+        /**
+         * Menghitung R 1
+         */
+        $z1 = $energi - (0.2 * $energi);
+
+        $y1 = $protein_diit;
+
+
+    }
+
+    public function R_2($gizi_lebih = 0, $normal_ztbu = 0, $gemuk = 0.04545455)
+    {
+
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+
+        // return $score->periksa->berat_badan;
+        
+        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
+        /**
+         * Pembulatan umur ke tahun
+         */
+        $umur_tahun_bulat = floor($umur_tahun);
+
+        /**
+         * CARI ENERGI
+         */
+        if ($umur_tahun_bulat <= 1) {
+            
+            $energi = 110 * $score->periksa->berat_badan;  
+
+        } else if ($umur_tahun_bulat <= 3) {
+
+            $energi = 100 * $score->periksa->berat_badan;
+
+        } else if ($umur_tahun_bulat <= 5) {
+
+            $energi = 90 * $score->periksa->berat_badan;
+        }
+
+        // return $energi;
+
+        /**
+         * CARI PROTEIN
+         */
+        
+        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+
+        $umur_bulan_bulat = floor($umur_bulan);
+
+        /**
+         * Protein DIIT
+         */
+        if ($umur_bulan_bulat <= 48) {
+            
+            $protein_diit = 1.84 * $score->periksa->berat_badan;
+
+        }else{
+
+            $protein_diit =  1.79 * $score->periksa->berat_badan;
+        }
+
+        // return $protein_diit;
+
+        /**
+         * Protein KKP
+         */
+        if ($umur_bulan_bulat <= 48) {
+            
+            $protein_kkp = 2.05 * $score->periksa->berat_badan;
+
+        }else{
+
+            $protein_kkp =  2.03 * $score->periksa->berat_badan;
+        }
+
+        // return $protein_kkp;
+        
+        /**
+         * Menghitung R 1
+         */
+        $z1 = $energi - (0.2 * $energi);
+
+        $y1 = $protein_diit;
+        
     }
 
 }

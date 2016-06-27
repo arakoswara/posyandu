@@ -230,4 +230,15 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@zbbtbGemuk'
 	]);
 
+	/**
+	 * R 1
+	 */
+	
+	Route::get('/r-1', [
+
+		'as' => 'r_1',
+
+		'uses' => 'BalitaController@R_1'
+	]);
+
 });
