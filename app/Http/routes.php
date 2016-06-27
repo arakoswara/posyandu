@@ -138,9 +138,96 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@hitungBalita'
 	]);
 
-});
+	Route::get('zbbu-gizi-buruk',[
 
-Route::group(['prefix' => 'sispos_2'], function() {
+		'as' => 'zbbu_gizi_buruk',
 
+		'uses' => 'BalitaController@zbbuGiziburuk'
+	]);
+
+	Route::get('zbbu-gizi-kurang',[
+
+		'as' => 'zbbu_gizi_kurang',
+
+		'uses' => 'BalitaController@zbbuGizikurang'
+	]);
+
+	Route::get('zbbu-gizi-baik',[
+
+		'as' => 'zbbu_gizi_baik',
+
+		'uses' => 'BalitaController@zbbuGizibaik'
+	]);
+
+	Route::get('zbbu-gizi-lebih',[
+
+		'as' => 'zbbu_gizi_lebih',
+
+		'uses' => 'BalitaController@zbbuGizilebih'
+	]);
+
+	/**
+	 * ZTBU
+	 */
+
+	Route::get('ztbu-sangat-pendek',[
+
+		'as' => 'ztbu_sangat_pendek',
+
+		'uses' => 'BalitaController@ztbuSangatPendek'
+	]);
+
+	Route::get('ztbu-pendek',[
+
+		'as' => 'ztbu_pendek',
+
+		'uses' => 'BalitaController@ztbuPendek'
+	]);
+
+	Route::get('ztbu-normal',[
+
+		'as' => 'ztbu_normal',
+
+		'uses' => 'BalitaController@ztbuNormal'
+	]);
+
+	Route::get('ztbu-tinggi',[
+
+		'as' => 'ztbu_tinggi',
+
+		'uses' => 'BalitaController@ztbuTinggi'
+	]);
+
+	/**
+	 * ZBBTB
+	 */
+	Route::get('zbbtb-sangat-kurus',[
+
+		'as' => 'zbbtb_sangat_kurus',
+
+		'uses' => 'BalitaController@zbbtbSangatKurus'
+	]);
+
+	Route::get('zbbtb-kurus',[
+
+		'as' => 'zbbtb_kurus',
+
+		'uses' => 'BalitaController@zbbtbKurus'
+	]);
+
+
+	Route::get('zbbtb-normal',[
+
+		'as' => 'zbbtb_normal',
+
+		'uses' => 'BalitaController@zbbtbNormal'
+	]);
+
+	Route::get('zbbtb-gemuk',[
+
+		'as' => 'zbbtb_gemuk',
+
+		'uses' => 'BalitaController@zbbtbGemuk'
+	]);
 
 });

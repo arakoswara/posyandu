@@ -95,7 +95,7 @@
      			<div class="form-group">
      				{!! Form::label('tgl_lahir', 'Tanggal Lahir') !!}
 
-     				{!! Form::text('tgl_lahir', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('tgl_lahir', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
      			</div>
 
      		</div>

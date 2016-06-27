@@ -8,7 +8,7 @@ class Score extends Model
 {
     protected $table = 'score';
 
-    protected $fillable = ['id_balita', 'id_periksa', 'zbbu', 'ztbu', 'zbbtb', 'energi', 'protein'];
+    protected $fillable = ['id_balita', 'id_periksa', 'zbbu', 'ztbu', 'zbbtb', 'energi', 'protein', 'month'];
 
     public function dataBalita()
     {

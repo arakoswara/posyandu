@@ -1,6 +1,4 @@
-@extends('master-home')
 
-@section('content')
 
 	{!! Form::open(['route' => 'do-Register']) !!}
 
@@ -47,5 +45,3 @@
 			<a href="{{ route('login-form') }}" title="">LOGIN</a>
 		</div>
 	</div>
-
-@endsection

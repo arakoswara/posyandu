@@ -73,9 +73,15 @@
 
             <div class="col-md-6">
 
-                <h4>Riwayat Pemeriksaan [ {{ $score->dataBalita->nama_balita }} ]</h4>
+                <h4>Riwayat Pemeriksaan [ {{ $data_balita->nama_balita }} ]</h4>
 
                 <hr class="garis">
+
+                @if (empty($score))
+                    
+                    <h4>Tidak ada riwayat pemeriksaan</h4>
+
+                @else
 
                 <table class="table table-striped">
                     <thead>
@@ -101,19 +107,79 @@
                         <tr>
                             <td>BBU / U</td>
                             <td> : </td>
-                            <td>{{ $score->zbbu }}</td>
+                            <td>{{ $score->zbbu }} |
+
+                                @if($score->zbbu < -3)
+
+                                    {{ "Gizi Buruk" }}
+
+                                @elseif($score->zbbu > -3 && $score->zbbu < -2)
+
+                                    {{ "Gizi Kurang" }}
+
+                                @elseif($score->zbbu > -2 && $score->zbbu < 2)
+
+                                    {{ "Gizi Baik" }}
+
+                                @elseif($score->zbbu > 2)
+
+                                    {{ "Gizi Lebih" }}
+
+                                @endif
+
+                            </td>
                         </tr>
 
                         <tr>
                             <td>TB / U</td>
                             <td> : </td>
-                            <td>{{ $score->ztbu }}</td>
+                            <td>{{ $score->ztbu }} |
+
+                                @if($score->ztbu < -3)
+
+                                    {{ "Sangat Pendek" }}
+
+                                @elseif($score->ztbu > -3 && $score->ztbu < -2)
+
+                                    {{ "Pendek" }}
+
+                                @elseif($score->ztbu > -2 && $score->ztbu < 2)
+
+                                    {{ "Normal" }}
+
+                                @elseif($score->ztbu > 2)
+
+                                    {{ "Tinggi" }}
+
+                                @endif
+
+                            </td>
                         </tr>
 
                         <tr>
                             <td>BB / TB</td>
                             <td> : </td>
-                            <td>{{ $score->zbbtb }}</td>
+                            <td>{{ $score->zbbtb }} |
+
+                                @if($score->zbbtb < -3)
+
+                                    {{ "Sangat Kurus" }}
+
+                                @elseif($score->zbbtb > -3 && $score->zbbtb < -2)
+
+                                    {{ "Kurus" }}
+
+                                @elseif($score->zbbtb > -2 && $score->zbbtb < 2)
+
+                                    {{ "Normal" }}
+
+                                @elseif($score->zbbtb > 2)
+
+                                    {{ "Gemuk" }}
+
+                                @endif
+
+                            </td>
                         </tr>
 
                         <tr>
@@ -130,6 +196,8 @@
                     </tbody>
                 </table>
 
+                @endif
+
             </div>
 
             <div class="col-md-12">
@@ -140,9 +208,17 @@
                     <h4>Grafik Pemeriksaan Balita [ {{ $data_balita->nama_balita }} ]</h4>
                 </center>
 
-                <div id="grafikBalita" style="width:100%; height: 400px;"></div>
+                @if (empty($grafik_score))
+                    
+                    <h4> Tidak ada riwayat pemeriksaan</h4>
 
-            </div>
+                @else
+
+                    <div id="grafikBalita" style="width:100%; height: 400px;"></div>
+
+                @endif
+
+            </div
 
             
             <span class="clearall"></span>
@@ -165,7 +241,7 @@
                 <div class="form-group">
                     {!! Form::label('tgl_periksa', 'Tanggal Periksa') !!}
 
-                    {!! Form::text('tgl_periksa', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('tgl_periksa', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
@@ -192,25 +268,8 @@
 
 <script>
 
-    <?php 
-        foreach ($grafik_score as $item) {
+    var chartData = <?php  echo $grafik_score; ?>
 
-        $time=strtotime($item->periksa->tgl_periksa);
-
-        $month=date("F",$time);
-
-    ?>
-
-    var chartData = [
-        {
-            "month" : "<?php echo $month; ?>",
-            "zbbu" : <?php echo $item->zbbu; ?>,
-            "ztbu" : <?php echo $item->ztbu; ?>,
-            "zbbtb" : <?php echo $item->zbbtb; ?>
-        }
-    ];
-
-    <?php } ?>
 </script>
 
 @endsection

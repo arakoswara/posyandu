@@ -20,7 +20,7 @@ AmCharts.ready(function () {
     // GRAPH
     var graph = new AmCharts.AmGraph();
     graph.valueField = "zbbu";
-    graph.balloonText = "[[category]]: <b>[[value]]</b>";
+    graph.balloonText = " zbbu : <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;
@@ -28,7 +28,7 @@ AmCharts.ready(function () {
     
     var graph = new AmCharts.AmGraph();
     graph.valueField = "ztbu";
-    graph.balloonText = "[[category]]: <b>[[value]]</b>";
+    graph.balloonText = "ztbu: <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;
@@ -36,7 +36,23 @@ AmCharts.ready(function () {
     
     var graph = new AmCharts.AmGraph();
     graph.valueField = "zbbtb";
-    graph.balloonText = "[[category]]: <b>[[value]]</b>";
+    graph.balloonText = "zbbtb: <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "protein";
+    graph.balloonText = "protein: <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "energi";
+    graph.balloonText = "energi: <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;

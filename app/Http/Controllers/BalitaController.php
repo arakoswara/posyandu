@@ -93,9 +93,9 @@ class BalitaController extends Controller
          */
         $score = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->first();
         
-        $grafik_score = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->get();
+        $grafik_score = Score::orderBy('id', 'ASC')->where('id_balita', $id)->get();
 
-        return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik', 'grafik_score'));
+        return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik_score'));
     }
 
     /**
@@ -167,10 +167,13 @@ class BalitaController extends Controller
     public function doPeriksaBalita(PeriksaBalitaRequest $request)
     {
         /**
-         * [$input description]
          * temporary variabel dari form periksa
          */
         $input = $request->all();
+
+        $date = date_create($input['tgl_periksa']);
+
+        $input['tgl_periksa'] = date_format($date, 'd-m-Y');
 
         $id_balita = $input['id_balita'];
 
@@ -181,12 +184,16 @@ class BalitaController extends Controller
         return redirect()->back();
     }
 
-    public function hitungBalita($id_balita)
+    public function hitungBalita($id_balita =1)
     {
         /**
          * mengambil data dari table periksa dan balita berdasarkan reasi one to many
          */
-        $periksa_balita = Periksa::with('dataBalita')->find($id_balita);
+        $periksa_balita = Periksa::with('dataBalita')->where('id_balita',$id_balita)->orderBy('id', 'DESC')->first();
+
+        $time=strtotime($periksa_balita->tgl_periksa);
+
+        $month=date("F",$time);
 
         /**
          * Hitung umur balita
@@ -198,16 +205,16 @@ class BalitaController extends Controller
          */
         $umur_bulat = floor($umur);
 
-        $this->perhitunganScore($periksa_balita, $umur_bulat);
+        $this->perhitunganScore($periksa_balita, $umur_bulat, $month);
 
         // return "Oke";
     }
 
-    /**
-     * hitung ZBBU
-     */
-    public function perhitunganScore($periksa_balita, $umur_bulat)
+    public function perhitunganScore($periksa_balita, $umur_bulat, $month)
     {
+        /**
+         * HITUNG BBU
+         */
         $bbu = BBU::where('jk', $periksa_balita->dataBalita->jenis_kelamin)->where('umur', $umur_bulat)->first();
 
         if ($periksa_balita->berat_badan < $bbu['median']) {
@@ -295,35 +302,294 @@ class BalitaController extends Controller
         /**
          * Insert Score
          */
+        
+        $input['month'] = $month;
+
         $input['id_balita'] = $periksa_balita->id_balita;
 
         $input['id_periksa']= $periksa_balita->id;
 
-        $input['zbbu']      = $zbbtb;
+        $input['zbbu']      = $zbbu;
 
-        $input['ztbu']      = $zbbtb;
+        $input['ztbu']      = $ztbu;
 
         $input['zbbtb']     = $zbbtb;
 
         Score::create($input);
+    }
 
-        // if ($zbbtb < -3) {
+    /**
+     * ZBBU
+     * =================================================
+     */
 
-        //     return "gizi buruk";
+    public function zbbuGiziburuk()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
-        // }elseif ($zbbtb > -3 && $zbbtb < -2) {
+        if ($score->zbbu <= -3) {
             
-        //     return "gizi kurang";
+            return $gizi_buruk = 1;
 
-        // }elseif ($zbbtb > -2 && $zbbtb < 2) {
-            
-        //     return "gizi baik";
+        }else if($score->zbbu >= -3 && $score->zbbu <= -2) {
 
-        // } elseif ($zbbtb > 2) {
+            return $gizi_buruk = (-2 - $score->zbbu);
+
+        }else if($score->zbbu >= -2) {
+
+            return $gizi_buruk = 0;
+
+        }
+
+    }
+
+
+    public function zbbuGizikurang()
+    {
+        return $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbu <= -3 || $score->zbbu >= 0) {
             
-        //     return "gizi lebih";
+            return $gizi_kurang = 0;
+
+        }else if($score->zbbu >= -3 && $score->zbbu <= -2) {
+
+            return $gizi_kurang = $score->zbbu + 3;
+
+        }else if($score->zbbu >= -2 && $score->zbbu <= 0) {
+
+            return $gizi_kurang = (-$score->zbbu)/2;
+
+        }else if($score->zbbu == -2) {
+
+            return $gizi_kurang = 1;
+        }
+
+    }
+
+    public function zbbuGizibaik()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbu <= -2 || $score->zbbu >= 2) {
             
-        // }
+            return $gizi_baik = 0;
+
+        }else if($score->zbbu >= -2 && $score->zbbu <= 0) {
+
+            return $gizi_baik = ($score->zbbu + 2)/2;
+
+        }else if($score->zbbu >= 0 && $score->zbbu <= 2) {
+
+            return $gizi_baik = (2 - $score->zbbu)/2;
+
+        }else if($score->zbbu == 0) {
+
+            return $gizi_baik = 1;
+        }
+
+    }
+
+    public function zbbuGizilebih()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbu >= 0 && $score->zbbu <= 2) {
+            
+            return $gizi_lebih = ($score->zbbu)/2;
+
+        }else if($score->zbbu >= 2) {
+
+            return $gizi_lebih = 1;
+
+        }else if($score->zbbu <= 0) {
+
+            return $gizi_lebih = 0;
+        }
+
+    }
+
+    /**
+     * ZTBU
+     * ============================================
+     */
+
+    public function ztbuSangatPendek()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->ztbu <= -3) {
+            
+            return $sangat_pendek = 1;
+
+        }else if($score->ztbu >= -3 && $score->ztbu <= -2) {
+
+            return $sangat_pendek = (-2 - $score->ztbu);
+
+        }else if($score->ztbu >= -2) {
+
+            return $sangat_pendek = 0;
+
+        }
+
+    }
+
+
+    public function ztbuPendek()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->ztbu <= -3 || $score->ztbu >= 0) {
+            
+            return $pendek = 0;
+
+        }else if($score->ztbu >= -3 && $score->ztbu <= -2) {
+
+            return $pendek = $score->ztbu + 3;
+
+        }else if($score->ztbu >= -2 && $score->ztbu <= 0) {
+
+            return $pendek = (-$score->ztbu)/2;
+
+        }else if($score->ztbu == -2) {
+
+            return $pendek = 1;
+        }
+
+    }
+
+    public function ztbuNormal()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->ztbu <= -2 || $score->ztbu >= 2) {
+            
+            return $normal = 0;
+
+        }else if($score->ztbu >= -2 && $score->ztbu <= 0) {
+
+            return $normal = ($score->ztbu + 2)/2;
+
+        }else if($score->ztbu >= 0 && $score->ztbu <= 2) {
+
+            return $normal = (2 - $score->ztbu)/2;
+
+        }else if($score->ztbu == 0) {
+
+            return $normal = 1;
+        }
+
+    }
+
+    public function ztbuTinggi()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->ztbu >= 0 && $score->ztbu <= 2) {
+            
+            return $tinggi = ($score->ztbu)/2;
+
+        }else if($score->ztbu >= 2) {
+
+            return $tinggi = 1;
+
+        }else if($score->ztbu <= 0) {
+
+            return $tinggi = 0;
+        }
+
+    }
+
+
+    /**
+     * ZBBTB
+     * ============================================
+     */
+
+    public function zbbtbSangatKurus()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbtb <= -3) {
+            
+            return $sangat_kurus = 1;
+
+        }else if($score->zbbtb >= -3 && $score->zbbtb <= -2) {
+
+            return $sangat_kurus = (-2 - $score->zbbtb);
+
+        }else if($score->zbbtb >= -2) {
+
+            return $sangat_kurus = 0;
+
+        }
+
+    }
+
+
+    public function zbbtbKurus()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbtb <= -3 || $score->zbbtb >= 0) {
+            
+            return $kurus = 0;
+
+        }else if($score->zbbtb >= -3 && $score->zbbtb <= -2) {
+
+            return $kurus = $score->zbbtb + 3;
+
+        }else if($score->zbbtb >= -2 && $score->zbbtb <= 0) {
+
+            return $kurus = (-$score->zbbtb)/2;
+
+        }else if($score->zbbtb == -2) {
+
+            return $kurus = 1;
+        }
+
+    }
+
+    public function zbbtbNormal()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbtb <= -2 || $score->zbbtb >= 2) {
+            
+            return $normal = 0;
+
+        }else if($score->zbbtb >= -2 && $score->zbbtb <= 0) {
+
+            return $normal = ($score->zbbtb + 2)/2;
+
+        }else if($score->zbbtb >= 0 && $score->zbbtb <= 2) {
+
+            return $normal = (2 - $score->zbbtb)/2;
+
+        }else if($score->zbbtb == 0) {
+
+            return $normal = 1;
+        }
+
+    }
+
+    public function zbbtbGemuk()
+    {
+        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+
+        if ($score->zbbtb >= 0 && $score->zbbtb <= 2) {
+            
+            return $tinggi = ($score->zbbtb)/2;
+
+        }else if($score->zbbtb >= 2) {
+
+            return $tinggi = 1;
+
+        }else if($score->zbbtb <= 0) {
+
+            return $tinggi = 0;
+        }
+
     }
 
 }
