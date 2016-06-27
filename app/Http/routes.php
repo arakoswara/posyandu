@@ -252,4 +252,194 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@R_2'
 	]);
 
+
+	/**
+	 * R 3
+	 */
+	
+	Route::get('/r-3', [
+
+		'as' => 'r_3',
+
+		'uses' => 'BalitaController@R_3'
+	]);
+
+	/**
+	 * R 4
+	 */
+	
+	Route::get('/r-4', [
+
+		'as' => 'r_4',
+
+		'uses' => 'BalitaController@R_4'
+	]);
+
+	/**
+	 * R 5
+	 */
+	
+	Route::get('/r-5', [
+
+		'as' => 'r_5',
+
+		'uses' => 'BalitaController@R_5'
+	]);
+
+	/**
+	 * R 6
+	 */
+	
+	Route::get('/r-6', [
+
+		'as' => 'r_6',
+
+		'uses' => 'BalitaController@R_6'
+	]);
+
+	/**
+	 * R 7
+	 */
+	
+	Route::get('/r-7', [
+
+		'as' => 'r_7',
+
+		'uses' => 'BalitaController@R_7'
+	]);
+
+	/**
+	 * R 8
+	 */
+	
+	Route::get('/r-8', [
+
+		'as' => 'r_8',
+
+		'uses' => 'BalitaController@R_8'
+	]);
+
+	/**
+	 * R 9
+	 */
+	
+	Route::get('/r-9', [
+
+		'as' => 'r_9',
+
+		'uses' => 'BalitaController@R_9'
+	]);
+
+	/**
+	 * R 10
+	 */
+	
+	Route::get('/r-10', [
+
+		'as' => 'r_10',
+
+		'uses' => 'BalitaController@R_10'
+	]);
+
+	/**
+	 * R 11
+	 */
+	
+	Route::get('/r-11', [
+
+		'as' => 'r_11',
+
+		'uses' => 'BalitaController@R_11'
+	]);
+
+	/**
+	 * R 12
+	 */
+	
+	Route::get('/r-12', [
+
+		'as' => 'r_12',
+
+		'uses' => 'BalitaController@R_12'
+	]);
+
+	/**
+	 * R 13
+	 */
+	
+	Route::get('/r-13', [
+
+		'as' => 'r_13',
+
+		'uses' => 'BalitaController@R_13'
+	]);
+
+	/**
+	 * R 14
+	 */
+	
+	Route::get('/r-14', [
+
+		'as' => 'r_14',
+
+		'uses' => 'BalitaController@R_14'
+	]);
+
+	/**
+	 * R 15
+	 */
+	
+	Route::get('/r-15', [
+
+		'as' => 'r_15',
+
+		'uses' => 'BalitaController@R_15'
+	]);
+
+	/**
+	 * R 16
+	 */
+	
+	Route::get('/r-16', [
+
+		'as' => 'r_16',
+
+		'uses' => 'BalitaController@R_16'
+	]);
+
+	/**
+	 * R 17
+	 */
+	
+	Route::get('/r-17', [
+
+		'as' => 'r_17',
+
+		'uses' => 'BalitaController@R_17'
+	]);
+
+
+	/**
+	 * R 18
+	 */
+	
+	Route::get('/r-18', [
+
+		'as' => 'r_18',
+
+		'uses' => 'BalitaController@R_18'
+	]);
+
+	/**
+	 * R 19
+	 */
+	
+	Route::get('/r-19', [
+
+		'as' => 'r_19',
+
+		'uses' => 'BalitaController@R_19'
+	]);
+
+	
 });
