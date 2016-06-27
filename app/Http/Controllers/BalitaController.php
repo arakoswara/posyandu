@@ -350,20 +350,21 @@ class BalitaController extends Controller
 
         if ($score->zbbu <= -3 || $score->zbbu >= 0) {
             
-            return $gizi_kurang = 0;
+             $gizi_kurang = 0;
 
         }else if($score->zbbu >= -3 && $score->zbbu <= -2) {
 
-            return $gizi_kurang = $score->zbbu + 3;
+             $gizi_kurang = $score->zbbu + 3;
 
         }else if($score->zbbu >= -2 && $score->zbbu <= 0) {
 
-            return $gizi_kurang = (-$score->zbbu)/2;
+             $gizi_kurang = (-$score->zbbu)/2;
 
         }else if($score->zbbu == -2) {
 
-            return $gizi_kurang = 1;
+             $gizi_kurang = 1;
         }
+		return $gizi_kurang;
 
     }
 
@@ -408,7 +409,7 @@ class BalitaController extends Controller
             $gizi_lebih = 0;
         }
 
-        $gizi_lebih;
+        return $gizi_lebih;
 
     }
 
@@ -679,7 +680,7 @@ class BalitaController extends Controller
 
     }
 
-    public function R_2($gizi_lebih = 0, $normal_ztbu = 0, $gemuk = 0.04545455)
+    public function R_2($gizi_lebih = 0, $normal_ztbu = 0.180555, $gemuk = 0.04545455)
     {
 
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
@@ -731,7 +732,7 @@ class BalitaController extends Controller
             $protein_diit =  1.79 * $score->periksa->berat_badan;
         }
 
-        // return $protein_diit;
+        return $protein_diit;
 
         /**
          * Protein KKP
@@ -745,12 +746,12 @@ class BalitaController extends Controller
             $protein_kkp =  2.03 * $score->periksa->berat_badan;
         }
 
-        // return $protein_kkp;
+        //return $protein_kkp;
         
         /**
-         * Menghitung R 1
+         * Menghitung R 2
          */
-        $z1 = $energi - (0.2 * $energi);
+        $z1 = $energi - (0.1 * $energi);
 
         $y1 = $protein_diit;
         
