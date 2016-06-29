@@ -30,6 +30,9 @@
         <script src="{{ asset('asset-home/amcharts/serial.js') }}" type="text/javascript"></script>
         <script src="{{ asset('asset-home/amcharts/amchart.js') }}" type="text/javascript"></script>
 
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+          
+
     </head>
     <body class="withvernav">
     
@@ -45,5 +48,13 @@
 
             </div>
         </div>
+
+        <script type="text/javascript" charset="utf8" src="{{ asset('asset-home/js/datatables.js') }}"></script>
+
+        <script type="text/javascript">
+             $(document).ready( function () {
+                 $('#myTable').DataTable();
+             } );
+        </script>
     </body>
 </html>

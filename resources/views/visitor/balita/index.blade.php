@@ -22,7 +22,8 @@
      
         <div class="msghead">
 
-        	<table class="table table-striped">
+        	<table class="table table-striped" id="myTable">
+
         		<thead>
         			<tr>
         				<th>No</th>
@@ -37,10 +38,11 @@
         		</thead>
         		<tbody>
         			
+                    <?php $no = 1; ?>
                     @foreach($data_balita as $item)
 
                         <tr>
-                            <td>1</td>
+                            <td>{{$no}}</td>
                             <td>{{ $item->no_reg }}</td>
                             <td>{{ $item->nama_balita }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
@@ -55,6 +57,8 @@
                                 <span class="label label-danger"> <a href="{{ route('destroy_balita', $item->id ) }}" title="">Hapus</a> </span>
                             </td>
                         </tr>
+
+                        <?php $no++; ?>
 
                     @endforeach
         		</tbody>
@@ -127,7 +131,7 @@
 
      		<div class="col-md-12">
      			
-     			<button type="submit" class="btn btn-primary">SIMPAN</button>
+     			<button type="submit" class="btn btn-primary">SIMPAN</button>   
      		</div>
 
      	{!! Form::close() !!}
