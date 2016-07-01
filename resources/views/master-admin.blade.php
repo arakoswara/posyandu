@@ -25,6 +25,12 @@
 	<!-- template skin -->
 	<link id="t-colors" href="color/default.css" rel="stylesheet">
 
+	<!--Amchart-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('asset-home/amcharts/style.css') }}">
+	<script src="{{ asset('asset-home/amcharts/amcharts.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('asset-home/amcharts/serial.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('asset-home/amcharts/amchart.js') }}" type="text/javascript"></script>
+
 
 </head>
 

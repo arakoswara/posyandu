@@ -443,3 +443,18 @@ Route::group(['prefix' => 'sispos'], function() {
 
 	
 });
+
+/**
+ * Route Orang Tua
+ */
+
+Route::group(['prefix' => 'parent'], function(){
+
+	Route::post('/do-pencaian/{no_reg}', [
+
+		'as' => 'do_pencarian',
+
+		'uses' => 'ParentController@doPencarian'
+
+	]);
+});

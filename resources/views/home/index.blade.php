@@ -7,6 +7,43 @@
             <div class="row">
 
                 <div class="col-lg-6">
+
+                    <div class="form-wrapper">
+                        <div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
+                            <div class="panel panel-skin">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <i class="fa fa-search"></i> Pencarian Data Balita</small>
+                                    </h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    
+                                    {!! Form::open(['route' => 'do_pencarian']) !!}
+                                        
+                                        <div class="row">
+
+                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label>&nbsp;</label>
+                                                    <input type="text" name="no_reg" id="phone" class="form-control input-lg" placeholder="ID / No. Registrasi Balita anda..">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success btn-block btn-lg">
+                                            <i class="fa fa-search"></i> Cari
+                                        </button>
+
+                                    {!! Form::close() !!}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
                         <h2 class="h-ultra">Posyandu Melati</h2>
                     </div>
