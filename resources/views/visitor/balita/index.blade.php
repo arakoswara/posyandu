@@ -6,7 +6,7 @@
 
     <h1 class="pagetitle">Data Balita</h1>
 
-    <span class="pagedesc">Data balita posyandu MAWAR</span>
+    <span class="pagedesc">Data balita posyandu MELATI</span>
     
     <ul class="hornav">
         <li class="current"><a href="#inbox">Data Semua Balita</a></li>
