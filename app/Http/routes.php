@@ -460,4 +460,12 @@ Route::group(['prefix' => 'parent'], function(){
 		'uses' => 'ParentController@doPencarian'
 
 	]);
+
+	Route::get('/semua-riwayat/{id}', [
+
+		'as' => 'tampilkan_semua_riwayat',
+
+		'uses' => 'ParentController@tampilkanSemuaRiwayat'
+	]);
+
 });

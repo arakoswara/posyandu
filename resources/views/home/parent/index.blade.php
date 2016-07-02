@@ -10,6 +10,12 @@
 					<div class="col-sm-6 col-md-6">
 						<div class="wow fadeInUp" data-wow-delay="0.2s">
 							<div class="box">
+
+								<a href="" class="btn btn-danger" style="color:white">
+									Download PDF
+								</a>
+
+								<a href="{{ route('tampilkan_semua_riwayat', $data_balita->id) }}" class="btn btn-success" style="color:white">Tampilkan semua riwayat</a>
 								
 								<i class="fa fa-check fa-3x circled bg-skin"></i>
 								<h4 class="h-bold">Data Balita</h4>
@@ -85,7 +91,7 @@
 							<div class="box">
 								
 								<i class="fa fa-check fa-3x circled bg-skin"></i>
-								<h4 class="h-bold">History Pemeriksaan Balita</h4>
+								<h4 class="h-bold">Riwayat Pemeriksaan Balita</h4> 
 								
 								<div class="well well-trans">
 								    <div class="wow fadeInRight" data-wow-delay="0.1s">
@@ -234,7 +240,6 @@
 					</div>
 				</div>
 			</div>
-
 		</section>
 		<!-- /Section: boxes -->
 

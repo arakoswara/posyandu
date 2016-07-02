@@ -33,6 +33,8 @@ class ParentController extends Controller
 
         				->where('score.id_balita', $id)
 
+        				->orderBy('score.id', 'ASC')
+
         				->select('score.*', 'periksa.berat_badan', 'periksa.tinggi_badan')
 
         				->get();
@@ -41,6 +43,11 @@ class ParentController extends Controller
 
         return view('home.parent.index', compact('data_pencarian', 'data_balita', 'grafik_score'));
 
+    }
+
+    public function tampilkanSemuaRiwayat($id)
+    {
+    	return $data_riwayat = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->get();
     }
     
 }
