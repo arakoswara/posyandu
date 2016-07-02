@@ -113,11 +113,11 @@
 
                                     {{ "Gizi Buruk" }}
 
-                                @elseif($score->zbbu > -3 && $score->zbbu < -2)
+                                @elseif($score->zbbu >= -3 && $score->zbbu < -2)
 
                                     {{ "Gizi Kurang" }}
 
-                                @elseif($score->zbbu > -2 && $score->zbbu < 2)
+                                @elseif($score->zbbu >= -2 && $score->zbbu <= 2)
 
                                     {{ "Gizi Baik" }}
 
@@ -139,11 +139,11 @@
 
                                     {{ "Sangat Pendek" }}
 
-                                @elseif($score->ztbu > -3 && $score->ztbu < -2)
+                                @elseif($score->ztbu >= -3 && $score->ztbu < -2)
 
                                     {{ "Pendek" }}
 
-                                @elseif($score->ztbu > -2 && $score->ztbu < 2)
+                                @elseif($score->ztbu >= -2 && $score->ztbu <= 2)
 
                                     {{ "Normal" }}
 
@@ -165,11 +165,11 @@
 
                                     {{ "Sangat Kurus" }}
 
-                                @elseif($score->zbbtb > -3 && $score->zbbtb < -2)
+                                @elseif($score->zbbtb >= -3 && $score->zbbtb < -2)
 
                                     {{ "Kurus" }}
 
-                                @elseif($score->zbbtb > -2 && $score->zbbtb < 2)
+                                @elseif($score->zbbtb >= -2 && $score->zbbtb <= 2)
 
                                     {{ "Normal" }}
 
