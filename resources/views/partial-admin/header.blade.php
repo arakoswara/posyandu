@@ -8,7 +8,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('home_index') }}">
                 {{-- <img src="{{ asset('asset/img/logo.png') }}" alt="" width="150" height="40" /> --}}
                 <h3>SPBP2</h3>
             </a>
@@ -17,7 +17,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#intro">Home</a></li>
+            <li class="active"><a href="{{ route('home_index') }}">Home</a></li>
             <li><a href="{{ route('login-form') }}">Login</a></li>
           </ul>
         </div>

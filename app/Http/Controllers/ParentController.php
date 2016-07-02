@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\DataBalita;
+use App\Http\Requests\PencarianRequest;
 use App\Score;
 use App\Periksa;
 use DB;
@@ -14,7 +15,7 @@ use DB;
 class ParentController extends Controller
 {
 
-    public function doPencarian(Request $request)
+    public function doPencarian(PencarianRequest $request)
     {
 
         $no_reg = $request->all();

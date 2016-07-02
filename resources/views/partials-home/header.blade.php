@@ -1,16 +1,13 @@
 <div class="topheader">
     <div class="left">
         <h1 class="logo"> POSYANDU </span></h1>
-        <span class="slogan"> Beta </span>
         
         <br clear="all" />
         
     </div><!--left-->
     
     <div class="right">
-    	<div class="notification">
-            <a class="count" href="ajax/notifications.html"><span>9</span></a>
-    	</div>
+    	
     	<div class="userinfo">
         	<img src="images/thumbs/avatar.png" alt="" />
             {{-- <span>{{ $user->name }}</span> --}}

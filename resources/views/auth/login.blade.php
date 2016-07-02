@@ -93,6 +93,20 @@
                                             <button type="submit" class="btn btn-success btn-block btn-lg">
                                                 <i class="fa fa-sign-in"></i> Login
                                             </button>
+
+                                            <small style="color:red;">*
+                                                @if(Session::has('message'))
+
+                                                    <div class="alert alert-success">
+
+                                                        {{ session('message') }}
+                                                        
+                                                        <a href="#" class="close">&times;</a>
+                                                    </div>
+                                                    
+                                                @endif
+                                                
+                                            </small>
                                         
                                         {!! Form::close() !!}
                                     </div>

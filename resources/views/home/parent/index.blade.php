@@ -3,6 +3,9 @@
 @section('content')
 
 		<!-- Section: boxes -->
+
+		@if(!empty($data_balita) && !empty($data_pencarian))
+
 	    <section id="boxes" class="home-section paddingtop-80">
 		
 			<div class="container">
@@ -128,11 +131,11 @@
 
 									        		    {{ "Gizi Buruk" }}
 
-									        		@elseif($data_pencarian->zbbu > -3 && $data_pencarian->zbbu < -2)
+									        		@elseif($data_pencarian->zbbu >= -3 && $data_pencarian->zbbu < -2)
 
 									        		    {{ "Gizi Kurang" }}
 
-									        		@elseif($data_pencarian->zbbu > -2 && $data_pencarian->zbbu < 2)
+									        		@elseif($data_pencarian->zbbu >= -2 && $data_pencarian->zbbu <= 2)
 
 									        		    {{ "Gizi Baik" }}
 
@@ -141,6 +144,7 @@
 									        		    {{ "Gizi Lebih" }}
 
 									        		@endif
+
 									        	</span>
 									        </li>
 
@@ -153,11 +157,11 @@
 
 									        		    {{ "Sangat Pendek" }}
 
-									        		@elseif($data_pencarian->ztbu > -3 && $data_pencarian->ztbu < -2)
+									        		@elseif($data_pencarian->ztbu >= -3 && $data_pencarian->ztbu < -2)
 
 									        		    {{ "Pendek" }}
 
-									        		@elseif($data_pencarian->ztbu > -2 && $data_pencarian->ztbu < 2)
+									        		@elseif($data_pencarian->ztbu >= -2 && $data_pencarian->ztbu <= 2)
 
 									        		    {{ "Normal" }}
 
@@ -179,11 +183,11 @@
 
 									        		    {{ "Sangat Kurus" }}
 
-									        		@elseif($data_pencarian->zbbtb > -3 && $data_pencarian->zbbtb < -2)
+									        		@elseif($data_pencarian->zbbtb >= -3 && $data_pencarian->zbbtb < -2)
 
 									        		    {{ "Kurus" }}
 
-									        		@elseif($data_pencarian->zbbtb > -2 && $data_pencarian->zbbtb < 2)
+									        		@elseif($data_pencarian->zbbtb >= -2 && $data_pencarian->zbbtb <= 2)
 
 									        		    {{ "Normal" }}
 
@@ -242,6 +246,44 @@
 			</div>
 		</section>
 		<!-- /Section: boxes -->
+
+		@else
+
+	    <section id="intro" class="intro">
+            <div class="intro-content">
+                <div class="container" style="min-height:420px">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                             
+                            <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                                <h1 class="h-ultra">Oppsss... tidak ada data ditemukan</h1>
+                                <h2 class="h-ultra">Posyandu Melati</h2>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
+                                <h4 class="h-light">Melayani Dengan Sepenuh<span style="color:red"> <i class="fa fa-heart"></i> </span></h4>
+                            </div>
+
+                            <div class="well well-trans">
+                                <div class="wow fadeInRight" data-wow-delay="0.1s">
+
+                                <ul class="lead-list">
+                                    <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>ID / No. Registrasi Salah</strong><br />
+                                    ID / No. Registrasi Balita anda tidak terdaftar atau salah</span></li>
+                                    
+                                </ul>
+
+                                </div>
+                            </div>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+		@endif
 
 		<script>
 

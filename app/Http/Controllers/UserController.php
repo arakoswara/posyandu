@@ -94,8 +94,10 @@ class UserController extends Controller
                 }
             }
         } else {
-            // user belum melakukan registrasi
-            return redirect()->route('register-form');
+            
+            session()->flash('message', 'Email dan Password belum terdaftar / tidak sesuai');
+
+            return redirect()->route('login-form');
         }
 
     }

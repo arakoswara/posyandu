@@ -444,6 +444,14 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@R_19'
 	]);
 
+
+	Route::get('/coba-energi', [
+
+		'as' => 'coba_energi',
+
+		'uses' => 'BalitaController@cobaEnergi'
+	]);
+
 	
 });
 

@@ -26,7 +26,19 @@
 
                                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
-                                                    <label>&nbsp;</label>
+                                                    <label>&nbsp;</label> <small style="color:red"> 
+
+                                                    @if($errors->any())
+
+                                                        @foreach($errors->get('no_reg') as $error)
+
+                                                            {{ $error }}
+
+                                                        @endforeach
+                                                    @endif
+
+                                                    </small>
+
                                                     <input type="text" name="no_reg" id="phone" class="form-control input-lg" placeholder="ID / No. Registrasi Balita anda..">
                                                 </div>
                                             </div>

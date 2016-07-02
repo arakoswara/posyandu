@@ -184,7 +184,7 @@ class BalitaController extends Controller
         return redirect()->back();
     }
 
-    public function hitungBalita($id_balita =1)
+    public function hitungBalita($id_balita)
     {
         /**
          * mengambil data dari table periksa dan balita berdasarkan reasi one to many
@@ -303,7 +303,7 @@ class BalitaController extends Controller
          * Insert Score
          */
         
-        $input['month'] = $month;
+        $input['month']     = $month;
 
         $input['id_balita'] = $periksa_balita->id_balita;
 
@@ -318,28 +318,34 @@ class BalitaController extends Controller
         Score::create($input);
     }
 
+    public function cobaEnergi()
+    {
+        return $this->zbbuGizikurang();
+    }
+
     /**
      * ZBBU
      * =================================================
      */
-
     public function zbbuGiziburuk()
     {
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
         if ($score->zbbu <= -3) {
             
-            return $gizi_buruk = 1;
+            $gizi_buruk = 1;
 
         }else if($score->zbbu >= -3 && $score->zbbu <= -2) {
 
-            return $gizi_buruk = (-2 - $score->zbbu);
+            $gizi_buruk = (-2 - $score->zbbu);
 
         }else if($score->zbbu >= -2) {
 
-            return $gizi_buruk = 0;
+            $gizi_buruk = 0;
 
         }
+
+        return $gizi_buruk;
 
     }
 
@@ -511,7 +517,6 @@ class BalitaController extends Controller
      * ZBBTB
      * ============================================
      */
-
     public function zbbtbSangatKurus()
     {
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
@@ -531,7 +536,6 @@ class BalitaController extends Controller
         }
 
     }
-
 
     public function zbbtbKurus()
     {
@@ -601,13 +605,12 @@ class BalitaController extends Controller
         return $gemuk;
 
     }
+
     /**
      * Rule 1
 	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
      * ============================================
-     */
-
-	
+     */	
     public function R_1($gizi_lebih = 0, $tinggi = 0, $normal_zbbtb = 0.95454545)
     {
 
