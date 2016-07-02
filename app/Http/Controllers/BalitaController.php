@@ -41,8 +41,9 @@ class BalitaController extends Controller
 
     public function dashboard()
     {
+        $jml_balita = DataBalita::all()->count(); 
 
-        return view('visitor.index');
+        return view('visitor.index', compact('jml_balita'));
 
     }
     /**
@@ -611,9 +612,11 @@ class BalitaController extends Controller
 	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
      * ============================================
      */	
-    public function R_1($gizi_lebih = 0, $tinggi = 0, $normal_zbbtb = 0.95454545)
+    public function R_1($gizi_lebih = 0, $tinggi = 1, $normal_zbbtb = 0.95454545)
     {
-
+        /**
+         * Dari sini
+         */
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
 
@@ -677,6 +680,10 @@ class BalitaController extends Controller
             $protein_kkp =  2.03 * $score->periksa->berat_badan;
         }
 
+        /**
+         * Sampe sini
+         */
+
         // return $protein_kkp;
         
         /**
@@ -686,6 +693,10 @@ class BalitaController extends Controller
 
         $y1 = $protein_diit;
 
+        // $rz1=r_1*$z1;
+
+        // $ry1=r_1*$y1;
+        
 
     }
 

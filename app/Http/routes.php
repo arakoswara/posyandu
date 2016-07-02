@@ -83,7 +83,7 @@ Route::group(['prefix' => 'sispos'], function() {
 
 	Route::get('/', [
 
-		'as' => 'data-balita', 'uses' => 'BalitaController@dashboard'
+		'as' => 'dashboard', 'uses' => 'BalitaController@dashboard'
 	]);
 
 	Route::get('/data-balita', [
