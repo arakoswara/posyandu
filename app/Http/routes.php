@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function() {
-	return view('home.index');
-});
+Route::get('/', [
+
+	'as' => 'home_index',
+
+	'uses' => 'HomeController@index'
+]);
 
 Route::group(['prefix' => 'auth'], function()
 {	

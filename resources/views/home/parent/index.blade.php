@@ -115,21 +115,84 @@
 
 									        <li>
 									        	<span class="fa fa-check fa-2x icon-success"></span>
-									        	<span class="list"><strong>BBU / U</strong><br />
-									        		{{ $data_pencarian->zbbu }}
+									        	<span class="list"><strong>BB / U</strong><br />
+									        		{{ $data_pencarian->zbbu }} |
+
+									        		@if($data_pencarian->zbbu < -3)
+
+									        		    {{ "Gizi Buruk" }}
+
+									        		@elseif($data_pencarian->zbbu > -3 && $data_pencarian->zbbu < -2)
+
+									        		    {{ "Gizi Kurang" }}
+
+									        		@elseif($data_pencarian->zbbu > -2 && $data_pencarian->zbbu < 2)
+
+									        		    {{ "Gizi Baik" }}
+
+									        		@elseif($data_pencarian->zbbu > 2)
+
+									        		    {{ "Gizi Lebih" }}
+
+									        		@endif
 									        	</span>
 									        </li>
 
 									        <li>
 									        	<span class="fa fa-check fa-2x icon-success"></span>
-									        	<span class="list"><strong>TBU / U</strong><br />
-									        		{{ $data_pencarian->ztbu }}
+									        	<span class="list"><strong>TB / U</strong><br />
+									        		{{ $data_pencarian->ztbu }} |
+
+									        		@if($data_pencarian->ztbu < -3)
+
+									        		    {{ "Sangat Pendek" }}
+
+									        		@elseif($data_pencarian->ztbu > -3 && $data_pencarian->ztbu < -2)
+
+									        		    {{ "Pendek" }}
+
+									        		@elseif($data_pencarian->ztbu > -2 && $data_pencarian->ztbu < 2)
+
+									        		    {{ "Normal" }}
+
+									        		@elseif($data_pencarian->ztbu > 2)
+
+									        		    {{ "Tinggi" }}
+
+									        		@endif
+
 									        	</span>
 									        </li>
 
 									        <li>
 									        	<span class="fa fa-check fa-2x icon-success"></span>
-									        	<span class="list"><strong>Energi & Protein</strong><br />
+									        	<span class="list"><strong>BB / TB</strong><br />
+									        		{{ $data_pencarian->zbbtb }} |
+
+									        		@if($data_pencarian->zbbtb < -3)
+
+									        		    {{ "Sangat Kurus" }}
+
+									        		@elseif($data_pencarian->zbbtb > -3 && $data_pencarian->zbbtb < -2)
+
+									        		    {{ "Kurus" }}
+
+									        		@elseif($data_pencarian->zbbtb > -2 && $data_pencarian->zbbtb < 2)
+
+									        		    {{ "Normal" }}
+
+									        		@elseif($data_pencarian->zbbtb > 2)
+
+									        		    {{ "Gemuk" }}
+
+									        		@endif
+
+									        	</span>
+									        </li>
+
+									        <li>
+									        	<span class="fa fa-check fa-2x icon-success"></span>
+									        	<span class="list"><strong>Kebutuha Energi & Protein</strong><br />
 									        		{{ $data_pencarian->protein }} | {{ $data_pencarian->energi }}
 									        	</span>
 									        </li>

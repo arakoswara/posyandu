@@ -105,7 +105,7 @@
                         </tr>
 
                         <tr>
-                            <td>BBU / U</td>
+                            <td>BB / U</td>
                             <td> : </td>
                             <td>{{ $score->zbbu }} |
 

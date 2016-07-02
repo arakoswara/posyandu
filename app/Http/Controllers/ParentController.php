@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\DataBalita;
 use App\Score;
 use App\Periksa;
+use DB;
 
 class ParentController extends Controller
 {
@@ -22,9 +23,21 @@ class ParentController extends Controller
 
         $id = $data_balita['id'];
 
-        $data_pencarian = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->first();
+        $data_pencarian = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->first();
 
-        $grafik_score = Score::orderBy('id', 'ASC')->where('id_balita', $id)->get();
+        // $grafik_score = Score::orderBy('id', 'ASC')->where('id_balita', $id)->get();
+
+        $data = DB::table('score')
+
+        				->join('periksa', 'periksa.id', '=', 'score.id_periksa')
+
+        				->where('score.id_balita', $id)
+
+        				->select('score.*', 'periksa.berat_badan', 'periksa.tinggi_badan')
+
+        				->get();
+
+        $grafik_score = json_encode($data);
 
         return view('home.parent.index', compact('data_pencarian', 'data_balita', 'grafik_score'));
 

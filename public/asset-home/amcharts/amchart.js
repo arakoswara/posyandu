@@ -43,16 +43,16 @@ AmCharts.ready(function () {
     chart.addGraph(graph);
 
     var graph = new AmCharts.AmGraph();
-    graph.valueField = "protein";
-    graph.balloonText = "protein: <b>[[value]]</b>";
+    graph.valueField = "berat_badan";
+    graph.balloonText = "berat_badan: <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;
     chart.addGraph(graph);
 
     var graph = new AmCharts.AmGraph();
-    graph.valueField = "energi";
-    graph.balloonText = "energi: <b>[[value]]</b>";
+    graph.valueField = "tinggi_badan";
+    graph.balloonText = "tinggi_badan: <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;

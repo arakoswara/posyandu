@@ -107,6 +107,6 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('register-form');
+        return redirect()->route('home_index');
     }
 }

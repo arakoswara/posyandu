@@ -15,6 +15,11 @@ class HomeController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function index()
+    {
+        return view('home.index');
+    }
     
     public function register()
     {
