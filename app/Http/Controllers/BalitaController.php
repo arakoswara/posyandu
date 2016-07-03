@@ -612,13 +612,11 @@ class BalitaController extends Controller
     }
 
     /**
-     * Rule 1
-	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
-     * ============================================
-     */	
-    public function R_1($protein_kkp)
+     * Cari energi 
+     */
+    public function CariEnergi($id_periksa = 1, $id_balita = 1)
     {
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $score = Score::with('periksa')->where('id_periksa', $id_periksa)->with('dataBalita')->where('id_balita', $id_balita)->first();
 
 
         // return $score->periksa->berat_badan;
@@ -645,14 +643,13 @@ class BalitaController extends Controller
             $energi = 90 * $score->periksa->berat_badan;
         }
 
-        $energi;
+        return $energi;
+    }
 
-        // return $energi;
+    public function CariProteinDIIT($id_periksa = 1, $id_balita = 1)
+    {
+        $score = Score::with('periksa')->where('id_periksa', $id_periksa)->with('dataBalita')->where('id_balita', $id_balita)->first();
 
-        /**
-         * CARI PROTEIN
-         */
-        
         $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
 
         $umur_bulan_bulat = floor($umur_bulan);
@@ -669,7 +666,16 @@ class BalitaController extends Controller
             $protein_diit =  1.79 * $score->periksa->berat_badan;
         }
 
-        // return $protein_diit;
+        return $protein_diit;
+    }
+
+    public function CariProteinKKP($id_periksa = 1, $id_balita = 1)
+    {
+        $score = Score::with('periksa')->where('id_periksa', $id_periksa)->with('dataBalita')->where('id_balita', $id_balita)->first();
+
+        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+
+        $umur_bulan_bulat = floor($umur_bulan);
 
         /**
          * Protein KKP
@@ -683,22 +689,38 @@ class BalitaController extends Controller
             $protein_kkp =  2.03 * $score->periksa->berat_badan;
         }
 
-        $protein_kkp;
+        return $protein_kkp;
     }
 
-    public function cobaEnergi()
+    /**
+     * Rule 1
+	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
+     * ============================================
+     */	
+    public function R_1($gizi_lebih = 0, $tinggi = 0, $normal_zbbtb = 0.95454545)
     {
-        return $this->R_1($protein_kkp);
+
+        $data_energi = $this->CariEnergi();
+
+        $data_protein_diit = $this->CariProteinKKP();
+
+        $data_protein_diit = $this->CariProteinDIIT();
+
+        /**
+         * cari nilai terkecil
+         */
+        $r_1 = min($gizi_lebih, $tinggi, $normal_zbbtb);
+
         /**
          * Menghitung R 1
          */
-        // return $z1 = $energi - (0.2 * $energi);
+        $z1 = $data_energi - (0.2 * $data_energi);
 
-        return $y1 = $protein_diit;
+        $y1 = $data_protein_diit;
 
-        // $rz1=r_1*$z1;
+        $rz1 = $r_1 * $z1;
 
-        // $ry1=r_1*$y1;
+        return $ry1= $r_1 * $y1;
         
 
     }

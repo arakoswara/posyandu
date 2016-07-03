@@ -445,11 +445,18 @@ Route::group(['prefix' => 'sispos'], function() {
 	]);
 
 
-	Route::get('/coba-energi', [
+	Route::get('/cari-energi', [
 
-		'as' => 'coba_energi',
+		'as' => 'cari_energi',
 
-		'uses' => 'BalitaController@cobaEnergi'
+		'uses' => 'BalitaController@CariEnergi'
+	]);
+
+	Route::get('/cari-protein', [
+
+		'as' => 'cari_protein',
+
+		'uses' => 'BalitaController@CariProtein'
 	]);
 
 	/**
