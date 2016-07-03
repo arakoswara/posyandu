@@ -61,7 +61,9 @@ class BalitaController extends Controller
          */
         $data_balita = DataBalita::get();
 
-        return view('visitor.balita.index', compact('data_balita'));
+        $date_now = date('d-m-Y');
+
+        return view('visitor.balita.index', compact('data_balita', 'date_now'));
     }
 
     /**

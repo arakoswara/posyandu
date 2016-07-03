@@ -42,7 +42,7 @@
 
         		<thead>
         			<tr>
-        				<th>No</th>
+        				<th>Umur (bulan)</th>
         				<th>No. Registrasi</th>
                         <th>Nama Balita</th>
         				<th>Tgl Lahir</th>
@@ -57,8 +57,21 @@
                     <?php $no = 1; ?>
                     @foreach($data_balita as $item)
 
+
+                        <?php
+
+                        $umur = (strtotime($date_now) - strtotime($item->tgl_lahir)) / (60 * 60 * 24 * 30 );
+                        /**
+                         * pembulatan umur
+                         */
+                        $umur_bulat = floor($umur);
+
+                        ?>
+
+                        @if($umur_bulat <= 30)
+
                         <tr>
-                            <td>{{$no}}</td>
+                            <td>{{ $umur_bulat }}</td>
                             <td>{{ $item->no_reg }}</td>
                             <td>{{ $item->nama_balita }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
@@ -70,9 +83,11 @@
                                 &nbsp;
                                 <span class="label label-success"> <a href="{{ route('ubah_balita', $item->id) }}" title="">Ubah</a> </span>
                                 &nbsp;
-                                <span class="label label-danger"> <a href="{{ route('destroy_balita', $item->id ) }}" title="">Hapus</a> </span>
+                                {{-- <span class="label label-danger"> <a href="{{ route('destroy_balita', $item->id ) }}" title="">Hapus</a> </span> --}}
                             </td>
                         </tr>
+
+                        @endif
 
                         <?php $no++; ?>
 
