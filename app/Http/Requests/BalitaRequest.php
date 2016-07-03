@@ -25,7 +25,7 @@ class BalitaRequest extends Request
     {
         return [
             
-            'no_reg' => 'required|int',
+            'no_reg' => 'required|integer|unique:data_balita',
 
             'nama_balita' => 'required|min:6',
 

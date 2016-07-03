@@ -9,21 +9,21 @@
     <div class="right">
     	
     	<div class="userinfo">
-        	<img src="images/thumbs/avatar.png" alt="" />
-            {{-- <span>{{ $user->name }}</span> --}}
+        	<img src="{{ asset('user.png') }}" width="30px" />
+            <span>{{ $user->name }}</span>
         </div><!--userinfo-->
         
         <div class="userinfodrop">
         	<div class="avatar">
-            	<a href="#"><img src="images/thumbs/avatarbig.png" alt="" /></a>
+            	<a href="#"><img src="{{ asset('user.png') }}" width="100px" /></a>
             </div><!--avatar-->
             <div class="userdata">
-            	{{-- <h4>{{ $user->name }}</h4> --}}
+            	<h4>{{ $user->name }}</h4>
 
                 {{-- <span class="email"> {{ $user->email }}</span> --}}
 
                 <ul>
-                	<li><a href="editprofile.html">Edit Profile</a></li>
+                	<li><a href="{{ route('edit_profil') }}">Edit Profile</a></li>
                     
                     <li><a href="{{ route('do-Logout') }}" title="">LOGOUT</a></li>
                 </ul>

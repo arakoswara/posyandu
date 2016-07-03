@@ -37,6 +37,10 @@ class BalitaController extends Controller
         $this->middleware('auth');
 
         $this->middleware('role:visitor');
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        view()->share('user', $user);
     }
 
     public function dashboard()
@@ -75,7 +79,7 @@ class BalitaController extends Controller
          */
         DataBalita::create($input);
 
-        return redirect()->route('data_balita');
+        return redirect()->route('data-balita');
     }
 
     /**
@@ -139,7 +143,7 @@ class BalitaController extends Controller
          */
         $data_balita_db->update($data_balita);
 
-        return redirect()->route('data_balita');
+        return redirect()->route('data-balita');
     }
 
     /**
@@ -159,7 +163,7 @@ class BalitaController extends Controller
          */
         $data_balita->delete();
 
-        return redirect()->route('data_balita');
+        return redirect()->route('data-balita');
     }
 
     /**
@@ -319,10 +323,10 @@ class BalitaController extends Controller
         Score::create($input);
     }
 
-    public function cobaEnergi()
-    {
-        return $this->zbbuGizikurang();
-    }
+    // public function cobaEnergi()
+    // {
+    //     return $this->zbbuGizikurang();
+    // }
 
     /**
      * ZBBU
@@ -612,7 +616,7 @@ class BalitaController extends Controller
 	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
      * ============================================
      */	
-    public function R_1($gizi_lebih = 0, $tinggi = 1, $normal_zbbtb = 0.95454545)
+    public function R_1($protein_kkp)
     {
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
@@ -640,6 +644,8 @@ class BalitaController extends Controller
 
             $energi = 90 * $score->periksa->berat_badan;
         }
+
+        $energi;
 
         // return $energi;
 
@@ -677,23 +683,18 @@ class BalitaController extends Controller
             $protein_kkp =  2.03 * $score->periksa->berat_badan;
         }
 
-        return $protein_kkp;
+        $protein_kkp;
     }
 
-    public function FunctionName($value='')
+    public function cobaEnergi()
     {
-        /**
-         * Sampe sini
-         */
-
-        // return $protein_kkp;
-        
+        return $this->R_1($protein_kkp);
         /**
          * Menghitung R 1
          */
-        $z1 = $energi - (0.2 * $energi);
+        // return $z1 = $energi - (0.2 * $energi);
 
-        $y1 = $protein_diit;
+        return $y1 = $protein_diit;
 
         // $rz1=r_1*$z1;
 

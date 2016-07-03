@@ -4,7 +4,7 @@
     
     <div class="pageheader">
         <div>
-        <h1 class="pagetitle">Juan Dela Cruz</h1>
+        <h1 class="pagetitle">{{ $user->name }}</h1>
         <span class="pagedesc">Front-End Engineer / UI Designer</span>
         </div>
         <ul class="hornav">
@@ -34,7 +34,7 @@
                             @endforeach
                         @endif
 
-            			{!! Form::text('email', null, ['class' => 'form-control']) !!}
+            			{!! Form::text('email', $user->email , ['class' => 'form-control']) !!}
             		</div>
             	</div>
 
@@ -54,7 +54,7 @@
                             @endforeach
                         @endif
 
-            			{!! Form::text('name', null, ['class' => 'form-control']) !!}
+            			{!! Form::text('name', $user->name , ['class' => 'form-control']) !!}
             		</div>
             	</div>
 
