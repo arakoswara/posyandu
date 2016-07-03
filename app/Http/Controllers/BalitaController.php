@@ -702,17 +702,17 @@ class BalitaController extends Controller
 
         $data_energi = $this->CariEnergi();
 
-        $data_protein_diit = $this->CariProteinKKP();
-
         $data_protein_diit = $this->CariProteinDIIT();
 
+        $data_protein_kkp = $this->CariProteinKKP();
+
         /**
-         * cari nilai terkecil
+         * cari nilai minimum R1
          */
         $r_1 = min($gizi_lebih, $tinggi, $normal_zbbtb);
 
         /**
-         * Menghitung R 1
+         * Konsekuen z1 dan y1
          */
         $z1 = $data_energi - (0.2 * $data_energi);
 
@@ -733,80 +733,29 @@ class BalitaController extends Controller
 	
     public function R_2($gizi_lebih = 0, $normal_ztbu = 0.180555, $gemuk = 0.04545455)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r2
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_2 = min($gizi_lebih, $normal_ztbu, $gemuk);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z2 dan y2
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z2 = $data_energi - (0.1 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y2 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz2 = $r_2 * $z2;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 2
-         */
-        $z2 = $energi - (0.1 * $energi);
-
-        $y2 = $protein_diit;
-        
+        $ry2= $r_2 * $y2;
     }
+
     /**
      * Rule 3
 	 * R3 Zbbu(gizilebih) &Ztbu(Pendek) & Zbbtb(Gemuk) z3=energi-(0.1*energi) y3=diit
@@ -815,78 +764,27 @@ class BalitaController extends Controller
 
     public function R_3($gizi_lebih = 0, $pendek = 0.819445, $gemuk = 0.04545455)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r3
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_3 = min($gizi_lebih, $pendek, $gemuk);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z3 dan y3
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z3 = $data_energi - (0.1 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y3 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz3 = $r_3 * $z3;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 3
-         */
-        $z3 = $energi - (0.1 * $energi);
-
-        $y3 = $protein_diit;
+        $ry3= $r_3 * $y3;
         
     }
     /**
@@ -897,80 +795,29 @@ class BalitaController extends Controller
 
     public function R_4($gizi_lebih = 0, $sangat_pendek = 0, $gemuk = 0.04545455)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r4
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_4 = min($gizi_lebih, $sangat_pendek, $gemuk);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z4 dan y4
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z4 = $data_energi - (0.2 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y4 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz4 = $r_4 * $z4;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 4
-         */
-        $z4 = $energi - (0.2 * $energi);
-
-        $y4 = $protein_diit;
-        
+        $ry4= $r_4 * $y4;
     }
+
     /**
      * Rule 5
      * R5 Zbbu(gizibaik) &Ztbu(Tinggi) & Zbbtb(Normal) z5= energi y5=diit
@@ -979,79 +826,28 @@ class BalitaController extends Controller
 
     public function R_5($gizi_baik = 0.59375, $tinggi = 0, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r5
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_5 = min($gizi_baik, $tinggi, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z5 dan y5
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z5 = $data_energi;
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y5 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz5 = $r_5 * $z5;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 5
-         */
-        $z5 = $energi;
-
-        $y5 = $protein_diit;
-        
+        $ry5= $r_5 * $y5;
+       
     }  
 
     /**
@@ -1062,79 +858,28 @@ class BalitaController extends Controller
 
     public function R_6($gizi_baik = 0.59375, $normal_ztbu = 0.180555, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r6
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_6 = min($gizi_baik, $normal_ztbu, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z6 dan y6
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z6 = $data_energi;
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y6 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz6 = $r_6 * $z6;
 
-        }else{
+        $ry6= $r_6 * $y6;
 
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 6
-         */
-        $z6 = $energi;
-
-        $y6 = $protein_diit;
-        
     }
 
     /**
@@ -1145,78 +890,27 @@ class BalitaController extends Controller
 
     public function R_7($gizi_baik = 0.59375, $pendek = 0.819445, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r7
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_7 = min($gizi_baik, $pendek, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z7 dan y7
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z7 = $data_energi;
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y7 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz7 = $r_7 * $z7;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 7
-         */
-        $z7 = $energi;
-
-        $y7 = $protein_diit;
+        $ry7= $r_7 * $y7;
         
     }
 
@@ -1228,79 +922,28 @@ class BalitaController extends Controller
 
     public function R_8($gizi_baik = 0.59375, $sangat_pendek = 0, $gemuk = 0.04545455)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r8
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_8 = min($gizi_baik, $sangat_pendek, $gemuk);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z8 dan y8
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z8 = $data_energi;
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y8 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz8 = $r_8 * $z8;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 8
-         */
-        $z8 = $energi;
-
-        $y8 = $protein_diit;
-        
+        $ry8= $r_8 * $y8;
+ 
     }
 
     /**
@@ -1311,78 +954,27 @@ class BalitaController extends Controller
 
     public function R_9($gizi_baik = 0.59375, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r9
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_9 = min($gizi_baik, $sangat_pendek, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z9 dan y9
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z9 = $data_energi;
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y9 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz9 = $r_9 * $z9;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 9
-         */
-        $z9 = $energi;
-
-        $y9 = $protein_diit;
+        $ry9= $r_9 * $y9;
         
     }
 
@@ -1394,79 +986,28 @@ class BalitaController extends Controller
 
     public function R_10($gizi_kurang = 0.40625, $tinggi = 0, $sangat_kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r10
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_10 = min($gizi_kurang, $tinggi, $sangat_kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z10 dan y10
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z10 = $data_energi + (0.4 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y10 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz10 = $r_10 * $z10;
 
-        }else{
+        $ry10= $r_10 * $y10;
 
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 10
-         */
-        $z10 = $energi + (0.4 * $energi);
-
-        $y10 = $protein_diit;
-        
     }
 
     /**
@@ -1477,78 +1018,27 @@ class BalitaController extends Controller
 
     public function R_11($gizi_kurang = 0.40625, $normal_ztbu = 0.180555, $kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r11
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_11 = min($gizi_kurang, $normal_ztbu, $kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z11 dan y11
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z11 = $data_energi + (0.2 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y11 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz11 = $r_11 * $z11;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 11
-         */
-        $z11 = $energi + (0.2 * $energi);
-
-        $y11 = $protein_diit;
+        $ry11= $r_11 * $y11;
         
     }
 
@@ -1560,79 +1050,28 @@ class BalitaController extends Controller
 
     public function R_12($gizi_kurang = 0.40625, $pendek = 0.819445, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r12
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_12 = min($gizi_kurang, $pendek, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z12 dan y12
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z12 = $data_energi + (0.2 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y12 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz12 = $r_12 * $z12;
 
-        }else{
+        $ry12= $r_12 * $y12;
 
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 12
-         */
-        $z12 = $energi + (0.2 * $energi);
-
-        $y12 = $protein_diit;
-        
     }
 
     /**
@@ -1643,78 +1082,27 @@ class BalitaController extends Controller
 
     public function R_13($gizi_kurang = 0.40625, $pendek = 0.819445, $kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r13
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_13 = min($gizi_kurang, $pendek, $kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z13 dan y13
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z13 = $data_energi + (0.3 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y13 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz13 = $r_13 * $z13;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 13
-         */
-        $z13 = $energi + (0.3 * $energi);
-
-        $y13 = $protein_diit;
+        $ry13= $r_13 * $y13;
         
     }
 
@@ -1726,78 +1114,27 @@ class BalitaController extends Controller
 
     public function R_14($gizi_kurang = 0.40625, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r14
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_14 = min($gizi_kurang, $sangat_pendek, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z14 dan y14
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z14 = $data_energi + (0.3 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y14 = $data_protein_diit;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz14 = $r_14 * $z14;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 14
-         */
-        $z14 = $energi + (0.3 * $energi);
-
-        $y14 = $protein_diit;
+        $ry14= $r_14 * $y14;
         
     }
 
@@ -1809,79 +1146,28 @@ class BalitaController extends Controller
 
     public function R_15($gizi_buruk = 0, $tinggi = 0, $sangat_kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r15
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_15 = min($gizi_buruk, $tinggi, $sangat_kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z15 dan y15
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z15 = $data_energi + (0.4 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y15 = $data_protein_kkp;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz15 = $r_15 * $z15;
 
-        }else{
+        $ry15= $r_15 * $y15;
 
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 15
-         */
-        $z15 = $energi + (0.4 * $energi);
-
-        $y15 = $protein_kkp;
-        
     }
 
     /**
@@ -1892,79 +1178,27 @@ class BalitaController extends Controller
 
     public function R_16($gizi_buruk = 0, $normal_ztbu = 0.180555, $kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r16
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_16 = min($gizi_buruk, $normal_ztbu, $kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z16 dan y16
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z16 = $data_energi + (0.3 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y16 = $data_protein_kkp;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz16 = $r_16 * $z16;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 16
-         */
-        $z16 = $energi + (0.3 * $energi);
-
-        $y16 = $protein_kkp;
-        
+        $ry16= $r_16 * $y16;
     }
 
     /**
@@ -1975,78 +1209,27 @@ class BalitaController extends Controller
 
     public function R_17($gizi_buruk = 0, $pendek = 0.819445, $kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r17
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_17 = min($gizi_buruk, $pendek, $kurus);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z17 dan y17
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z17 = $data_energi + (0.4 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y17 = $data_protein_kkp;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz17 = $r_17 * $z17;
 
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 17
-         */
-        $z17 = $energi + (0.4 * $energi);
-
-        $y17 = $protein_kkp;
+        $ry17= $r_17 * $y17;
         
     }
 
@@ -2058,79 +1241,28 @@ class BalitaController extends Controller
 
     public function R_18($gizi_buruk = 0, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
-
-        // return $score->periksa->berat_badan;
-        
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
+        $data_protein_kkp = $this->CariProteinKKP();
 
         /**
-         * CARI ENERGI
+         * cari nilai minimum r18
          */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
+        $r_18 = min($gizi_buruk, $sangat_pendek, $normal_zbbtb);
 
         /**
-         * CARI PROTEIN
+         * Konsekuen z18 dan y18
          */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
+        $z18 = $data_energi + (0.3 * $data_energi);
 
-        $umur_bulan_bulat = floor($umur_bulan);
+        $y18 = $data_protein_kkp;
 
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
+        $rz18 = $r_18 * $z18;
 
-        }else{
+        $ry18= $r_18 * $y18;       
 
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 18
-         */
-        $z18 = $energi + (0.3 * $energi);
-
-        $y18 = $protein_kkp;
-        
     }
 
    /**
@@ -2141,78 +1273,29 @@ class BalitaController extends Controller
 
     public function R_19($gizi_buruk = 0, $sangat_pendek = 0, $kurus = 0)
     {
+        $data_energi = $this->CariEnergi();
 
-        $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
+        $data_protein_diit = $this->CariProteinDIIT();
 
+        $data_protein_kkp = $this->CariProteinKKP();
 
-        // return $score->periksa->berat_badan;
+        /**
+         * cari nilai minimum r19
+         */
+        $r_19 = min($gizi_buruk, $sangat_pendek, $kurus);
+
+        /**
+         * Konsekuen z19 dan y19
+         */
+        $z19 = $data_energi + (0.4 * $data_energi);
+
+        $y19 = $data_protein_kkp;
+
+        $rz19 = $r_19 * $z19;
+
+        $ry19= $r_19 * $y19;
         
-        $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
-        /**
-         * Pembulatan umur ke tahun
-         */
-        $umur_tahun_bulat = floor($umur_tahun);
 
-        /**
-         * CARI ENERGI
-         */
-        if ($umur_tahun_bulat <= 1) {
-            
-            $energi = 110 * $score->periksa->berat_badan;  
-
-        } else if ($umur_tahun_bulat <= 3) {
-
-            $energi = 100 * $score->periksa->berat_badan;
-
-        } else if ($umur_tahun_bulat <= 5) {
-
-            $energi = 90 * $score->periksa->berat_badan;
-        }
-
-        // return $energi;
-
-        /**
-         * CARI PROTEIN
-         */
-        
-        $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
-
-        $umur_bulan_bulat = floor($umur_bulan);
-
-        /**
-         * Protein DIIT
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_diit = 1.84 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_diit =  1.79 * $score->periksa->berat_badan;
-        }
-
-        return $protein_diit;
-
-        /**
-         * Protein KKP
-         */
-        if ($umur_bulan_bulat <= 48) {
-            
-            $protein_kkp = 2.05 * $score->periksa->berat_badan;
-
-        }else{
-
-            $protein_kkp =  2.03 * $score->periksa->berat_badan;
-        }
-
-        //return $protein_kkp;
-        
-        /**
-         * Menghitung R 19
-         */
-        $z19 = $energi + (0.4 * $energi);
-
-        $y19 = $protein_kkp;
         
     }		
 }
