@@ -4,7 +4,7 @@
 
 	<!-- Section: boxes -->
 
-	@if(!empty($data_balita) && !empty($data_pencarian))
+	@if(!empty($data_balita) && !empty($data_periksa))
 
     <section id="boxes" class="home-section paddingtop-80">
 	
@@ -21,10 +21,12 @@
 							<a href="{{ route('tampilkan_semua_riwayat', $data_balita->id) }}" class="btn btn-success" style="color:white">Tampilkan semua riwayat</a>
 							
 							<i class="fa fa-check fa-3x circled bg-skin"></i>
-							<h4 class="h-bold">Data Balita</h4>
+							<h4 class="h-bold">Data Balita [ {{ $data_balita->nama_balita }} ]</h4>
 							
 							<div class="well well-trans">
 							    <div class="wow fadeInRight" data-wow-delay="0.1s">
+
+							    <p>
 								    <ul class="lead-list">
 								        <li>
 								        	<span class="fa fa-lock fa-2x icon-success"></span> 
@@ -76,8 +78,10 @@
 								        	<span class="list"><strong>Nama Ibu</strong><br />
 								        		{{ $data_balita->nama_ibu }}
 								        	</span>
-								        </li>								        
+								        </li>
+								        
 								    </ul>
+							    </p>
 
 							    </div>
 							</div> 
@@ -90,51 +94,52 @@
 						<div class="box">
 							
 							<i class="fa fa-check fa-3x circled bg-skin"></i>
-							<h4 class="h-bold">Riwayat Pemeriksaan Balita</h4> 
+							<h4 class="h-bold">Riwayat Pemeriksaan Balita [ {{ $data_balita->nama_balita }} ]</h4> 
 							
 							<div class="well well-trans">
 							    <div class="wow fadeInRight" data-wow-delay="0.1s">
 
+							    <p>
 								    <ul class="lead-list">
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span> 
 								        	<span class="list">
-								        		<strong>Tanggal Periksa</strong><br /> {{ $data_pencarian->periksa->tgl_periksa }}
+								        		<strong>Tanggal Periksa</strong><br /> {{ $data_periksa['tgl_periksa'] }}
 								        	</span>
 								        </li>
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Berat Badan</strong><br />
-								        		{{ $data_pencarian->periksa->berat_badan }} Kg
+								        		{{ $data_periksa['berat_badan'] }} Kg
 								        	</span>
 								        </li>
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Tinggi Badan</strong><br />
-								        		{{ $data_pencarian->periksa->tinggi_badan }} cm
+								        		{{ $data_periksa['tinggi_badan'] }} cm
 								        	</span>
 								        </li>
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>BB / U</strong><br />
-								        		{{ $data_pencarian->zbbu }} |
+								        		{{ $data_periksa['zbbu'] }} |
 
-								        		@if($data_pencarian->zbbu < -3)
+								        		@if($data_periksa['zbbu'] < -3)
 
 								        		    {{ "Gizi Buruk" }}
 
-								        		@elseif($data_pencarian->zbbu >= -3 && $data_pencarian->zbbu < -2)
+								        		@elseif($data_periksa['zbbu'] >= -3 && $data_periksa['zbbu'] < -2)
 
 								        		    {{ "Gizi Kurang" }}
 
-								        		@elseif($data_pencarian->zbbu >= -2 && $data_pencarian->zbbu <= 2)
+								        		@elseif($data_periksa['zbbu'] >= -2 && $data_periksa['zbbu'] <= 2)
 
 								        		    {{ "Gizi Baik" }}
 
-								        		@elseif($data_pencarian->zbbu > 2)
+								        		@elseif($data_periksa['zbbu'] > 2)
 
 								        		    {{ "Gizi Lebih" }}
 
@@ -146,21 +151,21 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>TB / U</strong><br />
-								        		{{ $data_pencarian->ztbu }} |
+								        		{{ $data_periksa['ztbu'] }} |
 
-								        		@if($data_pencarian->ztbu < -3)
+								        		@if($data_periksa['ztbu'] < -3)
 
 								        		    {{ "Sangat Pendek" }}
 
-								        		@elseif($data_pencarian->ztbu >= -3 && $data_pencarian->ztbu < -2)
+								        		@elseif($data_periksa['ztbu'] >= -3 && $data_periksa['ztbu'] < -2)
 
 								        		    {{ "Pendek" }}
 
-								        		@elseif($data_pencarian->ztbu >= -2 && $data_pencarian->ztbu <= 2)
+								        		@elseif($data_periksa['ztbu'] >= -2 && $data_periksa['ztbu'] <= 2)
 
 								        		    {{ "Normal" }}
 
-								        		@elseif($data_pencarian->ztbu > 2)
+								        		@elseif($data_periksa['ztbu'] > 2)
 
 								        		    {{ "Tinggi" }}
 
@@ -172,21 +177,21 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>BB / TB</strong><br />
-								        		{{ $data_pencarian->zbbtb }} |
+								        		{{ $data_periksa['zbbtb'] }} |
 
-								        		@if($data_pencarian->zbbtb < -3)
+								        		@if($data_periksa['zbbtb'] < -3)
 
 								        		    {{ "Sangat Kurus" }}
 
-								        		@elseif($data_pencarian->zbbtb >= -3 && $data_pencarian->zbbtb < -2)
+								        		@elseif($data_periksa['zbbtb'] >= -3 && $data_periksa['zbbtb'] < -2)
 
 								        		    {{ "Kurus" }}
 
-								        		@elseif($data_pencarian->zbbtb >= -2 && $data_pencarian->zbbtb <= 2)
+								        		@elseif($data_periksa['zbbtb'] >= -2 && $data_periksa['zbbtb'] <= 2)
 
 								        		    {{ "Normal" }}
 
-								        		@elseif($data_pencarian->zbbtb > 2)
+								        		@elseif($data_periksa['zbbtb'] > 2)
 
 								        		    {{ "Gemuk" }}
 
@@ -198,91 +203,60 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuha Energi & Protein</strong><br />
-								        		{{ $data_pencarian->protein }} | {{ $data_pencarian->energi }}
+								        		
 								        	</span>
 								        </li>
 								        
 								    </ul>
-								    
+							    </p>
+
 							    </div>
 							</div> 
 						</div>
 					</div>
 				</div>
+
 			
 			</div>
 		</div>
-
-
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-12">
-					<div class="wow fadeInUp" data-wow-delay="0.2s">
-						<div class="box">
-
-							<i class="fa fa-check fa-3x circled bg-skin"></i>
-							<h4 class="h-bold">Grafik Hasil Pemeriksaan</h4>
-
-							@if (empty($grafik_score))
-							    
-							    <h4> Tidak ada riwayat pemeriksaan</h4>
-
-							@else
-
-							    <div id="grafikBalita" style="width:100%; height: 400px;"></div>
-
-							@endif
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 	</section>
-	<!-- /Section: boxes -->
 
 	@else
 
-    <section id="intro" class="intro">
-        <div class="intro-content">
-            <div class="container" style="min-height:420px">
-                <div class="row">
+	<section id="intro" class="intro">
+	    <div class="intro-content">
+	        <div class="container" style="min-height:420px">
+	            <div class="row">
 
-                    <div class="col-lg-12">
+	                <div class="col-lg-12">
 
-                         
-                        <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                            <h1 class="h-ultra">Oppsss... tidak ada data ditemukan</h1>
-                            <h2 class="h-ultra">Posyandu Melati</h2>
-                        </div>
-                        <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-                            <h4 class="h-light">Melayani Dengan Sepenuh<span style="color:red"> <i class="fa fa-heart"></i> </span></h4>
-                        </div>
+	                     
+	                    <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+	                        <h1 class="h-ultra">Oppsss... tidak ada hasil ditemukan</h1>
+	                        <h2 class="h-ultra">Posyandu Melati</h2>
+	                    </div>
+	                    <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
+	                        <h4 class="h-light">Melayani Dengan Sepenuh<span style="color:red"> <i class="fa fa-heart"></i> </span></h4>
+	                    </div>
 
-                        <div class="well well-trans">
-                            <div class="wow fadeInRight" data-wow-delay="0.1s">
+	                    <div class="well well-trans">
+	                        <div class="wow fadeInRight" data-wow-delay="0.1s">
 
-                            <ul class="lead-list">
-                                <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>ID / No. Registrasi Salah</strong><br />
-                                ID / No. Registrasi Balita anda tidak terdaftar atau salah</span></li>
-                                
-                            </ul>
+	                        <ul class="lead-list">
+	                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>404</strong><br />
+	                            Tidak dapat ditemukan hasil dari data yang anda masukkan</span></li>
+	                            
+	                        </ul>
 
-                            </div>
-                        </div>       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+	                        </div>
+	                    </div>       
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
 
 	@endif
-
-	<script>
-
-	    var chartData = <?php  echo $grafik_score; ?>
-
-	</script>
 
 @endsection

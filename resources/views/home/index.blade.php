@@ -76,20 +76,54 @@
                                 </div>
 
                                 <div class="panel-body">
-                                    <form role="form" class="lead">
+
+                                    {!! Form::open(['route' => 'do_periksa_balita_ortu']) !!}
+
                                         <div class="row">
 
                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                 <div class="form-group">
-                                                    <label>ID Balita</label> <small style="color:red;">*</small>
-                                                    <input type="text" name="first_name" id="first_name" class="form-control input-lg">
+                                                    <label>ID Balita</label> 
+                                                    <small style="color:red;">*
+
+                                                    <br>
+
+                                                    @if($errors->any())
+
+                                                    @foreach($errors->get('no_reg') as $error)
+
+                                                        {{ $error }}
+
+                                                    @endforeach
+
+                                                    @endif
+
+                                                    </small>
+                                                    <input type="text" name="no_reg" id="no_reg" class="form-control input-lg">
                                                 </div>
                                             </div>
 
                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Tanggal Periksa</label>  <small style="color:red;">*</small>
-                                                    <input type="date" name="last_name" id="last_name" class="form-control input-lg">
+                                                    <label>Tanggal Periksa</label>
+
+                                                    <small style="color:red;">*
+
+                                                    <br>
+
+                                                    @if($errors->any())
+
+                                                    @foreach($errors->get('tgl_periksa') as $error)
+
+                                                        {{ $error }}
+
+                                                    @endforeach
+
+                                                    @endif
+
+                                                    </small>
+
+                                                    <input type="date" name="tgl_periksa" id="tgl_periksa" class="form-control input-lg">
                                                 </div>
                                             </div>
                                         </div>
@@ -97,15 +131,47 @@
                                         <div class="row">
                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Berat Badan</label>  <small style="color:red;">*</small>
-                                                    <input type="email" name="email" id="email" class="form-control input-lg">
+                                                    <label>Berat Badan</label>
+
+                                                    <small style="color:red;">*
+
+                                                    <br>
+                                                    @if($errors->any())
+
+                                                    @foreach($errors->get('berat_badan') as $error)
+
+                                                        {{ $error }}
+
+                                                    @endforeach
+
+                                                    @endif
+
+                                                    </small>
+
+                                                    <input type="texy" name="berat_badan" id="berat_badan" class="form-control input-lg">
                                                 </div>
                                             </div>
 
                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Tinggi Badan</label>  <small style="color:red;">*</small>
-                                                    <input type="text" name="phone" id="phone" class="form-control input-lg">
+                                                    <label>Tinggi Badan</label> 
+
+                                                    <small style="color:red;">*
+                                                    <br>
+
+                                                    @if($errors->any())
+
+                                                    @foreach($errors->get('tinggi_badan') as $error)
+
+                                                        {{ $error }}
+
+                                                    @endforeach
+
+                                                    @endif
+
+                                                    </small>
+
+                                                    <input type="text" name="tinggi_badan" id="tinggi_badan" class="form-control input-lg">
                                                 </div>
                                             </div>
 
@@ -117,14 +183,20 @@
 
                                         <p class="lead-footer">* Data hasil pemeriksaan hanya bersifat sementara</p>
 
-                                    </form>
+                                    {!! Form::close() !!}
+
+
                                 </div>
                             </div>
                         </div>
+
+                        <br><br>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endsection

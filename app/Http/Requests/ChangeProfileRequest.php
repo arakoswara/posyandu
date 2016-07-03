@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class BalitaRequest extends Request
+class ChangeProfileRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +25,9 @@ class BalitaRequest extends Request
     {
         return [
             
-            'no_reg' => 'required|int',
+            'email' => 'required|email',
 
-            'nama_balita' => 'required|min:6',
-
-            'tgl_lahir' => 'required',
-
-            'jenis_kelamin' => 'required',
-
-            'nama_ayah' => 'required|min:3',
-
-            'nama_ibu' => 'required|min:3'
+            'name' => 'required|min:6'
         ];
     }
 }

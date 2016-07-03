@@ -9,15 +9,21 @@
 </div>
 <!--pageheader-->
 <div id="contentwrapper" class="contentwrapper">
-    <div id="inbox" class="subcontent">
-        <div class="msghead">
-            <div class="col-md-12">
 
-                <h1>Selamat Datang </h1>
-
-                <h1>Jumlah Balita : {{ $jml_balita }} </h1>
-
-            </div>
+    <div id="updates" class="subcontent">
+        <div class="notibar announcement">
+            <a class="close"></a>
+            <h3>Announcement</h3>
+            <p>
+                Selamat datang
+            </p>
+        </div><!-- notification announcement -->
+        
+        <div class="two_third dashboard_left">
+        
+            
+            
+            <h1>Jumlah Balita : {{ $jml_balita }} </h1>
         </div>
     </div>
 </div>

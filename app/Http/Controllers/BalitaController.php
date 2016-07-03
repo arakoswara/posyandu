@@ -614,9 +614,6 @@ class BalitaController extends Controller
      */	
     public function R_1($gizi_lebih = 0, $tinggi = 1, $normal_zbbtb = 0.95454545)
     {
-        /**
-         * Dari sini
-         */
         $score = Score::with('periksa')->where('id_periksa', 1)->with('dataBalita')->where('id_balita', 1)->first();
 
 
@@ -680,6 +677,11 @@ class BalitaController extends Controller
             $protein_kkp =  2.03 * $score->periksa->berat_badan;
         }
 
+        return $protein_kkp;
+    }
+
+    public function FunctionName($value='')
+    {
         /**
          * Sampe sini
          */

@@ -16,6 +16,22 @@
 
 </div><!--pageheader-->
 
+@if($errors->any())
+<div id="contentwrapper" class="contentwrapper">
+    <div class="notibar announcement">
+        <a class="close"></a>
+        <h3>Peringatan</h3>
+
+        @foreach($errors->all() as $error)
+        <p>
+            * {{ $error }}
+        </p>
+        @endforeach
+    </div><!-- notification announcement -->
+</div>
+    
+@endif
+
 <div id="contentwrapper" class="contentwrapper">
      
     <div id="inbox" class="subcontent">

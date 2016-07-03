@@ -24,7 +24,10 @@ class PeriksaBalitaRequest extends Request
     public function rules()
     {
         return [
-            //
+
+            'berat_badan' => 'required|integer',
+
+            'tinggi_badan' => 'required|integer'
         ];
     }
 }

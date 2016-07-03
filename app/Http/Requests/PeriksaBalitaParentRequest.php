@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class BalitaRequest extends Request
+class PeriksaBalitaParentRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,13 @@ class BalitaRequest extends Request
     public function rules()
     {
         return [
-            
-            'no_reg' => 'required|int',
+            'no_reg' => 'required',
 
-            'nama_balita' => 'required|min:6',
+            'tgl_periksa' => 'required|date',
 
-            'tgl_lahir' => 'required',
+            'berat_badan' => 'required|integer',
 
-            'jenis_kelamin' => 'required',
-
-            'nama_ayah' => 'required|min:3',
-
-            'nama_ibu' => 'required|min:3'
+            'tinggi_badan' => 'required|integer'
         ];
     }
 }

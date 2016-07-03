@@ -452,6 +452,23 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@cobaEnergi'
 	]);
 
+	/**
+	 * Profil
+	 */
+	Route::get('/profil', [
+
+		'as' => 'edit_profil',
+
+		'uses' => 'ProfileController@index'
+	]);
+
+	Route::post('/do-edit-profil', [
+
+		'as' => 'do_edit_profil',
+
+		'uses' => 'ProfileController@doEditProfil'
+	]);
+
 	
 });
 
@@ -474,6 +491,31 @@ Route::group(['prefix' => 'parent'], function(){
 		'as' => 'tampilkan_semua_riwayat',
 
 		'uses' => 'ParentController@tampilkanSemuaRiwayat'
+	]);
+
+	/**
+	 * PERIKSA
+	 */
+	Route::post('/do-periksa-balita-ortu', [
+
+		'as' => 'do_periksa_balita_ortu',
+
+		'uses' => 'ParentController@doPeriksaBalita'
+	]);
+
+	Route::get('hitung-balita', [
+
+		'use' => 'hitung-balita',
+
+		'uses' => 'ParentController@hitungBalita'
+	]);
+
+	Route::get('get-pdf-pencarian', [
+
+		'as' => 'get_pdf_pencarian',
+
+		'uses' => 'ParentController@getPDFPencarian'
+
 	]);
 
 });
