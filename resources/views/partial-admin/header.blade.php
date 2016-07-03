@@ -9,8 +9,8 @@
                 <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand" href="{{ route('home_index') }}">
-                {{-- <img src="{{ asset('asset/img/logo.png') }}" alt="" width="150" height="40" /> --}}
-                <h3>SPBP2</h3>
+                <img src="{{ asset('melati.jpg') }}" alt="" width="150" height="40" />
+                {{-- <h3>SPBP2</h3> --}}
             </a>
         </div>
 

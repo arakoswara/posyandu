@@ -720,7 +720,15 @@ class BalitaController extends Controller
 
         $rz1 = $r_1 * $z1;
 
-        return $ry1= $r_1 * $y1;
+        $ry1= $r_1 * $y1;
+
+        return $data_R19 = array(
+            'r_1' => $r_1,
+
+            'ry1' => $ry1,
+
+            'rz1' => $rz1
+        );
         
 
     }
@@ -754,6 +762,14 @@ class BalitaController extends Controller
         $rz2 = $r_2 * $z2;
 
         $ry2= $r_2 * $y2;
+
+        return $data_R19 = array(
+            'r_2' => $r_2,
+
+            'ry2' => $ry2,
+
+            'rz2' => $rz2
+        );
     }
 
     /**
@@ -785,6 +801,14 @@ class BalitaController extends Controller
         $rz3 = $r_3 * $z3;
 
         $ry3= $r_3 * $y3;
+
+        return $data_R3 = array(
+            'r_3' => $r_3,
+
+            'ry3' => $ry3,
+
+            'rz3' => $rz3
+        );
         
     }
     /**
@@ -816,6 +840,14 @@ class BalitaController extends Controller
         $rz4 = $r_4 * $z4;
 
         $ry4= $r_4 * $y4;
+
+        return $data_R4 = array(
+            'r_4' => $r_4,
+
+            'ry4' => $ry4,
+
+            'rz4' => $rz4
+        );
     }
 
     /**
@@ -847,6 +879,14 @@ class BalitaController extends Controller
         $rz5 = $r_5 * $z5;
 
         $ry5= $r_5 * $y5;
+
+        return $data_R5 = array(
+            'r_5' => $r_5,
+
+            'ry5' => $ry5,
+
+            'rz5' => $rz5
+        );
        
     }  
 
@@ -880,6 +920,14 @@ class BalitaController extends Controller
 
         $ry6= $r_6 * $y6;
 
+        return $data_R6 = array(
+            'r_6' => $r_6,
+
+            'ry6' => $ry6,
+
+            'rz6' => $rz6
+        );
+
     }
 
     /**
@@ -911,6 +959,14 @@ class BalitaController extends Controller
         $rz7 = $r_7 * $z7;
 
         $ry7= $r_7 * $y7;
+
+        return $data_R7 = array(
+            'r_7' => $r_7,
+
+            'ry7' => $ry7,
+
+            'rz7' => $rz7
+        );
         
     }
 
@@ -943,6 +999,14 @@ class BalitaController extends Controller
         $rz8 = $r_8 * $z8;
 
         $ry8= $r_8 * $y8;
+
+        return $data_R8 = array(
+            'r_8' => $r_8,
+
+            'ry8' => $ry8,
+
+            'rz8' => $rz8
+        );
  
     }
 
@@ -975,6 +1039,14 @@ class BalitaController extends Controller
         $rz9 = $r_9 * $z9;
 
         $ry9= $r_9 * $y9;
+
+        return $data_R9 = array(
+            'r_9' => $r_9,
+
+            'ry9' => $ry9,
+
+            'rz9' => $rz9
+        );
         
     }
 
@@ -1008,6 +1080,14 @@ class BalitaController extends Controller
 
         $ry10= $r_10 * $y10;
 
+        return $data_R10 = array(
+            'r_10' => $r_10,
+
+            'ry10' => $ry10,
+
+            'rz10' => $rz10
+        );
+
     }
 
     /**
@@ -1039,6 +1119,14 @@ class BalitaController extends Controller
         $rz11 = $r_11 * $z11;
 
         $ry11= $r_11 * $y11;
+
+        return $data_R11 = array(
+            'r_11' => $r_11,
+
+            'ry11' => $ry11,
+
+            'rz11' => $rz11
+        );
         
     }
 
@@ -1072,6 +1160,14 @@ class BalitaController extends Controller
 
         $ry12= $r_12 * $y12;
 
+        return $data_R12 = array(
+            'r_12' => $r_12,
+
+            'ry12' => $ry12,
+
+            'rz12' => $rz12
+        );
+
     }
 
     /**
@@ -1103,6 +1199,14 @@ class BalitaController extends Controller
         $rz13 = $r_13 * $z13;
 
         $ry13= $r_13 * $y13;
+
+        return $data_R13 = array(
+            'r_13' => $r_13,
+
+            'ry13' => $ry13,
+
+            'rz13' => $rz13
+        );
         
     }
 
@@ -1135,6 +1239,14 @@ class BalitaController extends Controller
         $rz14 = $r_14 * $z14;
 
         $ry14= $r_14 * $y14;
+
+        return $data_R14 = array(
+            'r_14' => $r_14,
+
+            'ry14' => $ry14,
+
+            'rz14' => $rz14
+        );
         
     }
 
@@ -1168,6 +1280,14 @@ class BalitaController extends Controller
 
         $ry15= $r_15 * $y15;
 
+        return $data_R15 = array(
+            'r_15' => $r_15,
+
+            'ry15' => $ry15,
+
+            'rz15' => $rz15
+        );
+
     }
 
     /**
@@ -1199,6 +1319,14 @@ class BalitaController extends Controller
         $rz16 = $r_16 * $z16;
 
         $ry16= $r_16 * $y16;
+
+        return $data_R16 = array(
+            'r_16' => $r_16,
+
+            'ry16' => $ry16,
+
+            'rz16' => $rz16
+        );
     }
 
     /**
@@ -1230,6 +1358,14 @@ class BalitaController extends Controller
         $rz17 = $r_17 * $z17;
 
         $ry17= $r_17 * $y17;
+
+        return $data_R17 = array(
+            'r_17' => $r_17,
+
+            'ry17' => $ry17,
+
+            'rz17' => $rz17
+        );
         
     }
 
@@ -1261,7 +1397,15 @@ class BalitaController extends Controller
 
         $rz18 = $r_18 * $z18;
 
-        $ry18= $r_18 * $y18;       
+        $ry18= $r_18 * $y18;
+
+        return $data_R18 = array(
+            'r_18' => $r_18,
+
+            'ry18' => $ry18,
+
+            'rz18' => $rz18
+        );
 
     }
 
@@ -1293,9 +1437,61 @@ class BalitaController extends Controller
 
         $rz19 = $r_19 * $z19;
 
-        $ry19= $r_19 * $y19;
-        
+        $ry19 = $r_19 * $y19;
 
-        
-    }		
+        return $data_R19 = array(
+            'r_19' => $r_19,
+
+            'ry19' => $ry19,
+
+            'rz19' => $rz19
+        );
+    }
+
+    public function sum_R()
+    {
+        $data_1     = $this->R_1();
+        $data_2     = $this->R_2();
+        $data_3     = $this->R_3();
+        $data_4     = $this->R_4();
+        $data_5     = $this->R_5();
+        $data_6     = $this->R_6();
+        $data_7     = $this->R_7();
+        $data_8     = $this->R_8();
+        $data_9     = $this->R_9();
+        $data_10    = $this->R_10();
+        $data_11    = $this->R_11();
+        $data_12    = $this->R_12();
+        $data_13    = $this->R_13();
+        $data_14    = $this->R_14();
+        $data_15    = $this->R_15();
+        $data_16    = $this->R_16();
+        $data_17    = $this->R_17();
+        $data_18    = $this->R_18();
+        $data_19    = $this->R_19();
+
+        /**
+         * Penjumlahan R
+         */
+        $jumlah_R = ($data_1['r_1'] + $data_2['r_2'] + $data_3['r_3'] + $data_4['r_4'] + $data_5['r_5'] + $data_6['r_6'] +$data_7['r_7'] + $data_8['r_8'] + $data_9['r_9'] +$data_10['r_10'] + $data_11['r_11'] + $data_12['r_12'] + $data_13['r_13'] + $data_14['r_14'] + $data_15['r_15'] + $data_16['r_16'] + $data_17['r_17'] + $data_18['r_18'] + $data_19['r_19']);
+
+        /**
+         * Penjumlahan RZ
+         */
+        $jumlah_RZ = ($data_1['rz1'] + $data_2['rz2'] + $data_3['rz3'] + $data_4['rz4'] + $data_5['rz5'] + $data_6['rz6'] +$data_7['rz7'] + $data_8['rz8'] + $data_9['rz9'] +$data_10['rz10'] + $data_11['rz11'] + $data_12['rz12'] + $data_13['rz13'] + $data_14['rz14'] + $data_15['rz15'] + $data_16['rz16'] + $data_17['rz17'] + $data_18['rz18'] + $data_19['rz19']);
+
+        /**
+        * Penjumlahan RY
+         */
+        $jumlah_RY = ($data_1['ry1'] + $data_2['ry2'] + $data_3['ry3'] + $data_4['ry4'] + $data_5['ry5'] + $data_6['ry6'] +$data_7['ry7'] + $data_8['ry8'] + $data_9['ry9'] +$data_10['ry10'] + $data_11['ry11'] + $data_12['ry12'] + $data_13['ry13'] + $data_14['ry14'] + $data_15['ry15'] + $data_16['ry16'] + $data_17['ry17'] + $data_18['ry18'] + $data_19['ry19']);
+        /**
+        * Hasil akhir Energi
+         */
+        $hasil_energi = $jumlah_RZ / $jumlah_R;
+        /**
+        * Hasil akhir Protein
+         */
+        return $hasil_protein = $jumlah_RY / $jumlah_R;
+
+    }	
 }

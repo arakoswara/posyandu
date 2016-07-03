@@ -476,6 +476,13 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'ProfileController@doEditProfil'
 	]);
 
+	Route::get('/sum-r', [
+
+		'as' => 'sum_r',
+
+		'uses' => 'BalitaController@sum_R'
+	]);
+
 	
 });
 
