@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ChangeProfileRequest;
+use App\Http\Requests\ChangePasswordRequest;
 
 /**
  * AUTH
@@ -35,6 +36,45 @@ class ProfileController extends Controller
 
     public function doEditProfil(ChangeProfileRequest $request)
     {
-    	return $request->all();
+    	$input = $request->all();
+
+        $user = User::findOrFail($input['id']);
+
+        $user->update($input);
+
+        session()->flash('message', 'Email & Nama anda berhasil diperbaharui.');
+
+        return redirect()->back();
+    }
+
+    public function gantiPasswordPetugas(ChangePasswordRequest $request)
+    {
+        $input = $request->all();
+
+        $credentials = [
+
+            'email' => Auth::user()->email,
+
+            'password' => $input['old_password']
+        ];
+
+        if (Auth::attempt($credentials)) {
+
+            $new_password['password'] = bcrypt($input['password']);
+
+            $user = User::where('email', Auth::user()->email)->first();
+
+            $user->update($new_password);
+
+            session()->flash('message','Password anda berhasil diperbaharui.');
+
+            return redirect()->back();
+        }else{
+
+            session()->flash('message', 'Password lama anda salah');
+
+            return redirect()->back();
+        }
+
     }
 }

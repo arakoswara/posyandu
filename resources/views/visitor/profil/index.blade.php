@@ -12,11 +12,34 @@
             <li><a href="#editprofile">Ganti Password</a></li>
         </ul>
     </div><!--pageheader-->
+
+    @if(Session::has('message'))
+
+    <div id="contentwrapper" class="contentwrapper">
+        <div class="notibar announcement">
+            <a class="close"></a>
+            <h3>Perhatian</h3>           
+            <p>
+                {{ session('message') }}
+            </p>
+        </div><!-- notification announcement -->
+    </div>
+
+    @endif
     
     <div id="contentwrapper" class="contentwrapper">
             <div id="profile" class="subcontent">
 
+                <div class="col-md-12">
+                    <h4>
+                        Email Petugas : {{ $user->email }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nama Petugas : {{ $user->name }}</h4>
+                </div>
+
+                <hr class="garis">
+
             	{!! Form::open(['route' => 'do_edit_profil']) !!}
+
+                {!! Form::hidden('id', $user->id , ['class' => 'form-control']) !!}
 
             	<div class="col-md-6 col-sm-6">
             		
@@ -69,26 +92,37 @@
             </div><!--#profile-->
             
             <div id="editprofile" class="subcontent" style="display: none">
-                {!! Form::open() !!}
 
-                <div class="col-md-6 col-sm-6">
+                {!! Form::open(['route' => 'ganti_password_petugas']) !!}
+
+                <div class="col-md-4 col-sm-4">
                 	
                 	<div class="form-group">
 
-                		{!! Form::label('email', 'Password Lama') !!}
+                		{!! Form::label('old_password', 'Password Lama') !!}
 
-                		{!! Form::text('email', null, ['class' => 'form-control']) !!}
+                		{!! Form::password('old_password', ['class' => 'form-control']) !!}
                 	</div>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-4">
                 	
                 	<div class="form-group">
 
-                		{!! Form::label('name', 'Password Baru') !!}
+                		{!! Form::label('password', 'Password Baru') !!}
 
-                		{!! Form::text('name', null, ['class' => 'form-control']) !!}
+                		{!! Form::password('password', ['class' => 'form-control']) !!}
                 	</div>
+                </div>
+
+                <div class="col-md-4 col-sm-4">
+                    
+                    <div class="form-group">
+
+                        {!! Form::label('password_confirmation', 'Konfirmasi Password Baru') !!}
+
+                        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                    </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12">

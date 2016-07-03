@@ -459,6 +459,12 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'BalitaController@CariProtein'
 	]);
 
+	Route::get('/sum-r', [
+
+		'as' => 'sum_r',
+
+		'uses' => 'BalitaController@sum_R'
+	]);
 	/**
 	 * Profil
 	 */
@@ -476,13 +482,12 @@ Route::group(['prefix' => 'sispos'], function() {
 		'uses' => 'ProfileController@doEditProfil'
 	]);
 
-	Route::get('/sum-r', [
+	Route::post('/ganti-password-petugas', [
 
-		'as' => 'sum_r',
+		'as' => 'ganti_password_petugas',
 
-		'uses' => 'BalitaController@sum_R'
+		'uses' => 'ProfileController@gantiPasswordPetugas'
 	]);
-
 	
 });
 
