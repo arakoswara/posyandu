@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use Auth;
+use Sendinblue\Mailin;
 
 class UserController extends Controller
 {
@@ -28,6 +29,8 @@ class UserController extends Controller
 
     	$input = $request->all();
 
+        $email = $input['email'];
+
     	$password = bcrypt($request->input('password'));
 
     	$input['password'] = $password;
@@ -36,13 +39,33 @@ class UserController extends Controller
 
     	$register = User::create($input)->assignRole(2);
 
-    	$data = [
-    		'name' => $input['name'],
-    		'code' => $input['activation_code']
-    	];
+    	// $data = [
+    	// 	'name' => $input['name'],
+    	// 	'code' => $input['activation_code']
+    	// ];
+        $code = $input['activation_code']; 
 
-    	return view('emails.email-activation', compact('data'));
+    	// return view('emails.email-activation', compact('data'));
+        $this->emailAktivasi($code, $email);
 
+    }
+
+    public function emailAktivasi($code, $email)
+    {
+        $mailin = new Mailin("https://api.sendinblue.com/v2.0","92qTN7E1xabfy0Ir");
+
+            $data = array( "to" => array($email => $email),
+
+                "from" => array("info.tukangketik@gmail.com", "INFO"),
+
+                "subject" => "AKTIVASI AKUN PETUGAS",
+
+                "html" => "Klik kode dibawah ini untuk mengaktifkan akun anda : <br>".
+                "<a href='http://localhost/posyandu/public/auth/active/$code'>$code</a>"
+
+            );
+         
+        var_dump($mailin->send_email($data));
     }
 
     /**

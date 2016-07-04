@@ -55,9 +55,11 @@ class ParentController extends Controller
 
     public function tampilkanSemuaRiwayat($id)
     {
+        $data_balita = DataBalita::where('id', $id)->first();
+
     	$data_riwayat = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->paginate(2);
 
-        return view('home.parent.semua-riwayat', compact('data_riwayat'));
+        return view('home.parent.semua-riwayat', compact('data_riwayat', 'data_balita'));
     }
 
     /**
@@ -201,11 +203,13 @@ class ParentController extends Controller
         return view('home.parent.hasil-periksa', compact('data_periksa', 'data_balita'));
     }
 
-    public function getPDFPencarian()
+    public function getPDFPencarian($id)
     {
-        $data = array('ara' => 'ara');
+        $data = $data_riwayat = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->get();
 
-        $pdf = PDF::loadView('home.parent.test', compact('data'));
+        $data_balita = DataBalita::where('id', $id)->first();
+
+        $pdf = PDF::loadView('home.parent.test', compact('data', 'data_balita'));
 
         return $pdf->stream('invoice.pdf');  
     }

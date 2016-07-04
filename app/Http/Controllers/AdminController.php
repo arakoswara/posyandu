@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Role;
+use App\RoleUser;
 use Auth;
 
 class AdminController extends Controller
@@ -18,6 +19,10 @@ class AdminController extends Controller
         $this->middleware('auth');
 
         $this->middleware('role:admin');
+
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        view()->share('role_user', $role_user);
     }
 
     public function index()

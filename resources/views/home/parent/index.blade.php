@@ -14,7 +14,7 @@
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
 						<div class="box">
 
-							<a href="{{ route('get_pdf_pencarian') }}" class="btn btn-danger" style="color:white">
+							<a href="{{ route('get_pdf_pencarian', $data_balita->id) }}" class="btn btn-danger" style="color:white">
 								Download PDF
 							</a>
 

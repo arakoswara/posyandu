@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'sendinblue' => [
+       'url' => 'https://api.sendinblue.com/v2.0',
+       'key' => '92qTN7E1xabfy0Ir',
+    ],
+
 ];

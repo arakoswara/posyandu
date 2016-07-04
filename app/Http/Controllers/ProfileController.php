@@ -15,6 +15,7 @@ use App\Http\Requests\ChangePasswordRequest;
  */
 use App\User;
 use Auth;
+use App\RoleUser;
 
 class ProfileController extends Controller
 {
@@ -27,6 +28,10 @@ class ProfileController extends Controller
 	    $user = User::findOrFail(Auth::user()->id);
 
 	    view()->share('user', $user);
+
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        view()->share('role_user', $role_user);
 	}
 
     public function index()

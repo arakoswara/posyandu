@@ -75,6 +75,13 @@ Route::get('/admin', [
 	'as' => 'admin-index', 'uses' => 'AdminController@index'
 ]);
 
+Route::get('/tambah-petugas', [
+
+	'as' => 'tambah_petugas', 
+
+	'uses' => 'AdminController@tambahPetugas'
+]);
+
 /**
  * VISITOR
  */
@@ -529,7 +536,7 @@ Route::group(['prefix' => 'parent'], function(){
 		'uses' => 'ParentController@hitungBalita'
 	]);
 
-	Route::get('get-pdf-pencarian', [
+	Route::get('get-pdf-pencarian/{id}', [
 
 		'as' => 'get_pdf_pencarian',
 

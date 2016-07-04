@@ -30,6 +30,8 @@ use App\BBTB1;
 use App\BBTB2;
 use App\Score;
 
+use App\RoleUser;
+
 class BalitaController extends Controller
 {
     public function __construct()
@@ -41,6 +43,10 @@ class BalitaController extends Controller
         $user = User::findOrFail(Auth::user()->id);
 
         view()->share('user', $user);
+
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        view()->share('role_user', $role_user);
     }
 
     public function dashboard()
@@ -437,17 +443,18 @@ class BalitaController extends Controller
 
         if ($score->ztbu <= -3) {
             
-            return $sangat_pendek = 1;
+            $sangat_pendek = 1;
 
         }else if($score->ztbu >= -3 && $score->ztbu <= -2) {
 
-            return $sangat_pendek = (-2 - $score->ztbu);
+            $sangat_pendek = (-2 - $score->ztbu);
 
         }else if($score->ztbu >= -2) {
 
-            return $sangat_pendek = 0;
+            $sangat_pendek = 0;
 
         }
+        return $sangat_pendek;
 
     }
 
@@ -458,20 +465,21 @@ class BalitaController extends Controller
 
         if ($score->ztbu <= -3 || $score->ztbu >= 0) {
             
-            return $pendek = 0;
+            $pendek = 0;
 
         }else if($score->ztbu >= -3 && $score->ztbu <= -2) {
 
-            return $pendek = $score->ztbu + 3;
+            $pendek = $score->ztbu + 3;
 
         }else if($score->ztbu >= -2 && $score->ztbu <= 0) {
 
-            return $pendek = (-$score->ztbu)/2;
+            $pendek = (-$score->ztbu)/2;
 
         }else if($score->ztbu == -2) {
 
-            return $pendek = 1;
+            $pendek = 1;
         }
+        return $pendek;
 
     }
 
@@ -481,20 +489,21 @@ class BalitaController extends Controller
 
         if ($score->ztbu <= -2 || $score->ztbu >= 2) {
             
-            return $normal_ztbu = 0;
+            $normal_ztbu = 0;
 
         }else if($score->ztbu >= -2 && $score->ztbu <= 0) {
 
-            return $normal_ztbu = ($score->ztbu + 2)/2;
+            $normal_ztbu = ($score->ztbu + 2)/2;
 
         }else if($score->ztbu >= 0 && $score->ztbu <= 2) {
 
-            return $normal_ztbu = (2 - $score->ztbu)/2;
+            $normal_ztbu = (2 - $score->ztbu)/2;
 
         }else if($score->ztbu == 0) {
 
-            return $normal_ztbu = 1;
+            $normal_ztbu = 1;
         }
+        return $normal_ztbu;
 
     }
 
@@ -530,17 +539,18 @@ class BalitaController extends Controller
 
         if ($score->zbbtb <= -3) {
             
-            return $sangat_kurus = 1;
+            $sangat_kurus = 1;
 
         }else if($score->zbbtb >= -3 && $score->zbbtb <= -2) {
 
-            return $sangat_kurus = (-2 - $score->zbbtb);
+            $sangat_kurus = (-2 - $score->zbbtb);
 
         }else if($score->zbbtb >= -2) {
 
-            return $sangat_kurus = 0;
+            $sangat_kurus = 0;
 
         }
+        return $sangat_kurus;
 
     }
 
@@ -550,20 +560,21 @@ class BalitaController extends Controller
 
         if ($score->zbbtb <= -3 || $score->zbbtb >= 0) {
             
-            return $kurus = 0;
+            $kurus = 0;
 
         }else if($score->zbbtb >= -3 && $score->zbbtb <= -2) {
 
-            return $kurus = $score->zbbtb + 3;
+            $kurus = $score->zbbtb + 3;
 
         }else if($score->zbbtb >= -2 && $score->zbbtb <= 0) {
 
-            return $kurus = (-$score->zbbtb)/2;
+            $kurus = (-$score->zbbtb)/2;
 
         }else if($score->zbbtb == -2) {
 
-            return $kurus = 1;
+            $kurus = 1;
         }
+        return $kurus;
 
     }
 
@@ -598,15 +609,15 @@ class BalitaController extends Controller
 
         if ($score->zbbtb >= 0 && $score->zbbtb <= 2) {
             
-            return $gemuk = ($score->zbbtb)/2;
+            $gemuk = ($score->zbbtb)/2;
 
         }else if($score->zbbtb >= 2) {
 
-            return $gemuk = 1;
+            $gemuk = 1;
 
         }else if($score->zbbtb <= 0) {
 
-            return $gemuk = 0;
+            $gemuk = 0;
         }
 
         return $gemuk;
@@ -699,8 +710,13 @@ class BalitaController extends Controller
 	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
      * ============================================
      */	
-    public function R_1($gizi_lebih = 0, $tinggi = 0, $normal_zbbtb = 0.95454545)
+    public function R_1()
     {
+        $gizi_lebih = $this->zbbuGizilebih();
+
+        $tinggi = $this->ztbuTinggi();
+
+        $normal_zbbtb = $this->zbbtbNormal();
 
         $data_energi = $this->CariEnergi();
 

@@ -7,6 +7,25 @@
 	@if(!empty($data_riwayat))
 
     <section id="boxes" class="home-section paddingtop-80">
+
+    	<div class="container">
+    		<div class="row">
+
+    			<div class="col-sm-4 col-md-4">
+    				<div class="wow fadeInUp" data-wow-delay="0.2s">
+    					<div class="box">
+
+    						<br><br>
+
+    						<a href="{{ route('get_pdf_pencarian', $data_balita->id) }}" class="btn btn-danger" style="color:white">
+    							Download PDF
+    						</a>
+
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
 	
 		<div class="container">
 			<div class="row">

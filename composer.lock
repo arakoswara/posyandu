@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0cbb7f05a431702e96dcf6d283a48ede",
-    "content-hash": "50eb7c040ded07ea1dc07b61bf77de53",
+    "hash": "28c04de40a44b4dbd57423d816162bee",
+    "content-hash": "7492e65933903d7462e1c919186e7c5f",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -830,6 +830,48 @@
                 "storage"
             ],
             "time": "2016-06-03 19:11:39"
+        },
+        {
+            "name": "mailin-api/mailin-api-php",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mailin-api/mailin-api-php.git",
+                "reference": "ee0ce5b75771e07c0b282b28ee9f667ca5c781d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mailin-api/mailin-api-php/zipball/ee0ce5b75771e07c0b282b28ee9f667ca5c781d6",
+                "reference": "ee0ce5b75771e07c0b282b28ee9f667ca5c781d6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Sendinblue": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SendinBlue",
+                    "homepage": "https://www.sendinblue.com/"
+                }
+            ],
+            "description": "Official SendinBlue provided API V2 wrapper",
+            "homepage": "https://github.com/mailin-api/mailin-api-php",
+            "time": "2016-02-26 08:48:44"
         },
         {
             "name": "monolog/monolog",
@@ -2224,6 +2266,56 @@
                 "environment"
             ],
             "time": "2015-05-30 15:59:26"
+        },
+        {
+            "name": "webup/laravel-sendinblue",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/agence-webup/laravel-sendinblue.git",
+                "reference": "6d469620073a7764f80b42df572cd4ef461600eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/agence-webup/laravel-sendinblue/zipball/6d469620073a7764f80b42df572cd4ef461600eb",
+                "reference": "6d469620073a7764f80b42df572cd4ef461600eb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/mail": "~5",
+                "mailin-api/mailin-api-php": "1.0.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webup\\LaravelSendinBlue\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Ducatel",
+                    "email": "baptiste@agence-webup.com",
+                    "homepage": "http://agence-webup.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel's mail transport for SendinBlue",
+            "keywords": [
+                "laravel",
+                "laravel5",
+                "lumen",
+                "mailing",
+                "sendinblue",
+                "stmp"
+            ],
+            "time": "2016-04-21 10:20:53"
         }
     ],
     "packages-dev": [

@@ -151,6 +151,10 @@ return [
          * PDF
          */
         Barryvdh\DomPDF\ServiceProvider::class,
+        /**
+         * Email
+         */
+        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
 
     ],
 
