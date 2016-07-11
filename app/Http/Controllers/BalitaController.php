@@ -32,6 +32,9 @@ use App\Score;
 
 use App\RoleUser;
 
+use Datatables;
+use DB;
+
 class BalitaController extends Controller
 {
     public function __construct()
@@ -105,10 +108,25 @@ class BalitaController extends Controller
          * mengambil data score dan semua relasinya
          */
         $score = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->first();
-        
-        $grafik_score = Score::orderBy('id', 'ASC')->where('id_balita', $id)->get();
 
-        return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik_score'));
+        $score_all = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->paginate(4);
+        
+        // $grafik_score = Score::orderBy('id', 'ASC')->where('id_balita', $id)->with('dataBalita')->get();
+        $data = DB::table('score')
+
+                        ->join('periksa', 'periksa.id', '=', 'score.id_periksa')
+
+                        ->where('score.id_balita', $id)
+
+                        ->orderBy('score.id', 'ASC')
+
+                        ->select('score.*', 'periksa.berat_badan', 'periksa.tinggi_badan')
+
+                        ->get();
+
+        $grafik_score = json_encode($data);
+
+        return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik_score', 'score_all'));
     }
 
     /**

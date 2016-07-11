@@ -536,6 +536,14 @@ Route::group(['prefix' => 'parent'], function(){
 		'uses' => 'ParentController@hitungBalita'
 	]);
 
+	Route::get('get-pdf-pencarian-all/{id}', [
+
+		'as' => 'get_pdf_pencarian_all',
+
+		'uses' => 'ParentController@getPDFPencarianAll'
+
+	]);
+
 	Route::get('get-pdf-pencarian/{id}', [
 
 		'as' => 'get_pdf_pencarian',

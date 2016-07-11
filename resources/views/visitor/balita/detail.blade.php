@@ -12,6 +12,8 @@
         <li class="current"><a href="#inbox">Detail Data Balita</a></li>
 
         <li><a href="#compose">Periksa Balita</a></li>
+
+        <li><a href="#all_riwayat">Semua Riwayat</a></li>
     </ul>
 
 </div><!--pageheader-->
@@ -37,6 +39,12 @@
     <div id="inbox" class="subcontent">
      
         <div class="msghead">
+
+            <div class="col-md-12">
+                <a href="{{ route('get_pdf_pencarian', $data_balita->id) }}">DOWNLOAD PDF</a>
+            <hr class="garis">
+            </div>
+
 
             <div class="col-md-6">
                 
@@ -279,6 +287,153 @@
             </div>
 
         {!! Form::close() !!}
+    </div>
+
+    <div id="all_riwayat" class="subcontent" style="display: none">
+
+        <div class="msghead">
+
+            <div class="col-md-12">
+                <a href="{{ route('get_pdf_pencarian_all', $data_balita->id) }}">DOWNLOAD PDF</a>
+            <hr class="garis">
+            </div>
+
+            @foreach($score_all as $item)
+
+            <div class="col-md-6">
+
+                @if (empty($item))
+                    
+                    <h4>Tidak ada riwayat pemeriksaan</h4>
+
+                @else
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tanggal Periksa</th>
+                            <th> : </th>
+                            <th> {{ $item->periksa->tgl_periksa }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Berat Badan</td>
+                            <td> : </td>
+                            <td>{{ $item->periksa->berat_badan }} Kg</td>
+                        </tr>
+
+                        <tr>
+                            <td>Tinggi Badan</td>
+                            <td> : </td>
+                            <td>{{ $item->periksa->tinggi_badan }} cm</td>
+                        </tr>
+
+                        <tr>
+                            <td>BB / U</td>
+                            <td> : </td>
+                            <td>{{ $item->zbbu }} |
+
+                                @if($item->zbbu < -3)
+
+                                    {{ "Gizi Buruk" }}
+
+                                @elseif($item->zbbu >= -3 && $item->zbbu < -2)
+
+                                    {{ "Gizi Kurang" }}
+
+                                @elseif($item->zbbu >= -2 && $item->zbbu <= 2)
+
+                                    {{ "Gizi Baik" }}
+
+                                @elseif($item->zbbu > 2)
+
+                                    {{ "Gizi Lebih" }}
+
+                                @endif
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>TB / U</td>
+                            <td> : </td>
+                            <td>{{ $item->ztbu }} |
+
+                                @if($item->ztbu < -3)
+
+                                    {{ "Sangat Pendek" }}
+
+                                @elseif($item->ztbu >= -3 && $item->ztbu < -2)
+
+                                    {{ "Pendek" }}
+
+                                @elseif($item->ztbu >= -2 && $item->ztbu <= 2)
+
+                                    {{ "Normal" }}
+
+                                @elseif($item->ztbu > 2)
+
+                                    {{ "Tinggi" }}
+
+                                @endif
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>BB / TB</td>
+                            <td> : </td>
+                            <td>{{ $item->zbbtb }} |
+
+                                @if($item->zbbtb < -3)
+
+                                    {{ "Sangat Kurus" }}
+
+                                @elseif($item->zbbtb >= -3 && $item->zbbtb < -2)
+
+                                    {{ "Kurus" }}
+
+                                @elseif($item->zbbtb >= -2 && $item->zbbtb <= 2)
+
+                                    {{ "Normal" }}
+
+                                @elseif($item->zbbtb > 2)
+
+                                    {{ "Gemuk" }}
+
+                                @endif
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Energi yang dibutuhkan</td>
+                            <td> : </td>
+                            <td>{{ $item->energi }}</td>
+                        </tr>
+
+                         <tr>
+                            <td>Protein</td>
+                            <td> : </td>
+                            <td>{{ $item->protein }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                @endif
+
+                <hr class="garis">
+
+            </div>
+
+            @endforeach
+
+            <div class="co-md-12">
+                {!! $score_all->render() !!}
+            </div>
+        </div><!--msghead-->
+
     </div>
 </div><!--contentwrapper-->
 
