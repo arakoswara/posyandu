@@ -17,7 +17,7 @@
 
     						<br><br>
 
-    						<a href="{{ route('get_pdf_pencarian', $data_balita->id) }}" class="btn btn-danger" style="color:white">
+    						<a href="{{ route('get_pdf_pencarian_all', $data_balita->id) }}" class="btn btn-danger" style="color:white">
     							Download PDF
     						</a>
 

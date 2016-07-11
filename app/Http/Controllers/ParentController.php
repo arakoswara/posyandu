@@ -203,15 +203,26 @@ class ParentController extends Controller
         return view('home.parent.hasil-periksa', compact('data_periksa', 'data_balita'));
     }
 
-    public function getPDFPencarian($id)
+    public function getPDFPencarianAll($id)
     {
-        $data = $data_riwayat = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->get();
+        $data = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->get();
 
         $data_balita = DataBalita::where('id', $id)->first();
 
-        $pdf = PDF::loadView('home.parent.test', compact('data', 'data_balita'));
+        $pdf = PDF::loadView('home.parent.pdf-all', compact('data', 'data_balita'));
 
-        return $pdf->stream('invoice.pdf');  
+        return $pdf->stream('semua-riwayat.pdf');  
+    }
+
+    public function getPDFPencarian($id)
+    {
+        $data = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->first();
+
+        $data_balita = DataBalita::where('id', $id)->first();
+
+        $pdf = PDF::loadView('home.parent.pdf', compact('data', 'data_balita'));
+
+        return $pdf->stream('hasil-pemeriksaan.pdf');  
     }
     
 }

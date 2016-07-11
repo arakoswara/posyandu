@@ -38,7 +38,7 @@
      
         <div class="msghead">
 
-        	<table class="table table-striped" id="myTable">
+        	<table class="stdtable" id="dyntable">
 
         		<thead>
         			<tr>
@@ -68,7 +68,7 @@
 
                         ?>
 
-                        @if($umur_bulat <= 30)
+                        @if($umur_bulat <= 60)
 
                         <tr>
                             <td>{{ $item->no_reg }}</td>

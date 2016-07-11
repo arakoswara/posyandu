@@ -30,7 +30,9 @@
         <script src="{{ asset('asset-home/amcharts/serial.js') }}" type="text/javascript"></script>
         <script src="{{ asset('asset-home/amcharts/amchart.js') }}" type="text/javascript"></script>
 
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+        <script type="text/javascript" src="{{ asset('asset-home/js/custom/tables.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('asset-home/js/plugins/jquery.dataTables.min.js') }}"></script>
           
 
     </head>

@@ -38,6 +38,12 @@
 			</tr>
 
 			<tr>
+				<td>BB / TB</td>
+				<td>:</td>
+				<td>{{ $value->zbbtb }}</td>
+			</tr>
+
+			<tr>
 				<td>Kebutuhan protein</td>
 				<td>:</td>
 				<td>{{ $value->protein }}</td>
