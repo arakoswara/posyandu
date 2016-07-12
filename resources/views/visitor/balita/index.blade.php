@@ -140,9 +140,9 @@
      			<div class="form-group">
      				{!! Form::label('jenis_kelamin', 'Jenis Kelamin') !!} <br>
 
-     				{!! Form::radio('jenis_kelamin', 'L', ['class' => 'form-control']) !!} Laki-laki
+     				{!! Form::radio('jenis_kelamin', 'L') !!} Laki-laki
      				&nbsp; &nbsp;&nbsp; 
-     				{!! Form::radio('jenis_kelamin', 'P', ['class' => 'form-control']) !!} Perempuan
+     				{!! Form::radio('jenis_kelamin', 'P') !!} Perempuan
      			</div>
      			 <br>
 
