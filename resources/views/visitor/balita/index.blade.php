@@ -42,10 +42,10 @@
 
         		<thead>
         			<tr>
-        				<th>Umur (bulan)</th>
-        				<th>No. Registrasi</th>
+                        <th>No. Registrasi</th>
                         <th>Nama Balita</th>
         				<th>Tgl Lahir</th>
+                        <th>Umur (bulan)</th>
         				<th>Jenis Kelamin</th>
         				<th>Nama Ayah</th>
         				<th>Nama Ibu</th>
@@ -71,10 +71,10 @@
                         @if($umur_bulat <= 60)
 
                         <tr>
-                            <td>{{ $umur_bulat }}</td>
                             <td>{{ $item->no_reg }}</td>
                             <td>{{ $item->nama_balita }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
+                            <td>{{ $umur_bulat }}</td>
                             <td>{{ $item->jenis_kelamin }}</td>
                             <td>{{ $item->nama_ayah }}</td>
                             <td>{{ $item->nama_ibu }}</td>
