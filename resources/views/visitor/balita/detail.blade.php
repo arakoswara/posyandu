@@ -209,13 +209,13 @@
                         <tr>
                             <td>Energi yang dibutuhkan</td>
                             <td> : </td>
-                            <td>{{ $score->energi }}</td>
+                            <td>{{ $score->energi }} Kkal</td>
                         </tr>
 
                          <tr>
                             <td>Protein</td>
                             <td> : </td>
-                            <td>{{ $score->protein }}</td>
+                            <td>{{ $score->protein }} gr</td>
                         </tr>
                     </tbody>
                 </table>
@@ -410,13 +410,13 @@
                         <tr>
                             <td>Energi yang dibutuhkan</td>
                             <td> : </td>
-                            <td>{{ $item->energi }}</td>
+                            <td>{{ $item->energi }} Kkal</td>
                         </tr>
 
                          <tr>
                             <td>Protein</td>
                             <td> : </td>
-                            <td>{{ $item->protein }}</td>
+                            <td>{{ $item->protein }} gr</td>
                         </tr>
                     </tbody>
                 </table>

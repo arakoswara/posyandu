@@ -27,10 +27,10 @@ class PeriksaBalitaParentRequest extends Request
             'no_reg' => 'required',
 
             'tgl_periksa' => 'required|date',
+            
+            'berat_badan' => 'required|numeric|min:1',
 
-            'berat_badan' => 'required|float',
-
-            'tinggi_badan' => 'required|float'
+            'tinggi_badan' => 'required|numeric|min:2'
         ];
     }
 }

@@ -25,9 +25,9 @@ class PeriksaBalitaRequest extends Request
     {
         return [
 
-            'berat_badan' => 'required|integer',
+            'berat_badan' => 'required|numeric|min:1',
 
-            'tinggi_badan' => 'required|integer'
+            'tinggi_badan' => 'required|numeric|min:2'
         ];
     }
 }

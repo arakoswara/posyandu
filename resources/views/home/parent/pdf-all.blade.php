@@ -16,43 +16,103 @@
 			<tr>
 				<td>Berat badan</td>
 				<td>:</td>
-				<td>{{ $value->periksa->berat_badan }}</td>
+				<td>{{ $value->periksa->berat_badan }} kg</td>
 			</tr>
 
 			<tr>
 				<td>Tinggi badan</td>
 				<td>:</td>
-				<td>{{ $value->periksa->tinggi_badan }}</td>
+				<td>{{ $value->periksa->tinggi_badan }} gr</td>
 			</tr>
 
 			<tr>
-				<td>BB / U</td>
-				<td>:</td>
-				<td>{{ $value->zbbu }}</td>
+			    <td>BB / U</td>
+			    <td> : </td>
+			    <td>{{ $value->zbbu }} |
+
+			        @if($value->zbbu < -3)
+
+			            {{ "Gizi Buruk" }}
+
+			        @elseif($value->zbbu >= -3 && $value->zbbu < -2)
+
+			            {{ "Gizi Kurang" }}
+
+			        @elseif($value->zbbu >= -2 && $value->zbbu <= 2)
+
+			            {{ "Gizi Baik" }}
+
+			        @elseif($value->zbbu > 2)
+
+			            {{ "Gizi Lebih" }}
+
+			        @endif
+
+			    </td>
 			</tr>
 
 			<tr>
-				<td>TB / U</td>
-				<td>:</td>
-				<td>{{ $value->ztbu }}</td>
+			    <td>TB / U</td>
+			    <td> : </td>
+			    <td>{{ $value->ztbu }} |
+
+			        @if($value->ztbu < -3)
+
+			            {{ "Sangat Pendek" }}
+
+			        @elseif($value->ztbu >= -3 && $value->ztbu < -2)
+
+			            {{ "Pendek" }}
+
+			        @elseif($value->ztbu >= -2 && $value->ztbu <= 2)
+
+			            {{ "Normal" }}
+
+			        @elseif($value->ztbu > 2)
+
+			            {{ "Tinggi" }}
+
+			        @endif
+
+			    </td>
 			</tr>
 
 			<tr>
-				<td>BB / TB</td>
-				<td>:</td>
-				<td>{{ $value->zbbtb }}</td>
+			    <td>BB / TB</td>
+			    <td> : </td>
+			    <td>{{ $value->zbbtb }} |
+
+			        @if($value->zbbtb < -3)
+
+			            {{ "Sangat Kurus" }}
+
+			        @elseif($value->zbbtb >= -3 && $value->zbbtb < -2)
+
+			            {{ "Kurus" }}
+
+			        @elseif($value->zbbtb >= -2 && $value->zbbtb <= 2)
+
+			            {{ "Normal" }}
+
+			        @elseif($value->zbbtb > 2)
+
+			            {{ "Gemuk" }}
+
+			        @endif
+
+			    </td>
 			</tr>
 
 			<tr>
 				<td>Kebutuhan protein</td>
 				<td>:</td>
-				<td>{{ $value->protein }}</td>
+				<td>{{ $value->protein }} kkal</td>
 			</tr>
 
 			<tr>
 				<td>Kebutuhan energi</td>
 				<td>:</td>
-				<td>{{ $value->energi }}</td>
+				<td>{{ $value->energi }} gr</td>
 			</tr>
 
 			<tr>

@@ -14,7 +14,7 @@
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
 						<div class="box">
 
-							<a href="{{ route('get_pdf_pencarian') }}" class="btn btn-danger" style="color:white">
+							<a href="{{ route('get_pdf_pencarian', $data_balita->id) }}" class="btn btn-danger" style="color:white">
 								Download PDF
 							</a>
 
@@ -143,6 +143,10 @@
 
 								        		    {{ "Gizi Lebih" }}
 
+								        		@else
+
+								        			{{ "Tidak ada hasil" }}
+
 								        		@endif
 
 								        	</span>
@@ -203,7 +207,7 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuha Energi & Protein</strong><br />
-								        		
+								        		{{-- {{ $data_periksa->energi }} kkal | {{ $data_periksa->protein }} gr --}}
 								        	</span>
 								        </li>
 								        

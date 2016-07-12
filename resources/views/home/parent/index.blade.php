@@ -198,7 +198,7 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuha Energi & Protein</strong><br />
-								        		{{ $data_pencarian->protein }} | {{ $data_pencarian->energi }}
+								        		{{ $data_pencarian->energi }} kkal | {{ $data_pencarian->protein }} gr
 								        	</span>
 								        </li>
 								        
