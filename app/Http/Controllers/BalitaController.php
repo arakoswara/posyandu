@@ -213,7 +213,7 @@ class BalitaController extends Controller
         return redirect()->back();
     }
 
-    public function hitungBalita($id_balita = 1)
+    public function hitungBalita($id_balita = 65)
     {
         /**
          * mengambil data dari table periksa dan balita berdasarkan reasi one to many
@@ -234,14 +234,14 @@ class BalitaController extends Controller
          */
         $umur_bulat = floor($umur);
 
-        // $this->perhitunganScore($periksa_balita, $umur_bulat, $month)
+        $this->perhitunganScore($periksa_balita, $umur_bulat, $month);
         
         /**
          * zbbu
          */
         $zbbuGiziburuk      = $this->zbbuGiziburuk($periksa_balita);
         $zbbuGizikurang     = $this->zbbuGizikurang($periksa_balita);
-        return $zbbuGizibaik       = $this->zbbuGizibaik($periksa_balita);
+        $zbbuGizibaik       = $this->zbbuGizibaik($periksa_balita);
         $zbbuGizilebih      = $this->zbbuGizilebih($periksa_balita);
         /**
          * ztbu
@@ -264,8 +264,7 @@ class BalitaController extends Controller
         $CariProteinDIIT    = $this->CariProteinDIIT($periksa_balita);
         $CariProteinKKP     = $this->CariProteinKKP($periksa_balita);
 
-
-        $r_1 = $this->R_1($zbbuGizilebih, $ztbuTinggi, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+        $r_1 = $this->R_1($zbbuGizilebih, $ztbuTinggi, $zbbtbNormal, $CariEnergi, $CariProteinDIIT);
 
         $r_2 = $this->R_2($zbbuGizilebih, $ztbuNormal, $zbbtbGemuk, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
 
@@ -278,6 +277,33 @@ class BalitaController extends Controller
         $r_6 = $this->R_6($zbbuGizibaik, $ztbuNormal, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
 
         $r_7 = $this->R_7($zbbuGizibaik, $ztbuPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_8 = $this->R_8($zbbuGizibaik, $ztbuSangatPendek, $zbbtbGemuk, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_9 = $this->R_9($zbbuGizibaik, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_10 = $this->R_10($zbbuGizikurang, $ztbuTinggi, $zbbtbSangatKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_11 = $this->R_11($zbbuGizikurang, $ztbuNormal, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_12 = $this->R_12($zbbuGizikurang, $ztbuPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_13 = $this->R_13($zbbuGizikurang, $ztbuPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_14 = $this->R_14($zbbuGizikurang, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_15 = $this->R_15($zbbuGiziburuk, $ztbuTinggi, $zbbtbSangatKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_16 = $this->R_16($zbbuGiziburuk, $ztbuNormal, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_17 = $this->R_17($zbbuGiziburuk, $ztbuPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_18 = $this->R_18($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        $r_19 = $this->R_19($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP);
+
+        return $this->sum_R($r_1, $r_2, $r_3, $r_4, $r_5, $r_6, $r_7, $r_8, $r_9, $r_10, $r_11, $r_12, $r_13, $r_14, $r_15, $r_16, $r_17, $r_18, $r_19, $periksa_balita);
+
     }
 
     public function perhitunganScore($periksa_balita, $umur_bulat, $month)
@@ -368,11 +394,9 @@ class BalitaController extends Controller
             $zbbtb = (($periksa_balita->berat_badan - $bbtb_2['median'])/$nsbr);
 
         }
-
         /**
          * Insert Score
-         */
-        
+         */        
         $input['month']     = $month;
 
         $input['id_balita'] = $periksa_balita->id_balita;
@@ -394,7 +418,7 @@ class BalitaController extends Controller
      */
     public function zbbuGiziburuk($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbu <= -3) {
             
@@ -417,7 +441,7 @@ class BalitaController extends Controller
 
     public function zbbuGizikurang($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbu <= -3 || $score->zbbu >= 0) {
             
@@ -441,7 +465,7 @@ class BalitaController extends Controller
 
     public function zbbuGizibaik($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbu <= -2 || $score->zbbu >= 2) {
             
@@ -465,7 +489,7 @@ class BalitaController extends Controller
 
     public function zbbuGizilebih($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbu >= 0 && $score->zbbu <= 2) {
             
@@ -491,7 +515,7 @@ class BalitaController extends Controller
 
     public function ztbuSangatPendek($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->ztbu <= -3) {
             
@@ -513,7 +537,7 @@ class BalitaController extends Controller
 
     public function ztbuPendek($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->ztbu <= -3 || $score->ztbu >= 0) {
             
@@ -537,7 +561,7 @@ class BalitaController extends Controller
 
     public function ztbuNormal($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->ztbu <= -2 || $score->ztbu >= 2) {
             
@@ -561,7 +585,7 @@ class BalitaController extends Controller
 
     public function ztbuTinggi($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->ztbu >= 0 && $score->ztbu <= 2) {
             
@@ -587,7 +611,7 @@ class BalitaController extends Controller
      */
     public function zbbtbSangatKurus($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbtb <= -3) {
             
@@ -608,7 +632,7 @@ class BalitaController extends Controller
 
     public function zbbtbKurus($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbtb <= -3 || $score->zbbtb >= 0) {
             
@@ -632,7 +656,7 @@ class BalitaController extends Controller
 
     public function zbbtbNormal($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbtb <= -2 || $score->zbbtb >= 2) {
             
@@ -657,7 +681,7 @@ class BalitaController extends Controller
 
     public function zbbtbGemuk($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         if ($score->zbbtb >= 0 && $score->zbbtb <= 2) {
             
@@ -681,7 +705,7 @@ class BalitaController extends Controller
      */
     public function CariEnergi($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
         
         $umur_tahun = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 *12);
         /**
@@ -710,7 +734,7 @@ class BalitaController extends Controller
 
     public function CariProteinDIIT($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
 
@@ -733,7 +757,7 @@ class BalitaController extends Controller
 
     public function CariProteinKKP($periksa_balita)
     {
-        $score = Score::with('periksa')->where('id_periksa', $periksa_balita['id'])->with('dataBalita')->where('id_balita', $periksa_balita['id_balita'])->first();
+        $score = Score::with('periksa')->where('id_periksa', $periksa_balita->id)->with('dataBalita')->where('id_balita', $periksa_balita->id_balita)->first();
 
         $umur_bulan = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30);
 
@@ -759,7 +783,7 @@ class BalitaController extends Controller
 	 * R1 Zbbu(gizilebih) &Ztbu(Tinggi) & Zbbtb(Normal) z1= energi-(0.2*energi)  y1=diit
      * ============================================
      */	
-    public function R_1($zbbuGizilebih, $ztbuTinggi, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
+    public function R_1($zbbuGizilebih, $ztbuTinggi, $zbbtbNormal, $CariEnergi, $CariProteinDIIT)
     {
         /**
          * cari nilai minimum R1
@@ -995,25 +1019,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_8($gizi_baik = 0.59375, $sangat_pendek = 0, $gemuk = 0.04545455)
+    public function R_8($zbbuGizibaik, $ztbuSangatPendek, $zbbtbGemuk, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r8
          */
-        $r_8 = min($gizi_baik, $sangat_pendek, $gemuk);
+        $r_8 = min($zbbuGizibaik, $ztbuSangatPendek, $zbbtbGemuk);
 
         /**
          * Konsekuen z8 dan y8
          */
-        $z8 = $data_energi;
+        $z8 = $CariEnergi;
 
-        $y8 = $data_protein_diit;
+        $y8 = $CariProteinDIIT;
 
         $rz8 = $r_8 * $z8;
 
@@ -1035,25 +1053,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_9($gizi_baik = 0.59375, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
+    public function R_9($zbbuGizibaik, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
-        /**
+       /**
          * cari nilai minimum r9
          */
-        $r_9 = min($gizi_baik, $sangat_pendek, $normal_zbbtb);
+        $r_9 = min($zbbuGizibaik, $ztbuSangatPendek, $zbbtbNormal);
 
         /**
          * Konsekuen z9 dan y9
          */
-        $z9 = $data_energi;
+        $z9 = $CariEnergi;
 
-        $y9 = $data_protein_diit;
+        $y9 = $CariProteinDIIT;
 
         $rz9 = $r_9 * $z9;
 
@@ -1075,25 +1087,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_10($gizi_kurang = 0.40625, $tinggi = 0, $sangat_kurus = 0)
+    public function R_10($zbbuGizikurang, $ztbuTinggi, $zbbtbSangatKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r10
          */
-        $r_10 = min($gizi_kurang, $tinggi, $sangat_kurus);
+        $r_10 = min($zbbuGizikurang, $ztbuTinggi, $zbbtbSangatKurus);
 
         /**
          * Konsekuen z10 dan y10
          */
-        $z10 = $data_energi + (0.4 * $data_energi);
+        $z10 = $CariEnergi + (0.4 * $CariEnergi);
 
-        $y10 = $data_protein_diit;
+        $y10 = $CariProteinDIIT;
 
         $rz10 = $r_10 * $z10;
 
@@ -1115,25 +1121,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_11($gizi_kurang = 0.40625, $normal_ztbu = 0.180555, $kurus = 0)
+    public function R_11($zbbuGizikurang, $ztbuNormal, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r11
          */
-        $r_11 = min($gizi_kurang, $normal_ztbu, $kurus);
+        $r_11 = min($zbbuGizikurang, $ztbuNormal, $zbbtbKurus);
 
         /**
          * Konsekuen z11 dan y11
          */
-        $z11 = $data_energi + (0.2 * $data_energi);
+        $z11 = $CariEnergi + (0.2 * $CariEnergi);
 
-        $y11 = $data_protein_diit;
+        $y11 = $CariProteinDIIT;
 
         $rz11 = $r_11 * $z11;
 
@@ -1155,25 +1155,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_12($gizi_kurang = 0.40625, $pendek = 0.819445, $normal_zbbtb = 0.95454545)
+    public function R_12($zbbuGizikurang, $ztbuPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r12
          */
-        $r_12 = min($gizi_kurang, $pendek, $normal_zbbtb);
+        $r_12 = min($zbbuGizikurang, $ztbuPendek, $zbbtbNormal);
 
         /**
          * Konsekuen z12 dan y12
          */
-        $z12 = $data_energi + (0.2 * $data_energi);
+        $z12 = $CariEnergi + (0.2 * $CariEnergi);
 
-        $y12 = $data_protein_diit;
+        $y12 = $CariProteinDIIT;
 
         $rz12 = $r_12 * $z12;
 
@@ -1195,25 +1189,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_13($gizi_kurang = 0.40625, $pendek = 0.819445, $kurus = 0)
+    public function R_13($zbbuGizikurang, $ztbuPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r13
          */
-        $r_13 = min($gizi_kurang, $pendek, $kurus);
+        $r_13 = min($zbbuGizikurang, $ztbuPendek, $zbbtbKurus);
 
         /**
          * Konsekuen z13 dan y13
          */
-        $z13 = $data_energi + (0.3 * $data_energi);
+        $z13 = $CariEnergi + (0.3 * $CariEnergi);
 
-        $y13 = $data_protein_diit;
+        $y13 = $CariProteinDIIT;
 
         $rz13 = $r_13 * $z13;
 
@@ -1235,25 +1223,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_14($gizi_kurang = 0.40625, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
+    public function R_14($zbbuGizikurang, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r14
          */
-        $r_14 = min($gizi_kurang, $sangat_pendek, $normal_zbbtb);
+        $r_14 = min($zbbuGizikurang, $ztbuSangatPendek, $zbbtbNormal);
 
         /**
          * Konsekuen z14 dan y14
          */
-        $z14 = $data_energi + (0.3 * $data_energi);
+        $z14 = $CariEnergi + (0.3 * $CariEnergi);
 
-        $y14 = $data_protein_diit;
+        $y14 = $CariProteinDIIT;
 
         $rz14 = $r_14 * $z14;
 
@@ -1275,25 +1257,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_15($gizi_buruk = 0, $tinggi = 0, $sangat_kurus = 0)
+    public function R_15($zbbuGiziburuk, $ztbuTinggi, $zbbtbSangatKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
-        /**
+       /**
          * cari nilai minimum r15
          */
-        $r_15 = min($gizi_buruk, $tinggi, $sangat_kurus);
+        $r_15 = min($zbbuGiziburuk, $ztbuTinggi, $zbbtbSangatKurus);
 
         /**
          * Konsekuen z15 dan y15
          */
-        $z15 = $data_energi + (0.4 * $data_energi);
+        $z15 = $CariEnergi + (0.4 * $CariEnergi);
 
-        $y15 = $data_protein_kkp;
+        $y15 = $CariProteinKKP;
 
         $rz15 = $r_15 * $z15;
 
@@ -1315,25 +1291,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_16($gizi_buruk = 0, $normal_ztbu = 0.180555, $kurus = 0)
+    public function R_16($zbbuGiziburuk, $ztbuNormal, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r16
          */
-        $r_16 = min($gizi_buruk, $normal_ztbu, $kurus);
+        $r_16 = min($zbbuGiziburuk, $ztbuNormal, $zbbtbKurus);
 
         /**
          * Konsekuen z16 dan y16
          */
-        $z16 = $data_energi + (0.3 * $data_energi);
+        $z16 = $CariEnergi + (0.3 * $CariEnergi);
 
-        $y16 = $data_protein_kkp;
+        $y16 = $CariProteinKKP;
 
         $rz16 = $r_16 * $z16;
 
@@ -1354,25 +1324,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_17($gizi_buruk = 0, $pendek = 0.819445, $kurus = 0)
+    public function R_17($zbbuGiziburuk, $ztbuPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r17
          */
-        $r_17 = min($gizi_buruk, $pendek, $kurus);
+        $r_17 = min($zbbuGiziburuk, $ztbuPendek, $zbbtbKurus);
 
         /**
          * Konsekuen z17 dan y17
          */
-        $z17 = $data_energi + (0.4 * $data_energi);
+        $z17 = $CariEnergi + (0.4 * $CariEnergi);
 
-        $y17 = $data_protein_kkp;
+        $y17 = $CariProteinKKP;
 
         $rz17 = $r_17 * $z17;
 
@@ -1394,25 +1358,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_18($gizi_buruk = 0, $sangat_pendek = 0, $normal_zbbtb = 0.95454545)
+    public function R_18($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbNormal, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r18
          */
-        $r_18 = min($gizi_buruk, $sangat_pendek, $normal_zbbtb);
+        $r_18 = min($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbNormal);
 
         /**
          * Konsekuen z18 dan y18
          */
-        $z18 = $data_energi + (0.3 * $data_energi);
+        $z18 = $CariEnergi + (0.3 * $CariEnergi);
 
-        $y18 = $data_protein_kkp;
+        $y18 = $CariProteinKKP;
 
         $rz18 = $r_18 * $z18;
 
@@ -1434,25 +1392,19 @@ class BalitaController extends Controller
      * ============================================
      */
 
-    public function R_19($gizi_buruk = 0, $sangat_pendek = 0, $kurus = 0)
+    public function R_19($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbKurus, $CariEnergi, $CariProteinDIIT, $CariProteinKKP)
     {
-        $data_energi = $this->CariEnergi();
-
-        $data_protein_diit = $this->CariProteinDIIT();
-
-        $data_protein_kkp = $this->CariProteinKKP();
-
         /**
          * cari nilai minimum r19
          */
-        $r_19 = min($gizi_buruk, $sangat_pendek, $kurus);
+        $r_19 = min($zbbuGiziburuk, $ztbuSangatPendek, $zbbtbKurus);
 
         /**
          * Konsekuen z19 dan y19
          */
-        $z19 = $data_energi + (0.4 * $data_energi);
+        $z19 = $CariEnergi + (0.4 * $CariEnergi);
 
-        $y19 = $data_protein_kkp;
+        $y19 = $CariProteinKKP;
 
         $rz19 = $r_19 * $z19;
 
@@ -1467,27 +1419,27 @@ class BalitaController extends Controller
         );
     }
 
-    public function sum_R()
+    public function sum_R($r_1, $r_2, $r_3, $r_4, $r_5, $r_6, $r_7, $r_8, $r_9, $r_10, $r_11, $r_12, $r_13, $r_14, $r_15, $r_16, $r_17, $r_18, $r_19, $periksa_balita)
     {
-        $data_1     = $this->R_1();
-        $data_2     = $this->R_2();
-        $data_3     = $this->R_3();
-        $data_4     = $this->R_4();
-        $data_5     = $this->R_5();
-        $data_6     = $this->R_6();
-        $data_7     = $this->R_7();
-        $data_8     = $this->R_8();
-        $data_9     = $this->R_9();
-        $data_10    = $this->R_10();
-        $data_11    = $this->R_11();
-        $data_12    = $this->R_12();
-        $data_13    = $this->R_13();
-        $data_14    = $this->R_14();
-        $data_15    = $this->R_15();
-        $data_16    = $this->R_16();
-        $data_17    = $this->R_17();
-        $data_18    = $this->R_18();
-        $data_19    = $this->R_19();
+        $data_1     = $r_1;
+        $data_2     = $r_2;
+        $data_3     = $r_3;
+        $data_4     = $r_4;
+        $data_5     = $r_5;
+        $data_6     = $r_6;
+        $data_7     = $r_7;
+        $data_8     = $r_8;
+        $data_9     = $r_9;
+        $data_10    = $r_10;
+        $data_11    = $r_11;
+        $data_12    = $r_12;
+        $data_13    = $r_13;
+        $data_14    = $r_14;
+        $data_15    = $r_15;
+        $data_16    = $r_16;
+        $data_17    = $r_17;
+        $data_18    = $r_18;
+        $data_19    = $r_19;
 
         /**
          * Penjumlahan R
@@ -1501,16 +1453,25 @@ class BalitaController extends Controller
 
         /**
         * Penjumlahan RY
-         */
+        */
         $jumlah_RY = ($data_1['ry1'] + $data_2['ry2'] + $data_3['ry3'] + $data_4['ry4'] + $data_5['ry5'] + $data_6['ry6'] +$data_7['ry7'] + $data_8['ry8'] + $data_9['ry9'] +$data_10['ry10'] + $data_11['ry11'] + $data_12['ry12'] + $data_13['ry13'] + $data_14['ry14'] + $data_15['ry15'] + $data_16['ry16'] + $data_17['ry17'] + $data_18['ry18'] + $data_19['ry19']);
         /**
         * Hasil akhir Energi
-         */
+        */
         $hasil_energi = $jumlah_RZ / $jumlah_R;
         /**
         * Hasil akhir Protein
-         */
-        return $hasil_protein = $jumlah_RY / $jumlah_R;
+        */
+        $hasil_protein = $jumlah_RY / $jumlah_R;
 
+        $sum_R = [
+            'energi' => $hasil_energi,
+
+            'protein' => $hasil_protein
+        ];
+
+        $score = Score::where('id_balita', $periksa_balita->id_balita)->where('id_periksa', $periksa_balita->id)->orderBy('id', 'DESC')->first();
+
+        $score->update($sum_R);
     }	
 }

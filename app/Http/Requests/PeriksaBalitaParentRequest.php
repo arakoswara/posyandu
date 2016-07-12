@@ -28,7 +28,7 @@ class PeriksaBalitaParentRequest extends Request
 
             'tgl_periksa' => 'required|date',
 
-            'berat_badan' => 'required|integer',
+            'berat_badan' => 'required|float',
 
             'tinggi_badan' => 'required|integer'
         ];
