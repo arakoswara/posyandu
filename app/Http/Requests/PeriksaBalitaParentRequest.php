@@ -30,7 +30,7 @@ class PeriksaBalitaParentRequest extends Request
 
             'berat_badan' => 'required|float',
 
-            'tinggi_badan' => 'required|integer'
+            'tinggi_badan' => 'required|float'
         ];
     }
 }
