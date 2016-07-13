@@ -144,7 +144,7 @@
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
-								        	<span class="list"><strong>Kebutuha Energi & Protein / hari </strong><br />
+								        	<span class="list"><strong>Kebutuhan Energi & Protein / hari </strong><br />
 								        		{{ $item->energi }} kkal | {{ $item->protein }} gr
 								        	</span>
 								        </li>
@@ -184,7 +184,7 @@
 
                          
                         <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                            <h1 class="h-ultra">Oppsss... tidak ada data ditemukan</h1>
+                            <h1 class="h-ultra">Maaf, tidak ada data ditemukan</h1>
                             <h2 class="h-ultra">Posyandu Melati</h2>
                         </div>
                         <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
@@ -195,8 +195,8 @@
                             <div class="wow fadeInRight" data-wow-delay="0.1s">
 
                             <ul class="lead-list">
-                                <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>ID / No. Registrasi Salah</strong><br />
-                                ID / No. Registrasi Balita anda tidak terdaftar atau salah</span></li>
+                                <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Maaf, ID / No. Registrasi Salah</strong><br />
+                                Maaf, ID / No. Registrasi Balita anda tidak terdaftar atau salah</span></li>
                                 
                             </ul>
 
