@@ -36,15 +36,12 @@
 
 				        @if($value->zbbu < -3)
 
-<<<<<<< HEAD
 			<tr>
 				<td>Tinggi badan</td>
 				<td>:</td>
 				<td>{{ $value->periksa->tinggi_badan }} cm</td>
 			</tr>
-=======
 				            {{ "Gizi Buruk" }}
->>>>>>> ca598e7ddff40acd6825b42600f849d77627f19f
 
 				        @elseif($value->zbbu >= -3 && $value->zbbu < -2)
 
@@ -115,25 +112,6 @@
 				    </td>
 				</tr>
 
-				<tr>
-					<td>Kebutuhan protein</td>
-					<td>:</td>
-					<td>{{ $value->protein }} kkal</td>
-				</tr>
-
-				<tr>
-					<td>Kebutuhan energi</td>
-					<td>:</td>
-					<td>{{ $value->energi }} gr</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">
-						<hr>
-					</td>
-				</tr>
-
-<<<<<<< HEAD
 			<tr>
 				<td>Kebutuhan energi/ hari</td>
 				<td>:</td>
@@ -145,11 +123,16 @@
 				<td>:</td>
 				<td>{{ $value->protein }} gr</td>
 			</tr>
-=======
+
+				<tr>
+					<td colspan="3">
+						<hr>
+					</td>
+				</tr>
+
 			@endforeach
 
 		</tbody>
->>>>>>> ca598e7ddff40acd6825b42600f849d77627f19f
 
 </table>
 	@else

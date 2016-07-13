@@ -110,7 +110,7 @@
 
 					        @endif
 
-<<<<<<< HEAD
+
 				<tr>
 					<td>Kebutuhan energi / hari</td>
 					<td>:</td>
@@ -122,21 +122,8 @@
 					<td>:</td>
 					<td>{{ $data->protein }} gr</td>
 				</tr>
-=======
+
 					    </td>
-					</tr>
-
-					<tr>
-						<td>Kebutuhan protein</td>
-						<td>:</td>
-						<td>{{ $data->protein }} kkal</td>
-					</tr>
->>>>>>> ca598e7ddff40acd6825b42600f849d77627f19f
-
-					<tr>
-						<td>Kebutuhan energi</td>
-						<td>:</td>
-						<td>{{ $data->energi }} gr</td>
 					</tr>
 
 					<tr>
