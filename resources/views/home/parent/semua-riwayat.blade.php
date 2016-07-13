@@ -144,8 +144,8 @@
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
-								        	<span class="list"><strong>Kebutuha Energi & Protein</strong><br />
-								        		{{ $item->protein }} | {{ $item->energi }}
+								        	<span class="list"><strong>Kebutuha Energi & Protein / hari </strong><br />
+								        		{{ $item->energi }} kkal | {{ $item->protein }} gr
 								        	</span>
 								        </li>
 								        

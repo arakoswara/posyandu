@@ -22,7 +22,7 @@
 			<tr>
 				<td>Tinggi badan</td>
 				<td>:</td>
-				<td>{{ $value->periksa->tinggi_badan }} gr</td>
+				<td>{{ $value->periksa->tinggi_badan }} cm</td>
 			</tr>
 
 			<tr>
@@ -104,15 +104,15 @@
 			</tr>
 
 			<tr>
-				<td>Kebutuhan protein</td>
+				<td>Kebutuhan energi/ hari</td>
 				<td>:</td>
-				<td>{{ $value->protein }} kkal</td>
+				<td>{{ $value->energi }} Kkal</td>
 			</tr>
 
 			<tr>
-				<td>Kebutuhan energi</td>
+				<td>Kebutuhan protein / hari</td>
 				<td>:</td>
-				<td>{{ $value->energi }} gr</td>
+				<td>{{ $value->protein }} gr</td>
 			</tr>
 
 			<tr>

@@ -112,15 +112,15 @@
 				</tr>
 
 				<tr>
-					<td>Kebutuhan protein</td>
+					<td>Kebutuhan energi / hari</td>
 					<td>:</td>
-					<td>{{ $data->protein }} kkal</td>
+					<td>{{ $data->energi }} Kkal</td>
 				</tr>
 
 				<tr>
-					<td>Kebutuhan energi</td>
+					<td>Kebutuhan protein / hari</td>
 					<td>:</td>
-					<td>{{ $data->energi }} gr</td>
+					<td>{{ $data->protein }} gr</td>
 				</tr>
 
 				<tr>
