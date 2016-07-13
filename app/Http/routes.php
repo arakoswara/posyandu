@@ -552,4 +552,11 @@ Route::group(['prefix' => 'parent'], function(){
 
 	]);
 
+	Route::get('/get-pdf-periksa', [
+
+		'as' => 'get_pdf_periksa',
+
+		'uses' => 'ParentController@getPDFPeriksa'
+	]);
+
 });

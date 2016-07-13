@@ -213,7 +213,7 @@ class BalitaController extends Controller
         return redirect()->back();
     }
 
-    public function hitungBalita($id_balita = 65)
+    public function hitungBalita($id_balita)
     {
         /**
          * mengambil data dari table periksa dan balita berdasarkan reasi one to many
