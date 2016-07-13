@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<h4>No. Registrasi : {{ $data_balita->no_reg }} | Nama Balita : {{ $data_balita->nama_balita }} | Tanggal Lahir : {{ $data_balita->tgl_lahir }}</h4>
+	<h4>No. Registrasi : {{ $data['no_reg'] }}  | Nama Balita : {{ $data['nama_balita'] }} | Tanggal Lahir : {{ $data['tgl_lahir'] }}</h4>
 
 	<hr>
 
@@ -17,43 +17,42 @@
 		<table>
 			<tbody>
 
-					@foreach ($data as $value)
-
 					<tr>
 						<td><h4>Tanggal periksa</h4></td>
 						<td>:</td>
-						<td><h4>{{ $value->periksa->tgl_periksa }}</h4></td>
+						<td><h4>{{ $data['tgl_periksa'] }}</h4></td>
 					</tr>
 
 					<tr>
 						<td>Berat badan</td>
 						<td>:</td>
-						<td>{{ $value->periksa->berat_badan }} Kg</td>
+						<td>{{ $data['berat_badan'] }} Kg</td>
 					</tr>
 
 					<tr>
 						<td>Tinggi badan</td>
 						<td>:</td>
-						<td>{{ $value->periksa->tinggi_badan }} cm</td>
+						<td>{{ $data['tinggi_badan'] }} cm</td>
 					</tr>
 
 					<tr>
 					    <td>BB / U</td>
 					    <td> : </td>
-					    <td>{{ $value->zbbu }} |
+					    <td>{{ $data['zbbu'] }} |
 
-					        @if($value->zbbu < -3)
+					        @if($data['zbbu'] < -3)
+
 					            {{ "Gizi Buruk" }}
 
-					        @elseif($value->zbbu >= -3 && $value->zbbu < -2)
+					        @elseif($data['zbbu'] >= -3 && $data['zbbu'] < -2)
 
 					            {{ "Gizi Kurang" }}
 
-					        @elseif($value->zbbu >= -2 && $value->zbbu <= 2)
+					        @elseif($data['zbbu'] >= -2 && $data['zbbu'] <= 2)
 
 					            {{ "Gizi Baik" }}
 
-					        @elseif($value->zbbu > 2)
+					        @elseif($data['zbbu'] > 2)
 
 					            {{ "Gizi Lebih" }}
 
@@ -65,21 +64,21 @@
 					<tr>
 					    <td>TB / U</td>
 					    <td> : </td>
-					    <td>{{ $value->ztbu }} |
+					    <td>{{ $data['ztbu'] }} |
 
-					        @if($value->ztbu < -3)
+					        @if($data['ztbu'] < -3)
 
 					            {{ "Sangat Pendek" }}
 
-					        @elseif($value->ztbu >= -3 && $value->ztbu < -2)
+					        @elseif($data['ztbu'] >= -3 && $data['ztbu'] < -2)
 
 					            {{ "Pendek" }}
 
-					        @elseif($value->ztbu >= -2 && $value->ztbu <= 2)
+					        @elseif($data['ztbu'] >= -2 && $data['ztbu'] <= 2)
 
 					            {{ "Normal" }}
 
-					        @elseif($value->ztbu > 2)
+					        @elseif($data['ztbu'] > 2)
 
 					            {{ "Tinggi" }}
 
@@ -91,38 +90,40 @@
 					<tr>
 					    <td>BB / TB</td>
 					    <td> : </td>
-					    <td>{{ $value->zbbtb }} |
+					    <td>{{ $data['zbbtb'] }} |
 
-					        @if($value->zbbtb < -3)
+					        @if($data['zbbtb'] < -3)
 
 					            {{ "Sangat Kurus" }}
 
-					        @elseif($value->zbbtb >= -3 && $value->zbbtb < -2)
+					        @elseif($data['zbbtb'] >= -3 && $data['zbbtb'] < -2)
 
 					            {{ "Kurus" }}
 
-					        @elseif($value->zbbtb >= -2 && $value->zbbtb <= 2)
+					        @elseif($data['zbbtb'] >= -2 && $data['zbbtb'] <= 2)
 
 					            {{ "Normal" }}
 
-					        @elseif($value->zbbtb > 2)
+					        @elseif($data['zbbtb'] > 2)
 
 					            {{ "Gemuk" }}
 
 					        @endif
 
-					    </td>
-					</tr>
-					<tr>
-						<td>Kebutuhan protein</td>
-						<td>:</td>
-						<td>{{ $value->protein }} kkal</td>
-					</tr>
 
-					<tr>
-						<td>Kebutuhan energi</td>
-						<td>:</td>
-						<td>{{ $value->energi }} gr</td>
+				<tr>
+					<td>Kebutuhan energi / hari</td>
+					<td>:</td>
+					<td>{{ "Belum" }} kkal</td>
+				</tr>
+
+				<tr>
+					<td>Kebutuhan protein / hari</td>
+					<td>:</td>
+					<td>{{ "belum" }} gr</td>
+				</tr>
+
+					    </td>
 					</tr>
 
 					<tr>
@@ -130,8 +131,6 @@
 							<hr>
 						</td>
 					</tr>
-
-					@endforeach
 
 			</tbody>
 		</table>

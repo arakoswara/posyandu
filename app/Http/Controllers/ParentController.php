@@ -198,9 +198,7 @@ class ParentController extends Controller
 
         $data_periksa['tgl_periksa'] = $input['tgl_periksa'];
 
-        return $data_periksa;
-
-        // return $this->getPDFPeriksa($data_periksa, $data_balita);
+        // return $data_periksa;
 
         return view('home.parent.hasil-periksa', compact('data_periksa', 'data_balita'));
     }
@@ -227,9 +225,13 @@ class ParentController extends Controller
         return $pdf->stream('hasil-pemeriksaan.pdf');  
     }
 
-    public function getPDFPeriksa()
+    public function getPDFPeriksa(Request $request)
     {
-        return $this->doPeriksaBalita();
+        $data = $request->all();
+
+        $pdf = PDF::loadView('home.parent.test', compact('data'));
+
+        return $pdf->stream('semua-riwayat.pdf');
     }
     
 }

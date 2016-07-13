@@ -14,9 +14,19 @@
 					<div class="wow fadeInUp" data-wow-delay="0.2s">
 						<div class="box">
 
-							<a href="{{ route('get_pdf_pencarian', $data_balita->id) }}" class="btn btn-danger" style="color:white">
-								Download PDF
-							</a>
+							{!! Form::open(['route' => 'get_pdf_periksa']) !!}
+
+							{!! Form::hidden('no_reg', $data_balita->no_reg) !!}
+							{!! Form::hidden('nama_balita', $data_balita->nama_balita) !!}
+							{!! Form::hidden('tgl_lahir', $data_balita->tgl_lahir) !!}
+							{!! Form::hidden('tgl_periksa', $data_periksa['tgl_periksa']) !!}
+							{!! Form::hidden('berat_badan', $data_periksa['berat_badan']) !!}
+							{!! Form::hidden('tinggi_badan', $data_periksa['tinggi_badan']) !!}
+							{!! Form::hidden('zbbu', $data_periksa['zbbu']) !!}
+							{!! Form::hidden('ztbu', $data_periksa['ztbu']) !!}
+							{!! Form::hidden('zbbtb', $data_periksa['zbbtb']) !!}
+
+							{!! Form::submit('Download PDF', ['class' => 'btn btn-danger']) !!}
 
 							<a href="{{ route('tampilkan_semua_riwayat', $data_balita->id) }}" class="btn btn-success" style="color:white">Tampilkan semua riwayat</a>
 							

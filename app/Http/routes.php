@@ -552,7 +552,7 @@ Route::group(['prefix' => 'parent'], function(){
 
 	]);
 
-	Route::get('/get-pdf-periksa', [
+	Route::post('/get-pdf-periksa', [
 
 		'as' => 'get_pdf_periksa',
 
