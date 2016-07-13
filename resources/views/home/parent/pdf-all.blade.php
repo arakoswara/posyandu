@@ -2,126 +2,136 @@
 
 <hr>
 
+@if (!empty($data))
+
 <table>
-	<tbody>		
+	
 
-		@foreach ($data as $value)
+		<tbody>		
 
-			<tr>
-				<td><h4>Tanggal periksa</h4></td>
-				<td>:</td>
-				<td><h4>{{ $value->periksa->tgl_periksa }}</h4></td>
-			</tr>
+			@foreach ($data as $value)
 
-			<tr>
-				<td>Berat badan</td>
-				<td>:</td>
-				<td>{{ $value->periksa->berat_badan }} kg</td>
-			</tr>
+				<tr>
+					<td><h4>Tanggal periksa</h4></td>
+					<td>:</td>
+					<td><h4>{{ $value->periksa->tgl_periksa }}</h4></td>
+				</tr>
 
-			<tr>
-				<td>Tinggi badan</td>
-				<td>:</td>
-				<td>{{ $value->periksa->tinggi_badan }} gr</td>
-			</tr>
+				<tr>
+					<td>Berat badan</td>
+					<td>:</td>
+					<td>{{ $value->periksa->berat_badan }} kg</td>
+				</tr>
 
-			<tr>
-			    <td>BB / U</td>
-			    <td> : </td>
-			    <td>{{ $value->zbbu }} |
+				<tr>
+					<td>Tinggi badan</td>
+					<td>:</td>
+					<td>{{ $value->periksa->tinggi_badan }} gr</td>
+				</tr>
 
-			        @if($value->zbbu < -3)
+				<tr>
+				    <td>BB / U</td>
+				    <td> : </td>
+				    <td>{{ $value->zbbu }} |
 
-			            {{ "Gizi Buruk" }}
+				        @if($value->zbbu < -3)
 
-			        @elseif($value->zbbu >= -3 && $value->zbbu < -2)
+				            {{ "Gizi Buruk" }}
 
-			            {{ "Gizi Kurang" }}
+				        @elseif($value->zbbu >= -3 && $value->zbbu < -2)
 
-			        @elseif($value->zbbu >= -2 && $value->zbbu <= 2)
+				            {{ "Gizi Kurang" }}
 
-			            {{ "Gizi Baik" }}
+				        @elseif($value->zbbu >= -2 && $value->zbbu <= 2)
 
-			        @elseif($value->zbbu > 2)
+				            {{ "Gizi Baik" }}
 
-			            {{ "Gizi Lebih" }}
+				        @elseif($value->zbbu > 2)
 
-			        @endif
+				            {{ "Gizi Lebih" }}
 
-			    </td>
-			</tr>
+				        @endif
 
-			<tr>
-			    <td>TB / U</td>
-			    <td> : </td>
-			    <td>{{ $value->ztbu }} |
+				    </td>
+				</tr>
 
-			        @if($value->ztbu < -3)
+				<tr>
+				    <td>TB / U</td>
+				    <td> : </td>
+				    <td>{{ $value->ztbu }} |
 
-			            {{ "Sangat Pendek" }}
+				        @if($value->ztbu < -3)
 
-			        @elseif($value->ztbu >= -3 && $value->ztbu < -2)
+				            {{ "Sangat Pendek" }}
 
-			            {{ "Pendek" }}
+				        @elseif($value->ztbu >= -3 && $value->ztbu < -2)
 
-			        @elseif($value->ztbu >= -2 && $value->ztbu <= 2)
+				            {{ "Pendek" }}
 
-			            {{ "Normal" }}
+				        @elseif($value->ztbu >= -2 && $value->ztbu <= 2)
 
-			        @elseif($value->ztbu > 2)
+				            {{ "Normal" }}
 
-			            {{ "Tinggi" }}
+				        @elseif($value->ztbu > 2)
 
-			        @endif
+				            {{ "Tinggi" }}
 
-			    </td>
-			</tr>
+				        @endif
 
-			<tr>
-			    <td>BB / TB</td>
-			    <td> : </td>
-			    <td>{{ $value->zbbtb }} |
+				    </td>
+				</tr>
 
-			        @if($value->zbbtb < -3)
+				<tr>
+				    <td>BB / TB</td>
+				    <td> : </td>
+				    <td>{{ $value->zbbtb }} |
 
-			            {{ "Sangat Kurus" }}
+				        @if($value->zbbtb < -3)
 
-			        @elseif($value->zbbtb >= -3 && $value->zbbtb < -2)
+				            {{ "Sangat Kurus" }}
 
-			            {{ "Kurus" }}
+				        @elseif($value->zbbtb >= -3 && $value->zbbtb < -2)
 
-			        @elseif($value->zbbtb >= -2 && $value->zbbtb <= 2)
+				            {{ "Kurus" }}
 
-			            {{ "Normal" }}
+				        @elseif($value->zbbtb >= -2 && $value->zbbtb <= 2)
 
-			        @elseif($value->zbbtb > 2)
+				            {{ "Normal" }}
 
-			            {{ "Gemuk" }}
+				        @elseif($value->zbbtb > 2)
 
-			        @endif
+				            {{ "Gemuk" }}
 
-			    </td>
-			</tr>
+				        @endif
 
-			<tr>
-				<td>Kebutuhan protein</td>
-				<td>:</td>
-				<td>{{ $value->protein }} kkal</td>
-			</tr>
+				    </td>
+				</tr>
 
-			<tr>
-				<td>Kebutuhan energi</td>
-				<td>:</td>
-				<td>{{ $value->energi }} gr</td>
-			</tr>
+				<tr>
+					<td>Kebutuhan protein</td>
+					<td>:</td>
+					<td>{{ $value->protein }} kkal</td>
+				</tr>
 
-			<tr>
-				<td colspan="3">
-					<hr>
-				</td>
-			</tr>
+				<tr>
+					<td>Kebutuhan energi</td>
+					<td>:</td>
+					<td>{{ $value->energi }} gr</td>
+				</tr>
 
-		@endforeach
+				<tr>
+					<td colspan="3">
+						<hr>
+					</td>
+				</tr>
 
-	</tbody>
+			@endforeach
+
+		</tbody>
+
 </table>
+	@else
+
+		{{ "Tidak ada data pemeriksaan" }}
+
+	@endif
