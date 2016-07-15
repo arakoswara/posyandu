@@ -113,17 +113,17 @@
 
 					    </td>
 					</tr>
-					<tr>
-						<td>Kebutuhan protein</td>
-						<td>:</td>
-						<td>{{ $value->protein }} kkal</td>
-					</tr>
+				<tr>
+					<td>Kebutuhan energi / hari</td>
+					<td>:</td>
+					<td>{{ $value->energi }} Kkal</td>
+				</tr>
 
-					<tr>
-						<td>Kebutuhan energi</td>
-						<td>:</td>
-						<td>{{ $value->energi }} gr</td>
-					</tr>
+				<tr>
+					<td>Kebutuhan protein / hari</td>
+					<td>:</td>
+					<td>{{ $value->protein }} gr</td>
+				</tr>
 
 					<tr>
 						<td colspan="3">
