@@ -252,7 +252,7 @@
 
                          
                         <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                            <h1 class="h-ultra">Oppsss... tidak ada data ditemukan</h1>
+                            <h1 class="h-ultra">Maaf.. data tidak ditemukan</h1>
                             <h2 class="h-ultra">Posyandu Melati</h2>
                         </div>
                         <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
