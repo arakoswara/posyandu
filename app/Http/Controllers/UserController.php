@@ -74,7 +74,7 @@ class UserController extends Controller
          
         $mailin->send_email($data);
 
-        session()->flash('Akun Petugas baru berhasil ditambahkan');
+        session()->flash('message', 'Akun Petugas baru berhasil ditambahkan');
 
         return redirect()->back();
     }
