@@ -55,6 +55,10 @@ class UserController extends Controller
     	// return view('emails.email-activation', compact('data'));
         $this->emailAktivasi($code, $email);
 
+        session()->flash('message', 'Akun Petugas baru berhasil ditambahkan');
+
+        return redirect()->route('admin-index');
+
     }
 
     public function emailAktivasi($code, $email)
@@ -73,10 +77,6 @@ class UserController extends Controller
             );
          
         $mailin->send_email($data);
-
-        session()->flash('message', 'Akun Petugas baru berhasil ditambahkan');
-
-        return redirect()->back();
     }
 
     /**
