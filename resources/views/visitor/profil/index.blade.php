@@ -5,7 +5,7 @@
     <div class="pageheader">
         <div>
         <h1 class="pagetitle">{{ $user->name }}</h1>
-        <span class="pagedesc">Front-End Engineer / UI Designer</span>
+        <span class="pagedesc">Profil Saya</span>
         </div>
         <ul class="hornav">
             <li class="current"><a href="#profile">Edit Profil</a></li>

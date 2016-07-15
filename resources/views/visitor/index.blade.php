@@ -1,7 +1,7 @@
 @extends('master-home')
 @section('content')
 <div class="pageheader">
-    <h1 class="pagetitle">Data Balita</h1>
+    <h1 class="pagetitle">Dashboard</h1>
     <span class="pagedesc">Data balita posyandu MELATI</span>
     <ul class="hornav">
         <li class="current"><a href="#inbox">Dashboard</a></li>
