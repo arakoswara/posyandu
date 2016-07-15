@@ -16,10 +16,17 @@ use Sendinblue\Mailin;
 
 class UserController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('guest');
-    // }
+    public function __construct()
+    {
+        // $this->middleware('auth');
+
+        // $this->middleware('role:guest');
+
+        // $this->middleware('auth');
+
+        // $this->middleware('role:visitor');
+
+    }
 
     /**
      * Handle proses registration
@@ -65,7 +72,11 @@ class UserController extends Controller
 
             );
          
-        var_dump($mailin->send_email($data));
+        $mailin->send_email($data);
+
+        session()->flash('Akun Petugas baru berhasil ditambahkan');
+
+        return redirect()->back();
     }
 
     /**

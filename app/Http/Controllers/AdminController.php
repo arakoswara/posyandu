@@ -29,6 +29,8 @@ class AdminController extends Controller
     {
         $user = User::findOrFail(Auth::user()->id);
 
-        return view('admin.index', compact('user'));
+        $data_petugas = User::get();
+
+        return view('admin.index', compact('user', 'data_petugas'));
     }
 }

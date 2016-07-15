@@ -8,8 +8,8 @@
         <span class="pagedesc">Front-End Engineer / UI Designer</span>
         </div>
         <ul class="hornav">
-            <li class="current"><a href="#profile">Tambah Petugas</a></li>
-            <li><a href="#editprofile">Daftar Petugas</a></li>
+            <li class="current"><a href="#tambah">Tambah Petugas</a></li>
+            <li><a href="#daftar">Daftar Petugas</a></li>
         </ul>
     </div><!--pageheader-->
 
@@ -45,7 +45,7 @@
     @endif
     
     <div id="contentwrapper" class="contentwrapper">
-            <div id="profile" class="subcontent">
+            <div id="tambah" class="subcontent">
 
             	{!! Form::open(['route' => 'do-Register']) !!}
 
@@ -118,6 +118,49 @@
             	{!! Form::close() !!}
                 
             </div><!--#profile-->
+
+            <div id="daftar" class="subcontent" style="display: none">
+
+                    <table class="stdtable" id="dyntable">
+
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php $no= 1; ?>
+                            @foreach($data_petugas as $item)
+
+
+                                <tr>
+                                    <td>{{ $no }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>
+                                        @if($item->active == 1)
+
+                                            {{ "Aktif" }}
+
+                                        @else
+
+                                            {{ "Non active" }}
+
+                                        @endif
+                                    </td>
+                                </tr>
+
+                            <?php $no++; ?> 
+
+                            @endforeach
+
+                        </tbody>
+                    </table>
+            </div>
         
         <br /><br />
         

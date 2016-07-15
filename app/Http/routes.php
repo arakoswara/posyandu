@@ -82,6 +82,13 @@ Route::get('/tambah-petugas', [
 	'uses' => 'AdminController@tambahPetugas'
 ]);
 
+Route::get('/data-petugas', [
+
+	'as' => 'data_petugas',
+
+	'uses' => 'AdminController@dataPetugas'
+]);
+
 /**
  * VISITOR
  */

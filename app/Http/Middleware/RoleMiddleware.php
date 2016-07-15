@@ -20,7 +20,7 @@ class RoleMiddleware
             
             if (Auth::check() && !Auth::user()->hasRole($roleName)) {
                 
-                return abort(401, 'Anda tidak berhak mengakses halaman ini, ini halaman visitor');
+                return abort(401, 'Anda tidak berhak mengakses halaman ini');
 
             }
             return $next($request);
