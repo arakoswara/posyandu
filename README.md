@@ -1,7 +1,7 @@
-# posyandu
+# Aplikasi Posyandu
 posyandu adalah sebuah aplikasi pemeriksaan balita, dengan aplikasi ini dapat menentukan kebutuhan protein dan energi yang balita butuhkan.
 
-#tim 
+#Tim 
 * Ara koswara
 * Aryuni Arafah
 
@@ -21,6 +21,6 @@ posyandu adalah sebuah aplikasi pemeriksaan balita, dengan aplikasi ini dapat me
 4. buat file .env
 
 #linsensi
-aplikasi ini dibawah lisensi
+Aplikasi ini dibawah lisensi ...
 
 
