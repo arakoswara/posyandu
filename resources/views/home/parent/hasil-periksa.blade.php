@@ -25,6 +25,8 @@
 							{!! Form::hidden('zbbu', $data_periksa['zbbu']) !!}
 							{!! Form::hidden('ztbu', $data_periksa['ztbu']) !!}
 							{!! Form::hidden('zbbtb', $data_periksa['zbbtb']) !!}
+							{!! Form::hidden('energi', $protein_energi['energi']) !!}
+							{!! Form::hidden('protein', $protein_energi['protein']) !!}
 
 							{!! Form::submit('Download PDF', ['class' => 'btn btn-danger']) !!}
 

@@ -114,13 +114,13 @@
 				<tr>
 					<td>Kebutuhan energi / hari</td>
 					<td>:</td>
-					<td>{{ "Belum" }} kkal</td>
+					<td>{{ $data['energi'] }} kkal</td>
 				</tr>
 
 				<tr>
 					<td>Kebutuhan protein / hari</td>
 					<td>:</td>
-					<td>{{ "belum" }} gr</td>
+					<td>{{ $data['protein'] }} gr</td>
 				</tr>
 
 					    </td>
