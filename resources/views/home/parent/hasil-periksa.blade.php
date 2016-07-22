@@ -217,7 +217,9 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuhan Energi & Protein / hari </strong><br />
-								        		{{-- {{ $data_periksa->energi }} Kkal | {{ $data_periksa->protein }} gr --}}
+								        		{{ $protein_energi['energi'] }} kkl |
+								        		{{ $protein_energi['protein'] }}
+
 								        	</span>
 								        </li>
 								        
