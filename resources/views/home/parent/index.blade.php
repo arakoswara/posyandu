@@ -41,6 +41,13 @@
 								        </li>
 
 								        <li>
+								        	<span class="fa fa-clock-o fa-2x icon-success"></span>
+								        	<span class="list"><strong>Umur Balita</strong><br />
+								        		{{ $data_balita->umur }} Bulan
+								        	</span>
+								        </li>
+
+								        <li>
 								        	<span class="fa fa-calendar fa-2x icon-success"></span>
 								        	<span class="list"><strong>Tanggal Lahir</strong><br />
 								        		{{ $data_balita->tgl_lahir }}

@@ -29,6 +29,22 @@ class ParentController extends Controller
 
         $data_balita = DataBalita::where('no_reg', $no_reg['no_reg'])->first();
 
+        $umur = (strtotime($date_now = date('d-m-Y')) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+        /**
+         * pembulatan umur
+         */
+        $umur_bulat = floor($umur);
+
+        $data_balita['umur'] = $umur_bulat;
+
+        $umur = (strtotime($date_now = date('d-m-Y')) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+        /**
+         * pembulatan umur
+         */
+        $umur_bulat = floor($umur);
+
+        $data_balita['umur'] = $umur_bulat;
+
         $id = $data_balita['id'];
 
         $data_pencarian = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->first();
@@ -1341,6 +1357,14 @@ class ParentController extends Controller
 
         $data_balita = DataBalita::where('id', $id)->first();
 
+        $umur = (strtotime($date_now = date('d-m-Y')) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+        /**
+         * pembulatan umur
+         */
+        $umur_bulat = floor($umur);
+
+        $data_balita['umur'] = $umur_bulat;
+
         $pdf = PDF::loadView('home.parent.pdf-all', compact('data', 'data_balita'));
 
         return $pdf->stream('semua-riwayat.pdf');  
@@ -1351,6 +1375,14 @@ class ParentController extends Controller
         $data = Score::with('dataBalita')->with('periksa')->where('id_balita', $id)->orderBy('id', 'DESC')->first();
 
         $data_balita = DataBalita::where('id', $id)->first();
+
+        $umur = (strtotime($date_now = date('d-m-Y')) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+        /**
+         * pembulatan umur
+         */
+        $umur_bulat = floor($umur);
+
+        $data_balita['umur'] = $umur_bulat;
 
         $pdf = PDF::loadView('home.parent.pdf', compact('data', 'data_balita'));
 

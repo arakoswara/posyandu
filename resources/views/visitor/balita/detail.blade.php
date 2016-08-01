@@ -74,6 +74,12 @@
                         </tr>
 
                         <tr>
+                            <td>Umur Balita</td>
+                            <td> : </td>
+                            <td>{{ $data_balita->umur }} Bln</td>
+                        </tr>
+
+                        <tr>
                             <td>Jenis Kelamin</td>
                             <td> : </td>
                             <td>{{ $data_balita->jenis_kelamin }}</td>
@@ -97,7 +103,7 @@
 
             <div class="col-md-6">
 
-                <h4>Riwayat Pemeriksaan [ {{ $data_balita->nama_balita }} ]</h4>
+                <h4>Riwayat Pemeriksaan [ {{ $data_balita->nama_balita }} </h4>
 
                 <hr class="garis">
 
@@ -317,6 +323,13 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <tr>
+                            <td>Umur Balita</td>
+                            <td> : </td>
+                            <td>{{ $data_balita->umur }} Bln</td>
+                        </tr>
+
                         <tr>
                             <td>Berat Badan</td>
                             <td> : </td>

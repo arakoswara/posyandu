@@ -26,6 +26,12 @@
 					</tr>
 
 					<tr>
+						<td>Umur Balita</td>
+						<td>:</td>
+						<td>{{ $data_balita->umur }} Bln</td>
+					</tr>
+
+					<tr>
 						<td>Berat badan</td>
 						<td>:</td>
 						<td>{{ $value->periksa->berat_badan }} Kg</td>

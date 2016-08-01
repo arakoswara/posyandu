@@ -51,6 +51,20 @@
 								        </li>
 
 								        <li>
+								        	<?php
+								        		$umur = (strtotime($date_now = date('d-m-Y')) - strtotime($item->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+								        		/**
+								        		 * pembulatan umur
+								        		 */
+								        		$umur_bulat = floor($umur);
+								        	?>
+								        	<span class="fa fa-check fa-2x icon-success"></span>
+								        	<span class="list"><strong>Umur Balita</strong><br />
+								        		{{ $umur_bulat }} Bulan
+								        	</span>
+								        </li>
+
+								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Berat Badan</strong><br />
 								        		{{ $item->periksa->berat_badan }} Kg
