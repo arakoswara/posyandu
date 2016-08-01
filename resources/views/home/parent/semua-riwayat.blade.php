@@ -52,7 +52,7 @@
 
 								        <li>
 								        	<?php
-								        		$umur = (strtotime($date_now = date('d-m-Y')) - strtotime($item->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+								        		$umur = (strtotime($item->periksa->tgl_periksa) - strtotime($item->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
 								        		/**
 								        		 * pembulatan umur
 								        		 */

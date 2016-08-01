@@ -102,20 +102,18 @@ class BalitaController extends Controller
          */
         $data_balita = DataBalita::findOrFail($id);
 
-        $umur = (strtotime($date_now = date('d-m-Y')) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+        /**
+         * mengambil data score dan semua relasinya
+         */
+        $score = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->first();
+        
+        $umur = (strtotime($data = $score->periksa->tgl_periksa) - strtotime($data_balita->tgl_lahir)) / (60 * 60 * 24 * 30 );
         /**
          * pembulatan umur
          */
         $umur_bulat = floor($umur);
 
         $data_balita['umur'] = $umur_bulat;
-
-        // return $data_balita;
-
-        /**
-         * mengambil data score dan semua relasinya
-         */
-        $score = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->first();
 
         $score_all = Score::with('dataBalita')->with('periksa')->orderBy('id', 'DESC')->where('id_balita', $id)->paginate(4);
         

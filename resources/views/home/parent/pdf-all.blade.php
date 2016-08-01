@@ -25,10 +25,18 @@
 						<td><h4>{{ $value->periksa->tgl_periksa }}</h4></td>
 					</tr>
 
+					<?php
+						$umur = (strtotime($value->periksa->tgl_periksa) - strtotime($value->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+						/**
+						 * pembulatan umur
+						 */
+						$umur_bulat = floor($umur);
+					?>
+
 					<tr>
 						<td>Umur Balita</td>
 						<td>:</td>
-						<td>{{ $data_balita->umur }} Bln</td>
+						<td>{{ $umur_bulat }} Bln</td>
 					</tr>
 
 					<tr>
