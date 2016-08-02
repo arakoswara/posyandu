@@ -59,7 +59,7 @@
 								        		$umur_bulat = floor($umur);
 								        	?>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
-								        	<span class="list"><strong>Umur Balita</strong><br />
+								        	<span class="list"><strong>Umur</strong><br />
 								        		{{ $umur_bulat }} Bulan
 								        	</span>
 								        </li>
@@ -159,7 +159,7 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuhan Energi & Protein / hari </strong><br />
-								        		{{ $item->energi }} kkal | {{ $item->protein }} gr
+								        		{{ $item->energi }} Kkal | {{ $item->protein }} gr
 								        	</span>
 								        </li>
 								        

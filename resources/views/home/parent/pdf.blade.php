@@ -24,9 +24,9 @@
 					</tr>
 
 					<tr>
-						<td>Umur Balita</td>
+						<td>Umur</td>
 						<td>:</td>
-						<td>{{ $data_balita->umur }} Bln</td>
+						<td>{{ $data_balita->umur }} Bulan</td>
 					</tr>
 
 					<tr>

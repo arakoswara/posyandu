@@ -34,9 +34,9 @@
 					?>
 
 					<tr>
-						<td>Umur Balita</td>
+						<td>Umur</td>
 						<td>:</td>
-						<td>{{ $umur_bulat }} Bln</td>
+						<td>{{ $umur_bulat }} Bulan</td>
 					</tr>
 
 					<tr>

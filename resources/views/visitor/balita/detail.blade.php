@@ -74,12 +74,6 @@
                         </tr>
 
                         <tr>
-                            <td>Umur Balita</td>
-                            <td> : </td>
-                            <td>{{ $data_balita->umur }} Bln</td>
-                        </tr>
-
-                        <tr>
                             <td>Jenis Kelamin</td>
                             <td> : </td>
                             <td>{{ $data_balita->jenis_kelamin }}</td>
@@ -103,7 +97,7 @@
 
             <div class="col-md-6">
 
-                <h4>Riwayat Pemeriksaan [ {{ $data_balita->nama_balita }} </h4>
+                <h4>Riwayat Pemeriksaan [ {{ $data_balita->nama_balita }} ] </h4>
 
                 <hr class="garis">
 
@@ -122,6 +116,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        $umur = (strtotime($score->periksa->tgl_periksa) - strtotime($score->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+                        /**
+                         * pembulatan umur
+                         */
+                        $umur_bulat = floor($umur);
+                    ?>
+
+                    <tr>
+                        <td>Umur</td>
+                        <td>:</td>
+                        <td>{{ $umur_bulat }} Bulan</td>
+                    </tr>
                         <tr>
                             <td>Berat Badan</td>
                             <td> : </td>
@@ -323,12 +330,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        $umur = (strtotime($item->periksa->tgl_periksa) - strtotime($item->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+                        /**
+                         * pembulatan umur
+                         */
+                        $umur_bulat = floor($umur);
+                    ?>
 
-                        <tr>
-                            <td>Umur Balita</td>
-                            <td> : </td>
-                            <td>{{ $data_balita->umur }} Bln</td>
-                        </tr>
+                    <tr>
+                        <td>Umur</td>
+                        <td>:</td>
+                        <td>{{ $umur_bulat }} Bulan</td>
+                    </tr>
 
                         <tr>
                             <td>Berat Badan</td>

@@ -41,13 +41,6 @@
 								        </li>
 
 								        <li>
-								        	<span class="fa fa-clock-o fa-2x icon-success"></span>
-								        	<span class="list"><strong>Umur Balita</strong><br />
-								        		{{ $data_balita->umur }} Bulan
-								        	</span>
-								        </li>
-
-								        <li>
 								        	<span class="fa fa-calendar fa-2x icon-success"></span>
 								        	<span class="list"><strong>Tanggal Lahir</strong><br />
 								        		{{ $data_balita->tgl_lahir }}
@@ -107,6 +100,19 @@
 								        	<span class="fa fa-check fa-2x icon-success"></span> 
 								        	<span class="list">
 								        		<strong>Tanggal Periksa</strong><br /> {{ $data_pencarian->periksa->tgl_periksa }}
+								        	</span>
+								        </li>
+
+								        <li>						        		  	<?php
+								        		$umur = (strtotime($data_pencarian->periksa->tgl_periksa) - strtotime($data_pencarian->dataBalita->tgl_lahir)) / (60 * 60 * 24 * 30 );
+								        		/**
+								        		 * pembulatan umur
+								        		 */
+								        		$umur_bulat = floor($umur);
+								        	?>
+								        	<span class="fa fa-check fa-2x icon-success"></span>
+								        	<span class="list"><strong>Umur</strong><br />
+								        		{{ $umur_bulat }} Bulan
 								        	</span>
 								        </li>
 
@@ -205,7 +211,7 @@
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
 								        	<span class="list"><strong>Kebutuhan Energi & Protein / hari </strong><br />
-								        		{{ $data_pencarian->energi }} kkal | {{ $data_pencarian->protein }} gr
+								        		{{ $data_pencarian->energi }} Kkal | {{ $data_pencarian->protein }} gr
 								        	</span>
 								        </li>
 								        
