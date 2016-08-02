@@ -5,6 +5,7 @@ AmCharts.ready(function () {
     chart = new AmCharts.AmSerialChart();
     chart.dataProvider = chartData;
     chart.categoryField = "month";
+    chart.categoryField = "date";
     chart.startDuration = 1;
 
     // AXES
@@ -53,6 +54,40 @@ AmCharts.ready(function () {
     var graph = new AmCharts.AmGraph();
     graph.valueField = "tinggi_badan";
     graph.balloonText = "tinggi_badan: <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+
+
+    // SKDN
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "s";
+    graph.balloonText = " s : <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+    
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "k";
+    graph.balloonText = "k: <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+    
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "d";
+    graph.balloonText = "d: <b>[[value]]</b>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 0.8;
+    chart.addGraph(graph);
+
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "n";
+    graph.balloonText = "n: <b>[[value]]</b>";
     graph.type = "column";
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;

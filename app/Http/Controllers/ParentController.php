@@ -100,6 +100,8 @@ class ParentController extends Controller
          */
         $umur_bulat = floor($umur);
 
+        $data_balita['umur'] = $umur_bulat;
+
         /**
          * HITUNG BBU
          */

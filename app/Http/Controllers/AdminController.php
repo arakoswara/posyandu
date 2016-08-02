@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\SKDNRequest;
 use App\User;
 use App\Role;
 use App\RoleUser;
 use Auth;
+use App\SKDN;
 
 class AdminController extends Controller
 {
@@ -23,6 +25,14 @@ class AdminController extends Controller
         $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
 
         view()->share('role_user', $role_user);
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        view()->share('user', $user);
+
+        $data_petugas = User::get();
+
+        view()->share('data_petugas', $data_petugas);
     }
 
     public function index()
@@ -32,5 +42,23 @@ class AdminController extends Controller
         $data_petugas = User::get();
 
         return view('admin.index', compact('user', 'data_petugas'));
+    }
+
+    public function tambahSKDN()
+    {
+        $skdn = SKDN::get();
+
+        return view('admin.skdn.index', compact('skdn'));
+    }
+
+    public function doTambahSKDN(SKDNRequest $request)
+    {
+        $input = $request->all();
+
+        SKDN::create($input);
+
+        session()->flash('message', 'Data SKDN berhasil ditambahkan');
+
+        return redirect()->back();
     }
 }

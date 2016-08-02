@@ -26,5 +26,33 @@
             <h1>Jumlah Balita : {{ $jml_balita }} </h1>
         </div>
     </div>
+
+    <div class="col-md-12">
+
+        <hr class="garis">
+
+        <center>
+            <h4>GRAFIK PENCAPAIAN PROGRAM SKDN</h4>
+        </center>
+
+        @if (empty($skdn))
+            
+            <h4> Tidak ada riwayat pemeriksaan</h4>
+
+        @else
+
+            <div id="grafikBalita" style="width:100%; height: 400px;"></div>
+
+        @endif
+
+    </div>
+
 </div>
+
+<script>
+
+    var chartData = <?php  echo $skdn; ?>
+
+</script>
+
 @endsection

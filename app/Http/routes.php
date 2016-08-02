@@ -89,6 +89,20 @@ Route::get('/data-petugas', [
 	'uses' => 'AdminController@dataPetugas'
 ]);
 
+Route::get('/tambah-skdn', [
+
+	'as' => 'tambah_skdn', 
+
+	'uses' => 'AdminController@tambahSKDN'
+]);
+
+Route::post('/do-tambah-skdn', [
+
+	'as' => 'do_tambah_skdn', 
+
+	'uses' => 'AdminController@doTambahSKDN'
+]);
+
 /**
  * VISITOR
  */

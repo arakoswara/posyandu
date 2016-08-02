@@ -129,6 +129,7 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -151,6 +152,12 @@
                                             {{ "Non active" }}
 
                                         @endif
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>Aktif</option>
+                                            <option>Non aktif</option>
+                                        </select>
                                     </td>
                                 </tr>
 

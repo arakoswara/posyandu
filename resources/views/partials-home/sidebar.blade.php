@@ -8,6 +8,7 @@
         @else
 
         <li><a href="{{ route('admin-index') }}" class="support">Tambah Petugas</a></li>
+        <li><a href="{{ route('tambah_skdn') }}" class="support">Tambah Data SKDN</a></li>
 
         @endif
 

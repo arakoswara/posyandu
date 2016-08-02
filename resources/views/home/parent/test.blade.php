@@ -24,6 +24,12 @@
 					</tr>
 
 					<tr>
+						<td>Umur Balita</td>
+						<td>:</td>
+						<td>{{ $data['umur'] }} Bulan</td>
+					</tr>
+
+					<tr>
 						<td>Berat badan</td>
 						<td>:</td>
 						<td>{{ $data['berat_badan'] }} Kg</td>

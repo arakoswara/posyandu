@@ -29,6 +29,7 @@ use App\TBU;
 use App\BBTB1;
 use App\BBTB2;
 use App\Score;
+use App\SKDN;
 
 use App\RoleUser;
 use DB;
@@ -52,9 +53,11 @@ class BalitaController extends Controller
 
     public function dashboard()
     {
-        $jml_balita = DataBalita::all()->count(); 
+        $jml_balita = DataBalita::all()->count();
 
-        return view('visitor.index', compact('jml_balita'));
+        $skdn = SKDN::all();
+
+        return view('visitor.index', compact('jml_balita', 'skdn'));
 
     }
     /**
@@ -130,7 +133,7 @@ class BalitaController extends Controller
 
                         ->get();
 
-        $grafik_score = json_encode($data);
+        return $grafik_score = json_encode($data);
 
         return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik_score', 'score_all'));
     }

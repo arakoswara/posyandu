@@ -20,6 +20,7 @@
 							{!! Form::hidden('nama_balita', $data_balita->nama_balita) !!}
 							{!! Form::hidden('tgl_lahir', $data_balita->tgl_lahir) !!}
 							{!! Form::hidden('tgl_periksa', $data_periksa['tgl_periksa']) !!}
+							{!! Form::hidden('umur', $data_balita->umur) !!}
 							{!! Form::hidden('berat_badan', $data_periksa['berat_badan']) !!}
 							{!! Form::hidden('tinggi_badan', $data_periksa['tinggi_badan']) !!}
 							{!! Form::hidden('zbbu', $data_periksa['zbbu']) !!}
@@ -117,6 +118,13 @@
 								        	<span class="fa fa-check fa-2x icon-success"></span> 
 								        	<span class="list">
 								        		<strong>Tanggal Periksa</strong><br /> {{ $data_periksa['tgl_periksa'] }}
+								        	</span>
+								        </li>
+
+								        <li>
+								        	<span class="fa fa-check fa-2x icon-success"></span>
+								        	<span class="list"><strong>Umur Balita</strong><br />
+								        		{{ $data_balita->umur }} Bulan
 								        	</span>
 								        </li>
 

@@ -255,7 +255,7 @@
 
                 @endif
 
-            </div
+            </div>
 
             
             <span class="clearall"></span>
