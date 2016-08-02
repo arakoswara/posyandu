@@ -5,7 +5,6 @@ AmCharts.ready(function () {
     chart = new AmCharts.AmSerialChart();
     chart.dataProvider = chartData;
     chart.categoryField = "month";
-    chart.categoryField = "date";
     chart.startDuration = 1;
 
     // AXES
@@ -58,7 +57,6 @@ AmCharts.ready(function () {
     graph.lineAlpha = 0;
     graph.fillAlphas = 0.8;
     chart.addGraph(graph);
-
 
     // SKDN
     var graph = new AmCharts.AmGraph();

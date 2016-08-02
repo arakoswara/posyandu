@@ -133,7 +133,7 @@ class BalitaController extends Controller
 
                         ->get();
 
-        return $grafik_score = json_encode($data);
+        $grafik_score = json_encode($data);
 
         return view('visitor.balita.detail', compact('data_balita', 'score', 'grafik_score', 'score_all'));
     }
