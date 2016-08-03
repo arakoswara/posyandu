@@ -1485,4 +1485,38 @@ class BalitaController extends Controller
 
         $score->update($sum_R);
     }	
+
+    public function grafikGizi()
+    {
+
+        $data_gizi = Score::all();
+
+        $no = 1;
+
+        foreach($data_gizi as $value) {
+
+            if($value->zbbu < -3) {
+
+                echo "ada";
+                
+
+            }elseif($value->zbbu >= -3 && $value->zbbu < -2){
+
+                
+
+            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
+
+                // echo "baik";
+                
+
+            }elseif($value->zbbu > 2){
+
+                echo $no++;
+                echo "<br>";
+
+            }
+
+        }
+
+    }
 }

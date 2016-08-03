@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\SKDNRequest;
+use App\Http\Requests\PetugasRequest;
 use App\User;
 use App\Role;
 use App\RoleUser;
@@ -55,10 +56,26 @@ class AdminController extends Controller
     {
         $input = $request->all();
 
+        $month = date("d-M-Y",strtotime($input['date']));
+
+        $input['date'] = $month;
+
         SKDN::create($input);
 
         session()->flash('message', 'Data SKDN berhasil ditambahkan');
 
         return redirect()->back();
+    }
+
+    public function doUpdatePetugas(PetugasRequest $request)
+    {
+        $input = $request->all();
+
+        $data = User::findOrFail($input['id']);
+
+        $data->update($input);
+
+        return redirect()->back();
+
     }
 }

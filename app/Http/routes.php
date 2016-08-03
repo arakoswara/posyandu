@@ -103,6 +103,12 @@ Route::post('/do-tambah-skdn', [
 	'uses' => 'AdminController@doTambahSKDN'
 ]);
 
+Route::post('/do-update-petugas', [
+
+	'as' => 'do_update_petugas', 
+
+	'uses' => 'AdminController@doUpdatePetugas'
+]);
 /**
  * VISITOR
  */
@@ -515,6 +521,18 @@ Route::group(['prefix' => 'sispos'], function() {
 		'as' => 'ganti_password_petugas',
 
 		'uses' => 'ProfileController@gantiPasswordPetugas'
+	]);
+
+	/**
+	 * GRAPIK GIZI
+	 */
+	
+	Route::get('/grafik-gizi', [
+
+		'as' => 'grafik_gizi',
+
+		'uses' => 'BalitaController@grafikGizi'
+
 	]);
 	
 });

@@ -153,12 +153,18 @@
 
                                         @endif
                                     </td>
+
+                                    {!! Form::open(['route' => 'do_update_petugas']) !!}
+                                    {!! Form::hidden('id', $item->id) !!}
+
                                     <td>
-                                        <select>
-                                            <option>Aktif</option>
-                                            <option>Non aktif</option>
+                                        <select name="active" onchange="this.form.submit();">
+                                            <option>--pilihan--</option>
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Non aktif</option>
                                         </select>
                                     </td>
+                                    {!! Form::close() !!}
                                 </tr>
 
                             <?php $no++; ?> 

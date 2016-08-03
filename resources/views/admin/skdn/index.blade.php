@@ -63,140 +63,140 @@
 
 	        	    </tbody>
 	        	</table>
+
+	        	<div class="col-md-12">
+
+	        	    <hr class="garis">
+
+	        	    <center>
+	        	        <h4>GRAFIK PENCAPAIAN PROGRAM SKDN</h4>
+	        	    </center>
+
+	        	    @if (empty($skdn))
+	        	        
+	        	        <h4> Tidak ada riwayat pemeriksaan</h4>
+
+	        	    @else
+
+	        	        <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
+
+	        	    @endif
+
+	        	</div>
 	            
 	        </div><!--#profile-->
 
-	        <div class="col-md-12">
-
-	            <hr class="garis">
-
-	            <center>
-	                <h4>GRAFIK PENCAPAIAN PROGRAM SKDN</h4>
-	            </center>
-
-	            @if (empty($skdn))
-	                
-	                <h4> Tidak ada riwayat pemeriksaan</h4>
-
-	            @else
-
-	                <div id="grafikBalita" style="width:100%; height: 400px;"></div>
-
-	            @endif
-
-	        </div>
-
 	        <div id="daftar" class="subcontent" style="display: none">
 
-	        		        	{!! Form::open(['route' => 'do_tambah_skdn']) !!}
+	        	{!! Form::open(['route' => 'do_tambah_skdn']) !!}
 
-	        		        	<div class="col-md-6 col-sm-6">
-	        		        		
-	        		        		<div class="form-group">
+	        	<div class="col-md-6 col-sm-6">
+	        		
+	        		<div class="form-group">
 
-	        		        			{!! Form::label('s', 'S') !!}
+	        			{!! Form::label('s', 'S') !!}
 
-	        		                    @if($errors->any())
-	        		                        @foreach($errors->get('s') as $error)
+	                    @if($errors->any())
+	                        @foreach($errors->get('s') as $error)
 
-	        		                        <span style="color:red">
-	        		                         * {{ $error }}
-	        		                        </span>
+	                        <span style="color:red">
+	                         * {{ $error }}
+	                        </span>
 
-	        		                        @endforeach
-	        		                    @endif
+	                        @endforeach
+	                    @endif
 
-	        		        			{!! Form::text('s', null , ['class' => 'form-control']) !!}
-	        		        		</div>
-	        		        	</div>
+	        			{!! Form::text('s', null , ['class' => 'form-control']) !!}
+	        		</div>
+	        	</div>
 
-	        		        	<div class="col-md-6 col-sm-6">
-	        		        		
-	        		        		<div class="form-group">
+	        	<div class="col-md-6 col-sm-6">
+	        		
+	        		<div class="form-group">
 
-	        		        			{!! Form::label('k', 'K') !!}
+	        			{!! Form::label('k', 'K') !!}
 
-	        		                    @if($errors->any())
-	        		                        @foreach($errors->get('k') as $error)
+	                    @if($errors->any())
+	                        @foreach($errors->get('k') as $error)
 
-	        		                        <span style="color:red">
-	        		                         * {{ $error }}
-	        		                        </span>
+	                        <span style="color:red">
+	                         * {{ $error }}
+	                        </span>
 
-	        		                        @endforeach
-	        		                    @endif
+	                        @endforeach
+	                    @endif
 
-	        		        			{!! Form::text('k', null , ['class' => 'form-control']) !!}
-	        		        		</div>
-	        		        	</div>
+	        			{!! Form::text('k', null , ['class' => 'form-control']) !!}
+	        		</div>
+	        	</div>
 
-	        	        		<div class="col-md-6 col-sm-6">
-	        	        			
-	        	        			<div class="form-group">
+        		<div class="col-md-6 col-sm-6">
+        			
+        			<div class="form-group">
 
-	        	        				{!! Form::label('d', 'D') !!}
+        				{!! Form::label('d', 'D') !!}
 
-	        	        	            @if($errors->any())
-	        	        	                @foreach($errors->get('d') as $error)
+        	            @if($errors->any())
+        	                @foreach($errors->get('d') as $error)
 
-	        	        	                <span style="color:red">
-	        	        	                 * {{ $error }}
-	        	        	                </span>
+        	                <span style="color:red">
+        	                 * {{ $error }}
+        	                </span>
 
-	        	        	                @endforeach
-	        	        	            @endif
+        	                @endforeach
+        	            @endif
 
-	        	        				{!! Form::text('d', null, ['class' => 'form-control']) !!}
-	        	        			</div>
-	        	        		</div>
+        				{!! Form::text('d', null, ['class' => 'form-control']) !!}
+        			</div>
+        		</div>
 
-	        	        		<div class="col-md-6 col-sm-6">
-	        	        			
-	        	        			<div class="form-group">
+        		<div class="col-md-6 col-sm-6">
+        			
+        			<div class="form-group">
 
-	        	        				{!! Form::label('n', 'N') !!}
+        				{!! Form::label('n', 'N') !!}
 
-	        	        	            @if($errors->any())
-	        	        	                @foreach($errors->get('n') as $error)
+        	            @if($errors->any())
+        	                @foreach($errors->get('n') as $error)
 
-	        	        	                <span style="color:red">
-	        	        	                 * {{ $error }}
-	        	        	                </span>
+        	                <span style="color:red">
+        	                 * {{ $error }}
+        	                </span>
 
-	        	        	                @endforeach
-	        	        	            @endif
+        	                @endforeach
+        	            @endif
 
-	        	        				{!! Form::text('n', null, ['class' => 'form-control']) !!}
-	        	        			</div>
-	        	        		</div>
+        				{!! Form::text('n', null, ['class' => 'form-control']) !!}
+        			</div>
+        		</div>
 
-	        	        		<div class="col-md-6 col-sm-6">
-	        	        			
-	        	        			<div class="form-group">
+        		<div class="col-md-6 col-sm-6">
+        			
+        			<div class="form-group">
 
-	        	        				{!! Form::label('date', 'Date') !!}
+        				{!! Form::label('date', 'Date') !!}
 
-	        	        	            @if($errors->any())
-	        	        	                @foreach($errors->get('date') as $error)
+        	            @if($errors->any())
+        	                @foreach($errors->get('date') as $error)
 
-	        	        	                <span style="color:red">
-	        	        	                 * {{ $error }}
-	        	        	                </span>
+        	                <span style="color:red">
+        	                 * {{ $error }}
+        	                </span>
 
-	        	        	                @endforeach
-	        	        	            @endif
+        	                @endforeach
+        	            @endif
 
-	        	        				{!! Form::date('date', null, ['class' => 'form-control']) !!}
-	        	        			</div>
-	        	        		</div>
+        				{!! Form::date('date', null, ['class' => 'form-control']) !!}
+        			</div>
+        		</div>
 
-	        		        	<div class="col-md-12 col-sm-12">
+	        	<div class="col-md-12 col-sm-12">
 
-	        		        		{!! Form::submit('SIMPAN', ['class' => 'btn btn-primary']) !!}
+	        		{!! Form::submit('SIMPAN', ['class' => 'btn btn-primary']) !!}
 
-	        		        	</div>
+	        	</div>
 
-	        		        	{!! Form::close() !!}
+	        	{!! Form::close() !!}
 
 	        </div>
 
