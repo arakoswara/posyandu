@@ -5,7 +5,7 @@
     <div class="pageheader">
         <div>
         <h1 class="pagetitle">{{ $user->name }}</h1>
-        <span class="pagedesc">Menu Super Admin</span>
+        <span class="pagedesc">Menu Data Petugas</span>
         </div>
         <ul class="hornav">
             <li class="current"><a href="#tambah">Tambah Petugas</a></li>

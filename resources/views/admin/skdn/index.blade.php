@@ -5,11 +5,11 @@
 		<div class="pageheader">
 		    <div>
 		    <h1 class="pagetitle">{{ $user->name }}</h1>
-		    <span class="pagedesc">Menu Super Admin</span>
+		    <span class="pagedesc">Menu Data SKDN</span>
 		    </div>
 		    <ul class="hornav">
-		        <li class="current"><a href="#tambah">Tambah Data SKDN</a></li>
-		        <li><a href="#daftar">Daftar Petugas</a></li>
+		        <li class="current"><a href="#tambah">Daftar Data SKDN</a></li>
+		        <li><a href="#daftar">Tambah Data SKDN</a></li>
 		    </ul>
 		</div><!--pageheader-->
 
@@ -69,7 +69,7 @@
 	        	    <hr class="garis">
 
 	        	    <center>
-	        	        <h4>GRAFIK PENCAPAIAN PROGRAM SKDN</h4>
+	        	        <h4>GRAFIK PROGRAM SKDN</h4>
 	        	    </center>
 
 	        	    @if (empty($skdn))
@@ -254,14 +254,6 @@
         var graph = new AmCharts.AmGraph();
         graph.valueField = "n";
         graph.balloonText = "N: <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
-
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "tinggi_badan";
-        graph.balloonText = "tinggi_badan: <b>[[value]]</b>";
         graph.type = "column";
         graph.lineAlpha = 0;
         graph.fillAlphas = 0.8;

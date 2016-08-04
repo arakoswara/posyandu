@@ -32,7 +32,7 @@
         <hr class="garis">
 
         <center>
-            <h4>GRAFIK PENCAPAIAN PROGRAM SKDN</h4>
+            <h3>GRAFIK PROGRAM SKDN</h3>
         </center>
 
         @if (empty($skdn))
@@ -44,8 +44,19 @@
             <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
 
             <br><br>
+            <h4>Keterangan</h4>
+                <ol>
+                    <li>S = jumlah balita yang ada diwilayah posyandu</li>
+                    <li>K = jumlah balita yang memiliki KMS</li>
+                    <li>D = jumlah balita yang datang ditimbang bulan ini</li>
+                    <li>N = jumlah balita yang naik berat badannya.</li>
+                </ol>
             <hr class="garis">
 
+
+        <center>
+            <h3>PERSENTASE STATUS GIZI </h3>
+        </center>
             <div class="col-md-4">
                 <h4>Persentase Gizi Bulan Maret</h4>
                 <ol>
@@ -111,7 +122,7 @@
         // SKDN
         var graph2 = new AmCharts.AmGraph();
         graph2.valueField = "s";
-        graph2.balloonText = " s : <b>[[value]]</b>";
+        graph2.balloonText = " S : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
@@ -119,7 +130,7 @@
 
         var graph2 = new AmCharts.AmGraph();
         graph2.valueField = "k";
-        graph2.balloonText = " k : <b>[[value]]</b>";
+        graph2.balloonText = " K : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
@@ -127,7 +138,7 @@
 
         var graph2 = new AmCharts.AmGraph();
         graph2.valueField = "d";
-        graph2.balloonText = " d : <b>[[value]]</b>";
+        graph2.balloonText = " D : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
@@ -135,7 +146,7 @@
 
         var graph2 = new AmCharts.AmGraph();
         graph2.valueField = "n";
-        graph2.balloonText = " n : <b>[[value]]</b>";
+        graph2.balloonText = " N : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
