@@ -53,11 +53,146 @@ class BalitaController extends Controller
 
     public function dashboard()
     {
+        $data_gizi = Score::where('month', 'march')->get();
+
+        $jumlah_data = Score::where('month', 'march')->get()->count();
+
+        $no = 1;
+        $no2 = 1;
+        $no3 = 1;
+
+        foreach ($data_gizi as $item) {
+            if($item->zbbu < -3) {
+
+                $jum_gizi_buruk = $no++;                
+
+            }else{
+
+                $jum_gizi_buruk = 0;
+
+            }
+        }
+
+        foreach($data_gizi as $value) {
+
+            if($value->zbbu >= -3 && $value->zbbu < -2){
+
+                $jum_gizi_kurang = $no++;
+
+            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
+
+                $jum_gizi_baik = $no2++;                
+
+            }elseif($value->zbbu > 2){
+
+                $jum_gizi_lebih = $no3++;
+
+            }
+
+        }
+
+        $persentase_maret['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
+        $persentase_maret['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
+        $persentase_maret['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
+        $persentase_maret['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
+
+        /**
+         * APRIL
+         */
+        $data_gizi = Score::where('month', 'april')->get();
+
+        $jumlah_data = Score::where('month', 'april')->get()->count();
+
+        $no = 1;
+        $no2 = 1;
+        $no3 = 1;
+
+        foreach ($data_gizi as $item) {
+            if($item->zbbu < -3) {
+
+                $jum_gizi_buruk = $no++;                
+
+            }else{
+
+                $jum_gizi_buruk = 0;
+
+            }
+        }
+
+        foreach($data_gizi as $value) {
+
+            if($value->zbbu >= -3 && $value->zbbu < -2){
+
+                $jum_gizi_kurang = $no++;
+
+            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
+
+                $jum_gizi_baik = $no2++;                
+
+            }elseif($value->zbbu > 2){
+
+                $jum_gizi_lebih = $no3++;
+
+            }
+
+        }
+
+        $persentase_april['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
+        $persentase_april['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
+        $persentase_april['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
+        $persentase_april['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
+
+        /**
+         * MEI
+         */
+        $data_gizi = Score::where('month', 'may')->get();
+
+        $jumlah_data = Score::where('month', 'may')->get()->count();
+
+        $no = 1;
+        $no2 = 1;
+        $no3 = 1;
+
+        foreach ($data_gizi as $item) {
+            if($item->zbbu < -3) {
+
+                $jum_gizi_buruk = $no++;                
+
+            }else{
+
+                $jum_gizi_buruk = 0;
+
+            }
+        }
+
+        foreach($data_gizi as $value) {
+
+            if($value->zbbu >= -3 && $value->zbbu < -2){
+
+                $jum_gizi_kurang = $no++;
+
+            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
+
+                $jum_gizi_baik = $no2++;                
+
+            }elseif($value->zbbu > 2){
+
+                $jum_gizi_lebih = $no3++;
+
+            }
+
+        }
+
+        $persentase_mei['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
+        $persentase_mei['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
+        $persentase_mei['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
+        $persentase_mei['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
+
         $jml_balita = DataBalita::all()->count();
 
         $skdn = SKDN::all();
 
-        return view('visitor.index', compact('jml_balita', 'skdn'));
+        return view('visitor.index', compact('jml_balita', 'skdn', 'persentase_mei', 'persentase_april', 'persentase_maret'));
 
     }
     /**
@@ -1484,39 +1619,5 @@ class BalitaController extends Controller
         $score = Score::where('id_balita', $periksa_balita->id_balita)->where('id_periksa', $periksa_balita->id)->orderBy('id', 'DESC')->first();
 
         $score->update($sum_R);
-    }	
-
-    public function grafikGizi()
-    {
-
-        $data_gizi = Score::all();
-
-        $no = 1;
-
-        foreach($data_gizi as $value) {
-
-            if($value->zbbu < -3) {
-
-                echo "ada";
-                
-
-            }elseif($value->zbbu >= -3 && $value->zbbu < -2){
-
-                
-
-            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
-
-                // echo "baik";
-                
-
-            }elseif($value->zbbu > 2){
-
-                echo $no++;
-                echo "<br>";
-
-            }
-
-        }
-
     }
 }

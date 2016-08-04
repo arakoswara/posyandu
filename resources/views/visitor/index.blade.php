@@ -43,6 +43,39 @@
 
             <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
 
+            <br><br>
+            <hr class="garis">
+
+            <div class="col-md-4">
+                <h4>Persentase Gizi Bulan Maret</h4>
+                <ol>
+                    <li>Gizi Buruk = {{ $persentase_maret['buruk'] }} %</li>
+                    <li>Gizi Kurang = {{ $persentase_maret['kurang'] }} %</li>
+                    <li>Gizi Baik = {{ $persentase_maret['baik'] }} %</li>
+                    <li>Gizi Lebih = {{ $persentase_maret['lebih'] }} %</li>
+                </ol>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Persentase Gizi Bulan April</h4>
+                <ol>
+                    <li>Gizi Buruk = {{ $persentase_april['buruk'] }} %</li>
+                    <li>Gizi Kurang = {{ $persentase_april['kurang'] }} %</li>
+                    <li>Gizi Baik = {{ $persentase_april['baik'] }} %</li>
+                    <li>Gizi Lebih = {{ $persentase_april['lebih'] }} %</li>
+                </ol>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Persentase Gizi Bulan Mei</h4>
+                <ol>
+                    <li>Gizi Buruk = {{ $persentase_mei['buruk'] }} %</li>
+                    <li>Gizi Kurang = {{ $persentase_mei['kurang'] }} %</li>
+                    <li>Gizi Baik = {{ $persentase_mei['baik'] }} %</li>
+                    <li>Gizi Lebih = {{ $persentase_mei['lebih'] }} %</li>
+                </ol>
+            </div>
+
         @endif
 
     </div>
@@ -51,23 +84,23 @@
 
 <script>
 
-    var chartData = <?php  echo $skdn; ?>
+    var chartData2 = <?php  echo $skdn; ?>
 
 </script>
 
 <script>
-    var chart;
+    var chart2;
 
     AmCharts.ready(function () {
         // SERIAL CHART
-        chart = new AmCharts.AmSerialChart();
-        chart.dataProvider = chartData;
-        chart.categoryField = "date";
-        chart.startDuration = 1;
+        chart2 = new AmCharts.AmSerialChart();
+        chart2.dataProvider = chartData2;
+        chart2.categoryField = "date";
+        chart2.startDuration = 1;
 
         // AXES
         // category
-        var categoryAxis = chart.categoryAxis;
+        var categoryAxis = chart2.categoryAxis;
         categoryAxis.labelRotation = 90;
         categoryAxis.gridPosition = "start";
 
@@ -76,48 +109,49 @@
         // you don't need to create it, as one value axis is created automatically.
 
         // SKDN
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "s";
-        graph.balloonText = " s : <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
-        
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "k";
-        graph.balloonText = "k: <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
-        
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "d";
-        graph.balloonText = "d: <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
+        var graph2 = new AmCharts.AmGraph();
+        graph2.valueField = "s";
+        graph2.balloonText = " s : <b>[[value]]</b>";
+        graph2.type = "column";
+        graph2.lineAlpha = 0;
+        graph2.fillAlphas = 0.8;
+        chart2.addGraph(graph2);
 
-        var graph = new AmCharts.AmGraph();
-        graph.valueField = "n";
-        graph.balloonText = "n: <b>[[value]]</b>";
-        graph.type = "column";
-        graph.lineAlpha = 0;
-        graph.fillAlphas = 0.8;
-        chart.addGraph(graph);
+        var graph2 = new AmCharts.AmGraph();
+        graph2.valueField = "k";
+        graph2.balloonText = " k : <b>[[value]]</b>";
+        graph2.type = "column";
+        graph2.lineAlpha = 0;
+        graph2.fillAlphas = 0.8;
+        chart2.addGraph(graph2);
+
+        var graph2 = new AmCharts.AmGraph();
+        graph2.valueField = "d";
+        graph2.balloonText = " d : <b>[[value]]</b>";
+        graph2.type = "column";
+        graph2.lineAlpha = 0;
+        graph2.fillAlphas = 0.8;
+        chart2.addGraph(graph2);
+
+        var graph2 = new AmCharts.AmGraph();
+        graph2.valueField = "n";
+        graph2.balloonText = " n : <b>[[value]]</b>";
+        graph2.type = "column";
+        graph2.lineAlpha = 0;
+        graph2.fillAlphas = 0.8;
+        chart2.addGraph(graph2);
+        
 
         // CURSOR
-        var chartCursor = new AmCharts.ChartCursor();
-        chartCursor.cursorAlpha = 0;
-        chartCursor.zoomable = false;
-        chartCursor.categoryBalloonEnabled = false;
-        chart.addChartCursor(chartCursor);
+        var chartCursor2 = new AmCharts.ChartCursor();
+        chartCursor2.cursorAlpha = 0;
+        chartCursor2.zoomable = false;
+        chartCursor2.categoryBalloonEnabled = false;
+        chart2.addChartCursor(chartCursor2);
 
-        chart.creditsPosition = "top-right";
+        chart2.creditsPosition = "top-right";
 
-        chart.write("grafikSKDN");
+        chart2.write("grafikSKDN");
     });
 </script>
 

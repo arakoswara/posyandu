@@ -53,11 +53,5 @@
         </div>
 
         <script type="text/javascript" charset="utf8" src="{{ asset('asset-home/js/datatables.js') }}"></script>
-
-        <script type="text/javascript">
-             $(document).ready( function () {
-                 $('#myTable').DataTable();
-             } );
-        </script>
     </body>
 </html>
