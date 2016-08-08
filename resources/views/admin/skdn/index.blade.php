@@ -4,8 +4,8 @@
 
 		<div class="pageheader">
 		    <div>
-		    <h1 class="pagetitle">{{ $user->name }}</h1>
-		    <span class="pagedesc">Menu Data SKDN</span>
+		    <h1 class="pagetitle">Data SKDN</h1>
+		    <span class="pagedesc">Data SKDN posyandu MELATI</span>
 		    </div>
 		    <ul class="hornav">
 		        <li class="current"><a href="#tambah">Daftar Data SKDN</a></li>
@@ -81,7 +81,15 @@
 	        	        <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
 
 	        	    @endif
-
+	        	    
+            <br><br>
+            <h4>Keterangan</h4>
+                <ol>
+                    <li>S = jumlah balita yang ada diwilayah posyandu</li>
+                    <li>K = jumlah balita yang memiliki KMS</li>
+                    <li>D = jumlah balita yang datang ditimbang bulan ini</li>
+                    <li>N = jumlah balita yang naik berat badannya.</li>
+                </ol>
 	        	</div>
 	            
 	        </div><!--#profile-->

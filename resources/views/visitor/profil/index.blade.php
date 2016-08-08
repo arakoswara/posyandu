@@ -4,8 +4,8 @@
     
     <div class="pageheader">
         <div>
-        <h1 class="pagetitle">{{ $user->name }}</h1>
-        <span class="pagedesc">Profil Saya</span>
+        <h1 class="pagetitle">Profil Saya</h1>
+        <span class="pagedesc">Data: {{ $user->name }}</span>
         </div>
         <ul class="hornav">
             <li class="current"><a href="#profile">Ubah Profil</a></li>
