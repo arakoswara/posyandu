@@ -9,7 +9,7 @@
     <span class="pagedesc">Data balita posyandu MELATI</span>
     
     <ul class="hornav">
-        <li class="current"><a href="#inbox">Edit Data Balita</a></li>
+        <li class="current"><a href="#inbox">Ubah Data Balita</a></li>
     </ul>
 
 </div><!--pageheader-->

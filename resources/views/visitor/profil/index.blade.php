@@ -8,8 +8,8 @@
         <span class="pagedesc">Profil Saya</span>
         </div>
         <ul class="hornav">
-            <li class="current"><a href="#profile">Edit Profil</a></li>
-            <li><a href="#editprofile">Ganti Password</a></li>
+            <li class="current"><a href="#profile">Ubah Profil</a></li>
+            <li><a href="#editprofile">Ubah Password</a></li>
         </ul>
     </div><!--pageheader-->
 
