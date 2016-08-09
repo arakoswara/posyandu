@@ -55,6 +55,7 @@
                 @foreach($skdn as $item)
 
                     <ul>
+                        <h5>Tanggal : {{ $item->date }}</h5>
                         <li>S : {{ $item->s }} data</li>
                         <li>K : {{ $item->k }} data</li>
                         <li>D : {{ $item->d }} data</li>
@@ -66,6 +67,7 @@
 
             <div class="col-md-6">
                     <ul>
+                        <h5>Keterangan</h5>
                         <li>S = jumlah balita yang ada diwilayah posyandu</li>
                         <li>K = jumlah balita yang memiliki KMS</li>
                         <li>D = jumlah balita yang datang ditimbang bulan ini</li>
