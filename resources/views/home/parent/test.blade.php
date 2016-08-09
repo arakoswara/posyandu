@@ -24,7 +24,7 @@
 					</tr>
 
 					<tr>
-						<td>Umur Balita</td>
+						<td>Umur</td>
 						<td>:</td>
 						<td>{{ $data['umur'] }} Bulan</td>
 					</tr>
@@ -120,7 +120,7 @@
 				<tr>
 					<td>Kebutuhan energi / hari</td>
 					<td>:</td>
-					<td>{{ $data['energi'] }} kkal</td>
+					<td>{{ $data['energi'] }} Kkal</td>
 				</tr>
 
 				<tr>

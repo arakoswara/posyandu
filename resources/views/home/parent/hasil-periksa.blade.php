@@ -123,7 +123,7 @@
 
 								        <li>
 								        	<span class="fa fa-check fa-2x icon-success"></span>
-								        	<span class="list"><strong>Umur Balita</strong><br />
+								        	<span class="list"><strong>Umur</strong><br />
 								        		{{ $data_balita->umur }} Bulan
 								        	</span>
 								        </li>

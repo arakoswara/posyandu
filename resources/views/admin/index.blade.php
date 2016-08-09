@@ -4,8 +4,8 @@
     
     <div class="pageheader">
         <div>
-        <h1 class="pagetitle">{{ $user->name }}</h1>
-        <span class="pagedesc">Menu Data Petugas</span>
+        <h1 class="pagetitle">Data Petugas</h1>
+        <span class="pagedesc">Data Petugas posyandu MELATI</span>
         </div>
         <ul class="hornav">
             <li><a href="#daftar">Daftar Petugas</a></li>
