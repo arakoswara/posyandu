@@ -30,6 +30,7 @@ use App\BBTB1;
 use App\BBTB2;
 use App\Score;
 use App\SKDN;
+use App\TbGizi;
 
 use App\RoleUser;
 use DB;
@@ -190,9 +191,11 @@ class BalitaController extends Controller
 
         $jml_balita = DataBalita::all()->count();
 
-        $skdn = SKDN::all();
+        $skdn = SKDN::get();
 
-        return view('visitor.index', compact('jml_balita', 'skdn', 'persentase_mei', 'persentase_april', 'persentase_maret'));
+        $gizi = TbGizi::get();
+
+        return view('visitor.index', compact('jml_balita', 'skdn', 'persentase_mei', 'persentase_april', 'persentase_maret', 'gizi'));
 
     }
     /**

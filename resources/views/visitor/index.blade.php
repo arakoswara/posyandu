@@ -44,20 +44,35 @@
             <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
 
             <br><br>
-            <h4>Keterangan</h4>
-                <ol>
-                    <li>S = jumlah balita yang ada diwilayah posyandu</li>
-                    <li>K = jumlah balita yang memiliki KMS</li>
-                    <li>D = jumlah balita yang datang ditimbang bulan ini</li>
-                    <li>N = jumlah balita yang naik berat badannya.</li>
-                </ol>
+            
             <hr class="garis">
-
 
         <center>
             <h3>PERSENTASE STATUS GIZI </h3>
         </center>
-            <div class="col-md-4">
+
+            <div class="col-md-6">
+                @foreach($skdn as $item)
+
+                    <ul>
+                        <li>S : {{ $item->s }}</li>
+                        <li>K : {{ $item->s }}</li>
+                        <li>D : {{ $item->s }}</li>
+                        <li>N : {{ $item->s }}</li>
+                    </ul>
+
+                @endforeach
+            </div>
+
+            <div class="col-md-6">
+                    <ol>
+                        <li>S = jumlah balita yang ada diwilayah posyandu</li>
+                        <li>K = jumlah balita yang memiliki KMS</li>
+                        <li>D = jumlah balita yang datang ditimbang bulan ini</li>
+                        <li>N = jumlah balita yang naik berat badannya.</li>
+                    </ol>
+            </div>
+            {{-- <div class="col-md-4">
                 <h4>Persentase Gizi Bulan Maret</h4>
                 <ol>
                     <li>Gizi Buruk = {{ $persentase_maret['buruk'] }} %</li>
@@ -85,7 +100,7 @@
                     <li>Gizi Baik = {{ $persentase_mei['baik'] }} %</li>
                     <li>Gizi Lebih = {{ $persentase_mei['lebih'] }} %</li>
                 </ol>
-            </div>
+            </div> --}}
 
         @endif
 
@@ -95,7 +110,7 @@
 
 <script>
 
-    var chartData2 = <?php  echo $skdn; ?>
+    var chartData2 = <?php  echo $gizi; ?>
 
 </script>
 
@@ -106,7 +121,7 @@
         // SERIAL CHART
         chart2 = new AmCharts.AmSerialChart();
         chart2.dataProvider = chartData2;
-        chart2.categoryField = "date";
+        chart2.categoryField = "month";
         chart2.startDuration = 1;
 
         // AXES
@@ -121,32 +136,32 @@
 
         // SKDN
         var graph2 = new AmCharts.AmGraph();
-        graph2.valueField = "s";
-        graph2.balloonText = " S : <b>[[value]]</b>";
+        graph2.valueField = "gizi_buruk";
+        graph2.balloonText = " Gizi Buruk : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
         chart2.addGraph(graph2);
 
         var graph2 = new AmCharts.AmGraph();
-        graph2.valueField = "k";
-        graph2.balloonText = " K : <b>[[value]]</b>";
+        graph2.valueField = "gizi_kurang";
+        graph2.balloonText = " Gizi Kurang : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
         chart2.addGraph(graph2);
 
         var graph2 = new AmCharts.AmGraph();
-        graph2.valueField = "d";
-        graph2.balloonText = " D : <b>[[value]]</b>";
+        graph2.valueField = "gizi_baik";
+        graph2.balloonText = " Gizi Baik : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
         chart2.addGraph(graph2);
 
         var graph2 = new AmCharts.AmGraph();
-        graph2.valueField = "n";
-        graph2.balloonText = " N : <b>[[value]]</b>";
+        graph2.valueField = "gizi_lebih";
+        graph2.balloonText = " Gizi Lebih : <b>[[value]]</b>";
         graph2.type = "column";
         graph2.lineAlpha = 0;
         graph2.fillAlphas = 0.8;
