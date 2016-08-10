@@ -54,6 +54,67 @@ class BalitaController extends Controller
 
     public function dashboard()
     {
+        $semua_data = Score::get();
+
+        $group = $semua_data->groupBy('month');
+
+        $no = 1;
+        $no1 = 1;
+        $no2 = 1;
+        $no3 = 1;
+
+        foreach ($group as $month => $items) {
+
+            foreach ($items as $item) {
+                // Buruk
+                if($item->zbbu < -3) {
+
+                    $jum_gizi_buruk = $no++;                
+
+                }else{
+
+                    $jum_gizi_buruk = 0;
+                }
+                // Krang
+                if($item->zbbu >= -3 && $item->zbbu < -2){
+
+                    $jum_gizi_kurang = $no1++;
+
+                }
+                // baik
+                elseif($item->zbbu >= -2 && $item->zbbu <= 2){
+
+                    $jum_gizi_baik = $no2++;
+                    
+                }
+                // Lebih
+                elseif($item->zbbu > 2){
+
+                    $jum_gizi_lebih = $no3++;
+                    
+                }
+                
+            }
+
+        echo "<h4>".$month."</h4><br>";
+        echo  "Jumlah : ".$jumlah_data = Score::where('month', $month)->count()."<br>";
+        echo "buruk : ".$jum_gizi_buruk."<br>";
+        echo "kurang : ".$jum_gizi_kurang."<br>";
+        echo "baik : ".$jum_gizi_baik."<br>";
+        echo "lebih : ".$jum_gizi_lebih;
+
+        echo "<br>";
+
+        echo $persentase_maret['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data)."<br>";
+        echo $persentase_maret['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data)."<br>";
+        echo $persentase_maret['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data)."<br>";
+        echo $persentase_maret['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data)."<br>";
+
+        }
+        
+
+        return "oke";
+
         $data_gizi = Score::where('month', 'march')->get();
 
         $jumlah_data = Score::where('month', 'march')->get()->count();
@@ -138,10 +199,12 @@ class BalitaController extends Controller
 
         }
 
-        $persentase_april['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
-        $persentase_april['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
-        $persentase_april['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
-        $persentase_april['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
+        echo $persentase_april['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data)."<br>";
+        echo $persentase_april['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data)."<br>";
+        echo $persentase_april['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data)."<br>";
+        echo $persentase_april['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data)."<br>";
+
+        return "y";
 
         /**
          * MEI
