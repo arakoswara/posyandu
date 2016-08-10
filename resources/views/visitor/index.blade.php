@@ -23,7 +23,7 @@
         
             
             
-            <h1>Jumlah Balita : {{ $jml_balita }} </h1>
+            <h1>Jumlah Data Balita : {{ $jml_balita }} Balita</h1>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
         <hr class="garis">
 
         <center>
-            <h3>GRAFIK PROGRAM SKDN</h3>
+            <h3>GRAFIK PERSENTASE STATUS GIZI </h3>
         </center>
 
         @if (empty($skdn))
@@ -41,36 +41,38 @@
 
         @else
 
-            <div id="grafikSKDN" style="width:100%; height: 400px;"></div>
+            <div id="grafikGizi" style="width:100%; height: 400px;"></div>
 
             <br><br>
             
             <hr class="garis">
 
         <center>
-            <h3>PERSENTASE STATUS GIZI </h3>
+            <h3>JUMLAH DATA PROGRAM SKDN </h3>
         </center>
 
             <div class="col-md-6">
                 @foreach($skdn as $item)
 
                     <ul>
-                        <li>S : {{ $item->s }}</li>
-                        <li>K : {{ $item->s }}</li>
-                        <li>D : {{ $item->s }}</li>
-                        <li>N : {{ $item->s }}</li>
+                        <h5>Tanggal : {{ $item->date }}</h5>
+                        <li>S : {{ $item->s }} data</li>
+                        <li>K : {{ $item->k }} data</li>
+                        <li>D : {{ $item->d }} data</li>
+                        <li>N : {{ $item->n }} data</li>
                     </ul>
 
                 @endforeach
             </div>
 
             <div class="col-md-6">
-                    <ol>
+                    <ul>
+                        <h5>Keterangan</h5>
                         <li>S = jumlah balita yang ada diwilayah posyandu</li>
                         <li>K = jumlah balita yang memiliki KMS</li>
                         <li>D = jumlah balita yang datang ditimbang bulan ini</li>
                         <li>N = jumlah balita yang naik berat badannya.</li>
-                    </ol>
+                    </ul>
             </div>
             {{-- <div class="col-md-4">
                 <h4>Persentase Gizi Bulan Maret</h4>
@@ -177,7 +179,7 @@
 
         chart2.creditsPosition = "top-right";
 
-        chart2.write("grafikSKDN");
+        chart2.write("grafikGizi");
     });
 </script>
 
