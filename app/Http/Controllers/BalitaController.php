@@ -94,171 +94,50 @@ class BalitaController extends Controller
                     
                 }
                 
-            }
+                }
 
-        echo "<h4>".$month."</h4><br>";
-        echo  "Jumlah : ".$jumlah_data = Score::where('month', $month)->count()."<br>";
-        echo "buruk : ".$jum_gizi_buruk."<br>";
-        echo "kurang : ".$jum_gizi_kurang."<br>";
-        echo "baik : ".$jum_gizi_baik."<br>";
-        echo "lebih : ".$jum_gizi_lebih;
-
-        echo "<br>";
-
-        echo $persentase_maret['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data)."<br>";
-        echo $persentase_maret['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data)."<br>";
-        echo $persentase_maret['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data)."<br>";
-        echo $persentase_maret['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data)."<br>";
-
-        }
+            // echo "<h4>".$month."</h4><br>";
+            // echo  "Jumlah : ".$jumlah_data = Score::where('month', $month)->count()."<br>";
+            // echo "buruk : ".$jum_gizi_buruk."<br>";
+            // echo "kurang : ".$jum_gizi_kurang."<br>";
+            // echo "baik : ".$jum_gizi_baik."<br>";
+            // echo "lebih : ".$jum_gizi_lebih;
+            // echo "<br>";
         
+            $jumlah_data = Score::where('month', $month)->count();
+            $bulan = TbGizi::where('month', $month)->first();        
 
-        return "oke";
+            $persentase['gizi_buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
+            $persentase['gizi_kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
+            $persentase['gizi_baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
+            $persentase['gizi_lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
+            $persentase['month']  = $month;
 
-        $data_gizi = Score::where('month', 'march')->get();
-
-        $jumlah_data = Score::where('month', 'march')->get()->count();
-
-        $no = 1;
-        $no2 = 1;
-        $no3 = 1;
-
-        foreach ($data_gizi as $item) {
-            if($item->zbbu < -3) {
-
-                $jum_gizi_buruk = $no++;                
-
+            if (!empty($bulan)) {
+                if ($month != $bulan->month) {
+                    
+                    if (!empty($month)) {
+                        
+                        TbGizi::create($persentase);
+                    }
+                }
             }else{
 
-                $jum_gizi_buruk = 0;
-
-            }
-        }
-
-        foreach($data_gizi as $value) {
-
-            if($value->zbbu >= -3 && $value->zbbu < -2){
-
-                $jum_gizi_kurang = $no++;
-
-            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
-
-                $jum_gizi_baik = $no2++;                
-
-            }elseif($value->zbbu > 2){
-
-                $jum_gizi_lebih = $no3++;
-
+                if (!empty($month)) {
+                    
+                    TbGizi::create($persentase);
+                }
             }
 
         }
 
-        $persentase_maret['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
-        $persentase_maret['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
-        $persentase_maret['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
-        $persentase_maret['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
-
-        /**
-         * APRIL
-         */
-        $data_gizi = Score::where('month', 'april')->get();
-
-        $jumlah_data = Score::where('month', 'april')->get()->count();
-
-        $no = 1;
-        $no2 = 1;
-        $no3 = 1;
-
-        foreach ($data_gizi as $item) {
-            if($item->zbbu < -3) {
-
-                $jum_gizi_buruk = $no++;                
-
-            }else{
-
-                $jum_gizi_buruk = 0;
-
-            }
-        }
-
-        foreach($data_gizi as $value) {
-
-            if($value->zbbu >= -3 && $value->zbbu < -2){
-
-                $jum_gizi_kurang = $no++;
-
-            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
-
-                $jum_gizi_baik = $no2++;                
-
-            }elseif($value->zbbu > 2){
-
-                $jum_gizi_lebih = $no3++;
-
-            }
-
-        }
-
-        echo $persentase_april['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data)."<br>";
-        echo $persentase_april['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data)."<br>";
-        echo $persentase_april['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data)."<br>";
-        echo $persentase_april['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data)."<br>";
-
-        return "y";
-
-        /**
-         * MEI
-         */
-        $data_gizi = Score::where('month', 'may')->get();
-
-        $jumlah_data = Score::where('month', 'may')->get()->count();
-
-        $no = 1;
-        $no2 = 1;
-        $no3 = 1;
-
-        foreach ($data_gizi as $item) {
-            if($item->zbbu < -3) {
-
-                $jum_gizi_buruk = $no++;                
-
-            }else{
-
-                $jum_gizi_buruk = 0;
-
-            }
-        }
-
-        foreach($data_gizi as $value) {
-
-            if($value->zbbu >= -3 && $value->zbbu < -2){
-
-                $jum_gizi_kurang = $no++;
-
-            }elseif($value->zbbu >= -2 && $value->zbbu <= 2){
-
-                $jum_gizi_baik = $no2++;                
-
-            }elseif($value->zbbu > 2){
-
-                $jum_gizi_lebih = $no3++;
-
-            }
-
-        }
-
-        $persentase_mei['buruk']  = (($jum_gizi_buruk * 100 )/$jumlah_data);
-        $persentase_mei['kurang'] = (($jum_gizi_kurang * 100 )/$jumlah_data);
-        $persentase_mei['baik']   = (($jum_gizi_baik * 100 )/$jumlah_data);
-        $persentase_mei['lebih']  = (($jum_gizi_lebih * 100 )/$jumlah_data);
-
-        $jml_balita = DataBalita::all()->count();
+        $jml_balita = DataBalita::get()->count();
 
         $skdn = SKDN::get();
 
         $gizi = TbGizi::get();
 
-        return view('visitor.index', compact('jml_balita', 'skdn', 'persentase_mei', 'persentase_april', 'persentase_maret', 'gizi'));
+        return view('visitor.index', compact('jml_balita', 'skdn', 'gizi'));
 
     }
     /**
