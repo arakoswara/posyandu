@@ -58,12 +58,12 @@ class BalitaController extends Controller
 
         $group = $semua_data->groupBy('month');
 
-        $no = 1;
-        $no1 = 1;
-        $no2 = 1;
-        $no3 = 1;
 
         foreach ($group as $month => $items) {
+            $no = 1;
+            $no1 = 1;
+            $no2 = 1;
+            $no3 = 1;
 
             foreach ($items as $item) {
                 // Buruk
